@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="CST2355 Final Project"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/sunrise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="Sunrise ad Sunset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="Recipe Search"
+        app:layout_constraintEnd_toEndOf="@+id/sunrise"
+        app:layout_constraintStart_toStartOf="@+id/sunrise"
+        app:layout_constraintTop_toBottomOf="@+id/sunrise" />
+
+    <Button
+        android:id="@+id/dictionary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="Dictionary API"
+        app:layout_constraintEnd_toEndOf="@+id/recipe"
+        app:layout_constraintStart_toStartOf="@+id/recipe"
+        app:layout_constraintTop_toBottomOf="@+id/recipe" />
+
+    <Button
+        android:id="@+id/deezer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="Deezer Song"
+        app:layout_constraintEnd_toEndOf="@+id/dictionary"
+        app:layout_constraintStart_toStartOf="@+id/dictionary"
+        app:layout_constraintTop_toBottomOf="@+id/dictionary" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
