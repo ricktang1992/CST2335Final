@@ -1,11 +1,13 @@
 package algonquin.cst2335.cst2355final;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import algonquin.cst2335.cst2355final.databinding.ActivityMainBinding;
 
@@ -51,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
         Button recipeButton=variableBinding.recipe;
         recipeButton.setOnClickListener(clk->
         {
-            startActivity( nextPage);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Do you want to check Ziyao's Work").setTitle("Question: ")
+                    .setNegativeButton("No", (dialog, cl) -> {
+                    })
+                    .setPositiveButton("Yes", (dialog, cl) -> {
+                        startActivity( nextPage);
+                    }).create().show();
+
         } );
 
     }
