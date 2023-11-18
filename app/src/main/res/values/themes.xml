@@ -8,7 +8,8 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/my_statusbar</item>
-
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <!-- Text color. -->
         <item name="android:textColor">@color/my_text</item>
     </style>

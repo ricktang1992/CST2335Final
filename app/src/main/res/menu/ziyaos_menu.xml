@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeMenuZ"
+        android:title="Home Page"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/savedRecipeMenu"
+        android:title="Saved Recipes"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/aboutRecipeMenu"
+        android:title="About"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/saveTheRecipe"
+        android:title="Save The Recipe"
+        android:icon="@drawable/save"
+        app:showAsAction="always" />
+</menu>

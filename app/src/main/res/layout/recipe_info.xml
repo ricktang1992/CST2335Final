@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/messageDetail"
+        android:id="@+id/recipeInfoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -18,32 +18,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/timeDetail"
+        android:id="@+id/imageRecipe"
         android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Time Goes Here"
-        app:layout_constraintStart_toStartOf="@+id/messageDetail"
-        app:layout_constraintTop_toBottomOf="@+id/messageDetail" />
+        android:text="imageRecipe goes here"
+        app:layout_constraintStart_toStartOf="@+id/recipeInfoTitle"
+        app:layout_constraintTop_toBottomOf="@+id/recipeInfoTitle" />
+
 
     <TextView
-        android:id="@+id/sendDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:textSize="30dp"
-        android:text="Send Receive Goes Here"
-        app:layout_constraintStart_toStartOf="@+id/databaseDetail"
-        app:layout_constraintTop_toBottomOf="@+id/databaseDetail" />
-
-    <TextView
-        android:id="@+id/databaseDetail"
+        android:id="@+id/recipeInfoSum"
         android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Database Goes Here"
-        app:layout_constraintStart_toStartOf="@+id/timeDetail"
-        app:layout_constraintTop_toBottomOf="@+id/timeDetail" />
+        android:text="recipeInfoSum"
+        app:layout_constraintStart_toStartOf="@+id/imageRecipe"
+        app:layout_constraintTop_toBottomOf="@+id/imageRecipe" />
 </androidx.constraintlayout.widget.ConstraintLayout>

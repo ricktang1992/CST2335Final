@@ -1,11 +1,14 @@
 package algonquin.cst2335.cst2355final;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -14,54 +17,55 @@ import algonquin.cst2335.cst2355final.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding variableBinding;
     private static String TAG = "MainActivity";
-
+    Intent nextPage;
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.w( TAG, "In onStart() - Visible on screen" );
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.w( TAG, "In onResume() - Responding to user input" );
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.w( TAG, "In onPause() - No longer responding to user input" );
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.w( TAG, "In onStop() - no longer visible" );
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.w( TAG, "In onDestroy() - Freeing memory used by the application" );
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return true;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         variableBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(variableBinding.getRoot());
-        Intent nextPage = new Intent( MainActivity.this, RecipeMain.class);
+        setSupportActionBar( variableBinding.myToolbar);
+        nextPage = new Intent( MainActivity.this, RecipeMain.class);
         Button recipeButton=variableBinding.recipe;
         recipeButton.setOnClickListener(clk->
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Do you want to check Ziyao's Work").setTitle("Question: ")
-                    .setNegativeButton("No", (dialog, cl) -> {
-                    })
-                    .setPositiveButton("Yes", (dialog, cl) -> {
-                        startActivity( nextPage);
-                    }).create().show();
+            CharSequence text = "Going to Recipe Project...";
+            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            startActivity( nextPage);
 
         } );
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch( item.getItemId() )
+        {
+            case R.id.recipeMenu:
+
+                CharSequence text = "Going to Recipe Project...";
+                Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+                startActivity( nextPage);
+                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
+                //asking if the user wants to delete this message.
+                break;
+            case R.id.about:
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setMessage("This application is the final project of our class CST2355.\n" +
+                                "Team Member: \n" +
+                                "Ziyao\n" +
+                                "Rita\n" +
+                                "Tianjiao\n" +
+                                "XingXing").setTitle("About: ")
+                        .setNegativeButton("OK", (dialog, cl) -> {
+                        }).create().show();
+                break;
+        }
+
+        return true;
     }
 }
