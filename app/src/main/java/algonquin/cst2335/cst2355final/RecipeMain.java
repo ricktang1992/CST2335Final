@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,7 +90,14 @@ public class RecipeMain extends AppCompatActivity {
             });
         }
 
-
+        recipeModel.selectedRecipe.observe(this, (newMessageValue) -> {
+            RecipeDetailsFragment chatFragment = new RecipeDetailsFragment( newMessageValue );
+            FragmentManager fMgr = getSupportFragmentManager();
+            FragmentTransaction tx = fMgr.beginTransaction();
+            tx.addToBackStack("anything?");
+            tx.replace(R.id.fragmentLocation,chatFragment);
+            tx.commit();
+        });
 
         binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
@@ -119,6 +128,13 @@ public class RecipeMain extends AppCompatActivity {
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
             recipeTitle=itemView.findViewById(R.id.recipeTitle);
+            itemView.setOnClickListener(clk -> {
+                int position = getAbsoluteAdapterPosition();
+                Recipe selected = recipes.get(position);
+
+                recipeModel.selectedRecipe.postValue(selected);
+
+            });
         }
     }
     @Override
