@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         variableBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(variableBinding.getRoot());
         setSupportActionBar( variableBinding.myToolbar);
-        nextPage = new Intent( MainActivity.this, RecipeMain.class);
+        nextPage = new Intent( MainActivity.this, RecipeSearch.class);
         Button recipeButton=variableBinding.recipe;
         recipeButton.setOnClickListener(clk->
         {

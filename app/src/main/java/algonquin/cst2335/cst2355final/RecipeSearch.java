@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
+import androidx.room.util.StringUtil;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -56,6 +57,7 @@ public class RecipeSearch extends AppCompatActivity {
     RecipeViewModel recipeModel;
     Intent homePage;
     Intent savedPage;
+    Recipe recipefromAPI;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -75,6 +77,7 @@ public class RecipeSearch extends AppCompatActivity {
         savedPage = new Intent( RecipeSearch.this, RecipeMain.class);
         queue = Volley.newRequestQueue(this);
         recipes = recipeModel.recipes.getValue();
+        //recipeModel.recipes.setValue(recipes = new ArrayList<>());
         //get data from Database
         if(recipes == null)
         {
@@ -100,41 +103,36 @@ public class RecipeSearch extends AppCompatActivity {
             CharSequence text = "Searching...";
             Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
             searchmess = binding.searchText.getText().toString();
-            try {
-                stringURL = "https://api.openweathermap.org/data/2.5/weather?q="
-                        + URLEncoder.encode(searchmess, "UTF-8")
-                        + "&appid=7e943c97096a9784391a981c4d878b22&units=metric";
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
+            stringURL="https://api.spoonacular.com/recipes/complexSearch?query=chick&apiKey=670608d3fd1e4b15b120493cad68231a";
+//            try {
+//                stringURL = "https://api.openweathermap.org/data/2.5/weather?q="
+//                        + URLEncoder.encode(searchmess, "UTF-8")
+//                        + "&appid=7e943c97096a9784391a981c4d878b22&units=metric";
+//            } catch (UnsupportedEncodingException e) {
+//                throw new RuntimeException(e);
+//            }
 
             //this goes in the button click handler:
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringURL, null,
                     (response) -> {
                         try {
-                            JSONArray weatherArray= response.getJSONArray("weather");
-                            int vis = response.getInt("visibility");
-                            String name = response.getString("name");
-                            JSONObject position0 = weatherArray.getJSONObject(0);
-                            String description = position0.getString("description");
-                            String iconName = position0.getString("icon");
-                            JSONObject mainObject = response.getJSONObject("main");
-                            double current = mainObject.getDouble("temp");
-                            double min = mainObject.getDouble("temp_min");
-                            double max = mainObject.getDouble("temp_max");
-                            int humidity = mainObject.getInt("humidity");
-                            String iconUrl = "https://openweathermap.org/img/w/" + iconName + ".png";
-                            String pathname = getFilesDir() + "/" + iconName + ".png";
+                            JSONArray resultsArray= response.getJSONArray("results");
+                            recipeModel.recipes.setValue(recipes = new ArrayList<>());
+                            int number=response.getInt("number");
+                            for(int i=0;i<number;i++){
+                                JSONObject position0 = resultsArray.getJSONObject(i);
+                                int id=position0.getInt("id");
+                                String title = position0.getString("title");
+                                String image = position0.getString("image");
 
-                            Log.d("WeatherResponse", "Visibility: " + vis);
-                            Log.d("WeatherResponse", "Name: " + name);
-                            Log.d("WeatherResponse", "Description: " + description);
-                            Log.d("WeatherResponse", "IconName: " + iconName);
-                            Log.d("WeatherResponse", "Current Temperature: " + current);
-                            Log.d("WeatherResponse", "Min Temperature: " + min);
-                            Log.d("WeatherResponse", "Max Temperature: " + max);
-                            Log.d("WeatherResponse", "Humidity: " + humidity);
-                            Log.d("WeatherResponse", "iconURL: " + "http://openweathermap.org/img/w/" + iconName + ".png");
+                                Log.d("WeatherResponse", "id: " + id);
+                                Log.d("WeatherResponse", "title: " + title);
+                                Log.d("WeatherResponse", "image: " + image);
+                                recipefromAPI= new Recipe(title,image,id);
+                                recipes.add(recipefromAPI);
+                                myAdapter.notifyDataSetChanged();
+                            }
+
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -146,23 +144,6 @@ public class RecipeSearch extends AppCompatActivity {
         });
         searchText.get().setText(prefs.getString("searchText",""));
 
-        Button savedButton = binding.savedButton;
-        savedButton.setOnClickListener(clk->
-        {
-            Recipe recipe=new Recipe("aaaa","a",12);
-            recipes.add(recipe);
-            myAdapter.notifyDataSetChanged();
-            binding.searchText.setText("dashabi");
-            Executor thread1 = Executors.newSingleThreadExecutor();
-            thread1.execute(( ) -> {
-                //this is on a background thread
-                recipe.id = (int)mDAO.insertRecipe(recipe); //get the ID from the database
-                Log.d("TAG", "The id created is:" + recipe.id);
-            }); //the body of run()
-            Snackbar.make(searchText.get(),"Checking Your Saved Recipes!",Snackbar.LENGTH_LONG).show();
-        } );
-
-
         binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
@@ -173,7 +154,7 @@ public class RecipeSearch extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
-                holder.recipeTitle.setText("aaaaaaaaa");
+                holder.recipeTitle.setText(recipes.get(position).getTitle());
                 String obj = recipes.get(position).getTitle();
                 holder.recipeTitle.setText(obj);
             }
