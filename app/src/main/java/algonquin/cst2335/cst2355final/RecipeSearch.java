@@ -88,18 +88,19 @@ public class RecipeSearch extends AppCompatActivity {
         recipes = recipeModel.recipes.getValue();
         //recipeModel.recipes.setValue(recipes = new ArrayList<>());
         //get data from Database
-        if(recipes == null)
-        {
-            recipeModel.recipes.setValue(recipes = new ArrayList<>());
-
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(() ->
-            {
-                recipes.addAll( mDAO.getAllRecipe() ); //Once you get the data from database
-
-                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
-            });
-        }
+        recipeModel.recipes.setValue(recipes = new ArrayList<>());
+//        if(recipes == null)
+//        {
+//            recipeModel.recipes.setValue(recipes = new ArrayList<>());
+//
+//            Executor thread = Executors.newSingleThreadExecutor();
+//            thread.execute(() ->
+//            {
+//                recipes.addAll( mDAO.getAllRecipe() ); //Once you get the data from database
+//
+//                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+//            });
+//        }
 
         SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.searchText);
