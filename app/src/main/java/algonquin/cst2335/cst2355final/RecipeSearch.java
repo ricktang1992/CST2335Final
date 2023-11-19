@@ -1,8 +1,11 @@
 package algonquin.cst2335.cst2355final;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,12 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +31,8 @@ import androidx.room.util.StringUtil;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,6 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -103,7 +112,9 @@ public class RecipeSearch extends AppCompatActivity {
             CharSequence text = "Searching...";
             Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
             searchmess = binding.searchText.getText().toString();
-            stringURL="https://api.spoonacular.com/recipes/complexSearch?query=chick&apiKey=670608d3fd1e4b15b120493cad68231a";
+            stringURL="https://api.spoonacular.com/recipes/complexSearch?query="
+                     +searchmess
+                     +"&apiKey=670608d3fd1e4b15b120493cad68231a";
 //            try {
 //                stringURL = "https://api.openweathermap.org/data/2.5/weather?q="
 //                        + URLEncoder.encode(searchmess, "UTF-8")
@@ -131,6 +142,31 @@ public class RecipeSearch extends AppCompatActivity {
                                 recipefromAPI= new Recipe(title,image,id);
                                 recipes.add(recipefromAPI);
                                 myAdapter.notifyDataSetChanged();
+                                String pathname = getFilesDir() + "/" + id + ".jpg";
+                                File file = new File(pathname);
+                                if (file.exists()) {
+
+                                } else {
+                                    ImageRequest imgReq2 = new ImageRequest(image, new Response.Listener<Bitmap>() {
+                                        @Override
+                                        public void onResponse(Bitmap bitmap) {
+                                            // Do something with loaded bitmap...
+
+                                            try {
+
+                                                Log.e("ImageRequest", " loading image: " + bitmap);
+                                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, RecipeSearch.this.openFileOutput(id + ".png", Activity.MODE_PRIVATE));
+                                            } catch (Exception e) {
+
+                                            }
+                                            Log.e("ImageRequest", " loading image: " + image);
+
+                                        }
+                                    }, 1024, 1024, ImageView.ScaleType.CENTER, null, (error) -> {
+                                        Log.e("ImageRequest", "Error loading image: aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                                    });
+                                    queue.add(imgReq2);
+                                }
                             }
 
                         } catch (JSONException e) {
@@ -143,7 +179,14 @@ public class RecipeSearch extends AppCompatActivity {
 
         });
         searchText.get().setText(prefs.getString("searchText",""));
-
+        recipeModel.selectedRecipe.observe(this, (newMessageValue) -> {
+            RecipeDetailsFragment recipeFragment = new RecipeDetailsFragment( newMessageValue );
+            FragmentManager fMgr = getSupportFragmentManager();
+            FragmentTransaction tx = fMgr.beginTransaction();
+            tx.addToBackStack("anything?");
+            tx.replace(R.id.fragmentLocation,recipeFragment);
+            tx.commit();
+        });
         binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
@@ -173,6 +216,13 @@ public class RecipeSearch extends AppCompatActivity {
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
             recipeTitle=itemView.findViewById(R.id.recipeTitle);
+            itemView.setOnClickListener(clk -> {
+                int position = getAbsoluteAdapterPosition();
+                Recipe selected = recipes.get(position);
+
+                recipeModel.selectedRecipe.postValue(selected);
+
+            });
         }
     }
     @Override
