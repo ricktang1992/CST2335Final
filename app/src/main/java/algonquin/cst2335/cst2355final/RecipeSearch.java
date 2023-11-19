@@ -112,16 +112,16 @@ public class RecipeSearch extends AppCompatActivity {
             CharSequence text = "Searching...";
             Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
             searchmess = binding.searchText.getText().toString();
-            stringURL="https://api.spoonacular.com/recipes/complexSearch?query="
-                     +searchmess
-                     +"&apiKey=670608d3fd1e4b15b120493cad68231a";
-//            try {
-//                stringURL = "https://api.openweathermap.org/data/2.5/weather?q="
-//                        + URLEncoder.encode(searchmess, "UTF-8")
-//                        + "&appid=7e943c97096a9784391a981c4d878b22&units=metric";
-//            } catch (UnsupportedEncodingException e) {
-//                throw new RuntimeException(e);
-//            }
+//            stringURL="https://api.spoonacular.com/recipes/complexSearch?query="
+//                     +searchmess
+//                     +"&apiKey=670608d3fd1e4b15b120493cad68231a";
+            try {
+                stringURL = "https://api.spoonacular.com/recipes/complexSearch?query="
+                        + URLEncoder.encode(searchmess, "UTF-8")
+                        +"&apiKey=670608d3fd1e4b15b120493cad68231a";
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
 
             //this goes in the button click handler:
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringURL, null,
