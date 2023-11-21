@@ -251,20 +251,10 @@ public class RecipeSearch extends AppCompatActivity {
                         .setNegativeButton("OK", (dialog, cl) -> {
                         }).create().show();
                 break;
-            case R.id.saveTheRecipe:
+            case R.id.deleteRecipe:
 
-                Recipe addRecipe = recipeModel.selectedRecipe.getValue();
-                recipes.add(addRecipe);
-                myAdapter.notifyDataSetChanged();
-                Executor thread2 = Executors.newSingleThreadExecutor();
-                thread2.execute(( ) -> {
-                    //this is on a background thread
-                    addRecipe.id = (int)mDAO.insertRecipe(addRecipe); //get the ID from the database
-                    Log.d("TAG", "The id created is:" + addRecipe.id);
-                }); //the body of run()
-                Snackbar.make(this.findViewById(R.id.searchText),"You added the recipe "
-                        +addRecipe.getTitle(),Snackbar.LENGTH_LONG).show();
-                getSupportFragmentManager() .popBackStack();
+                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
+                //asking if the user wants to delete this message.
                 break;
         }
 
