@@ -163,8 +163,38 @@ public class RecipeMain extends AppCompatActivity {
                 break;
             case R.id.deleteRecipe:
 
-                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-                //asking if the user wants to delete this message.
+                Recipe removedRecipe = recipeModel.selectedRecipe.getValue();
+                int position = recipes.indexOf(removedRecipe);
+                AlertDialog.Builder builder = new AlertDialog.Builder(RecipeMain.this);
+
+                builder.setMessage("Do you want to delete the message:"
+                                + removedRecipe.getTitle()).setTitle("Question: ")
+                        .setNegativeButton("No", (dialog, cl) -> {
+                        })
+                        .setPositiveButton("Yes", (dialog, cl) -> {
+
+                            recipes.remove(position);
+                            myAdapter.notifyDataSetChanged();
+                            Executor thread1 = Executors.newSingleThreadExecutor();
+                            thread1.execute(( ) -> {
+                                //this is on a background thread
+                                mDAO.deleteRecipe(removedRecipe); //get the ID from the database
+                                Log.d("TAG", "The id removed is:" + removedRecipe.id);
+                            }); //the body of run()
+                            Snackbar.make(this.findViewById(R.id.searchText),"You deleted message #"
+                                            + position,Snackbar.LENGTH_LONG)
+                                    .setAction("Undo", click -> {
+                                        recipes.add(position,removedRecipe);
+                                        myAdapter.notifyDataSetChanged();
+                                        Executor thread2 = Executors.newSingleThreadExecutor();
+                                        thread2.execute(( ) -> {
+                                            //this is on a background thread
+                                            removedRecipe.id = (int)mDAO.insertRecipe(removedRecipe); //get the ID from the database
+                                            Log.d("TAG", "The id created is:" + removedRecipe.id);
+                                        }); //the body of run()
+                                    }).show();
+                        }).create().show();
+                getSupportFragmentManager() .popBackStack();
                 break;
         }
 
