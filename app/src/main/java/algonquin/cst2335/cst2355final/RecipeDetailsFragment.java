@@ -57,7 +57,7 @@ public class RecipeDetailsFragment extends Fragment {
 
                 }
                 Log.e("ImageRequest", " loading image: " + iconUrl);
-
+//test
             }
         }, 1024, 1024, ImageView.ScaleType.CENTER, null, (error) -> {
             Log.e("ImageRequest", "Error loading image: " + error.getMessage());

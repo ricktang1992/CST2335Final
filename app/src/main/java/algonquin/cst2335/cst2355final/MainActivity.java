@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import algonquin.cst2335.cst2355final.databinding.ActivityMainBinding;
-
+//test
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding variableBinding;
     private static String TAG = "MainActivity";

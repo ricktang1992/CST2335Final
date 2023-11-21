@@ -91,6 +91,7 @@ public class RecipeSearch extends AppCompatActivity {
         recipeModel.recipes.setValue(recipes = new ArrayList<>());
 //        if(recipes == null)
 //        {
+// test
 //            recipeModel.recipes.setValue(recipes = new ArrayList<>());
 //
 //            Executor thread = Executors.newSingleThreadExecutor();

@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST2355Final"
         tools:targetApi="31">
+
         <activity
             android:name=".RecipeMain"
             android:exported="false" />
