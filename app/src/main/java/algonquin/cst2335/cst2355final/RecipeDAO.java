@@ -5,7 +5,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 //test
 import java.util.List;
-//test
 @Dao
 public interface RecipeDAO {
     @Insert
