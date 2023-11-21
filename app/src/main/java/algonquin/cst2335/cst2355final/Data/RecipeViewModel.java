@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import algonquin.cst2335.cst2355final.Recipe;
 
-//test
+
 public class RecipeViewModel extends ViewModel {
     public MutableLiveData<ArrayList<Recipe>> recipes = new MutableLiveData< >();
     public MutableLiveData<Recipe> selectedRecipe = new MutableLiveData<>();
