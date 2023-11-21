@@ -251,7 +251,7 @@ public class RecipeSearch extends AppCompatActivity {
                         .setNegativeButton("OK", (dialog, cl) -> {
                         }).create().show();
                 break;
-            case R.id.deleteRecipe:
+            case R.id.saveTheRecipe:
 
                 Recipe addRecipe = recipeModel.selectedRecipe.getValue();
                 recipes.add(addRecipe);
