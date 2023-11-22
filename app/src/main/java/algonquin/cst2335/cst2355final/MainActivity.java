@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding variableBinding;
     private static String TAG = "MainActivity";
     Intent nextPage;
+    Intent dictionaryPage;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
 
         } );
 
+        dictionaryPage = new Intent( MainActivity.this, SearchRoom.class);
+        recipeButton.setOnClickListener(clk->
+        {
+            CharSequence text = "Going to Recipe Project...";
+            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            startActivity( nextPage);
+
+        } );
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -50,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
                 CharSequence text = "Going to Recipe Project...";
                 Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
                 startActivity( nextPage);
+                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
+                //asking if the user wants to delete this message.
+                break;
+            case R.id.dictionary:
+
+                CharSequence textdictionary = "Going to Dictionary Project...";
+                Toast.makeText(this,textdictionary, Toast.LENGTH_SHORT).show();
+                startActivity( dictionaryPage);
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;

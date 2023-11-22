@@ -20,6 +20,9 @@
             android:name=".RecipeSearch"
             android:exported="false" />
         <activity
+            android:name=".SearchRoom"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
