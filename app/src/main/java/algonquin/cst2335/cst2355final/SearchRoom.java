@@ -128,7 +128,7 @@ public class SearchRoom extends AppCompatActivity {
             FragmentManager fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
             tx.addToBackStack("");
-            tx.replace(R.id.fragmentLocation,dictionaryFragment);
+            tx.replace(R.id.frameLayout,dictionaryFragment);
             tx.commit();
         });
 
