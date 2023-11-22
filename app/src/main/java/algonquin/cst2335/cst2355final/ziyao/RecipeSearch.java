@@ -1,11 +1,10 @@
-package algonquin.cst2335.cst2355final;
+package algonquin.cst2335.cst2355final.ziyao;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,7 +26,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-import androidx.room.util.StringUtil;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -50,7 +48,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
 import algonquin.cst2335.cst2355final.Data.RecipeViewModel;
-import algonquin.cst2335.cst2355final.databinding.RecipeSearchBinding;
+import algonquin.cst2335.cst2355final.MainActivity;
+import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.RecipeSearchBinding;
 import algonquin.cst2335.cst2355final.databinding.RecipeTitleBinding;
 

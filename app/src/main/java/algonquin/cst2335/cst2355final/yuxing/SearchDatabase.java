@@ -1,4 +1,4 @@
-package algonquin.cst2335.cst2355final;
+package algonquin.cst2335.cst2355final.yuxing;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 

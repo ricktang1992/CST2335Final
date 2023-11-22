@@ -1,4 +1,4 @@
-package algonquin.cst2335.cst2355final;
+package algonquin.cst2335.cst2355final.yuxing;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import algonquin.cst2335.cst2355final.Data.SearchViewModel;
+import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SearchRoomBinding;
 import algonquin.cst2335.cst2355final.databinding.SearchMessageBinding;
 
