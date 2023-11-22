@@ -1,4 +1,4 @@
-package algonquin.cst2335.cst2355final;
+package algonquin.cst2335.cst2355final.rita;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class DeezerSong {
     @PrimaryKey(autoGenerate=true)
     @ColumnInfo(name="id")
-    public int id;
+    public long id;
     @ColumnInfo(name="Title")
     protected String title;
     @ColumnInfo(name="AlbumName")

@@ -23,7 +23,7 @@
             android:name=".yuxing.SearchRoom"
             android:exported="false" />
 
-        <activity android:name=".DeezerAlbum"
+        <activity android:name=".rita.DeezerAlbum"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

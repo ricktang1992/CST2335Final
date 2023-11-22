@@ -1,4 +1,4 @@
-package algonquin.cst2335.cst2355final;
+package algonquin.cst2335.cst2355final.rita;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

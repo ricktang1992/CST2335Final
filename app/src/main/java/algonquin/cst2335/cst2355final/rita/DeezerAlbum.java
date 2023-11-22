@@ -1,4 +1,4 @@
-package algonquin.cst2335.cst2355final;
+package algonquin.cst2335.cst2355final.rita;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -30,8 +33,12 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
+import algonquin.cst2335.cst2355final.Data.DeezerSongViewModel;
+import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
+import algonquin.cst2335.cst2355final.databinding.SongListBinding;
 import algonquin.cst2335.cst2355final.databinding.SongMainBinding;
+import algonquin.cst2335.cst2355final.yuxing.SearchDetailsFragment;
 
 
 public class DeezerAlbum extends AppCompatActivity {
@@ -55,44 +62,45 @@ public class DeezerAlbum extends AppCompatActivity {
         binding = SongMainBinding.inflate(getLayoutInflater());// Inflate the layout using binding
         setContentView(binding.getRoot());// Set the content view to the inflated layout
 
+        songModel = new ViewModelProvider(this).get(DeezerSongViewModel.class); // Initialize ViewModel
+        songModel.selectedSong.observe(this, (newMessageValue) -> {
+            // Create a new instance of MessageDetailsFragment and set the selected message
+            DeezerSongDetailsFragment songFragment = new DeezerSongDetailsFragment(newMessageValue);
+
+            // Get the FragmentManager
+            FragmentManager fragmentManager = getSupportFragmentManager();
+
+            // Begin the FragmentTransaction
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.addToBackStack("hi?");
+            // Replace the existing fragment in fragmentLocation with the new MessageDetailsFragment
+            fragmentTransaction.replace(R.id.songfragmentLocation, songFragment);
+
+            // Commit the transaction
+            fragmentTransaction.commit();
+        });
 
         DeezerSongDatabase db = Room.databaseBuilder(getApplicationContext(), DeezerSongDatabase.class, "database-song").build();
         dsDAO = db.dsDAO();
+
+        songs = songModel.songs.getValue();
+
+        if(songs == null)
+        {
+            songModel.songs.setValue(songs = new ArrayList<>());
+
+            Executor thread = Executors.newSingleThreadExecutor();
+            thread.execute(() ->
+            {
+                songs.addAll( dsDAO.getAllSongs() ); //Once you get the data from database
+
+                runOnUiThread( () ->  binding.songrecyclerView.setAdapter( myAdapter )); //You can then load the RecyclerView
+            });
+        }
+
         setSupportActionBar( binding.mysongToolbar);
-//        songModel = new ViewModelProvider(this).get(DeezerSongViewModel.class); // Initialize ViewModel
-        //load messages from the database
-        //initialize the variable
-//        songs = songModel.songs.getValue();// Get messages from the ViewModel
 
-//        songModel.selectedSong.observe(this, (newMessageValue) -> {
-//            // Create a new instance of MessageDetailsFragment and set the selected message
-//            DeezerSongDetailsFragment songFragment = new DeezerSongDetailsFragment(newMessageValue);
-//
-//            // Get the FragmentManager
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//            // Begin the FragmentTransaction
-//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//            fragmentTransaction.addToBackStack("hi?");
-//            // Replace the existing fragment in fragmentLocation with the new MessageDetailsFragment
-//            fragmentTransaction.replace(R.id.fragmentLocation, songFragment);
-//
-//            // Commit the transaction
-//            fragmentTransaction.commit();
-//        });
-
-//        if (songs == null) {
-//            songModel.songs.setValue(songs = new ArrayList<>());
-//
-//            Executor thread = Executors.newSingleThreadExecutor();
-//            thread.execute(() ->
-//            {
-//                songs.addAll( dsDAO.getAllSongs()); //Once you get the data from database
-//
-//                runOnUiThread( () -> binding.songrecyclerView.setAdapter( myAdapter )); //You can then load the RecyclerView
-//            });
-//        }
         SharedPreferences prefer = getSharedPreferences("Search History", Context.MODE_PRIVATE);
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.searchSongText);
 
@@ -102,28 +110,52 @@ public class DeezerAlbum extends AppCompatActivity {
             editorText.putString("searchText", searchText.get().getText().toString());
             editorText.apply();
             String text = binding.searchSongText.getText().toString();
-            DeezerSong theSong = new DeezerSong("","",123,"");
+            DeezerSong theSong = new DeezerSong(text,"",123,"");
             songs.add(theSong); // Add the message to the ArrayList
-//            myAdapter.notifyItemInserted(songs.size() - 1);
-//            binding.searchSongText.setText("");//remove the text in EditText
-//
-//            Executor thread = Executors.newSingleThreadExecutor();
-//            thread.execute(new Runnable() {
-//                @Override
-//                public void run() {
-//                    dsDAO.insertSong(theSong);
-//                }
-//            });
+            binding.searchSongText.setText("");//remove the text in EditText
+            myAdapter.notifyDataSetChanged();
+
+            Executor thread = Executors.newSingleThreadExecutor();
+            thread.execute(new Runnable() {
+                @Override
+                public void run() {
+                    long id = dsDAO.insertSong(theSong);
+                    theSong.id = id;
+                }
+            });
+
+
+            runOnUiThread(() ->{myAdapter.notifyItemInserted(songs.size() - 1);});
+
+            binding.searchSongText.setText("");
         });
 
+        searchText.get().setText(prefer.getString("searchText", ""));
+        songModel.selectedSong.observe(this, (newSongValue) ->{
+            // Create a new instance of MessageDetailsFragment and set the selected message
+            DeezerSongDetailsFragment songFragment = new DeezerSongDetailsFragment(newSongValue);
+
+            // Get the FragmentManager
+            FragmentManager fragmentManager = getSupportFragmentManager();
+
+            // Begin the FragmentTransaction
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.addToBackStack("hi?");
+            // Replace the existing fragment in fragmentLocation with the new MessageDetailsFragment
+            fragmentTransaction.replace(R.id.songfragmentLocation, songFragment);
+
+            // Commit the transaction
+            fragmentTransaction.commit();
+        });
 
         binding.songrecyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                    SongDetailBinding binding =
-                            SongDetailBinding.inflate(getLayoutInflater(), parent, false);
+                    SongListBinding binding =
+                            SongListBinding.inflate(getLayoutInflater(), parent, false);
 
                     return new MyRowHolder(binding.getRoot());
 
