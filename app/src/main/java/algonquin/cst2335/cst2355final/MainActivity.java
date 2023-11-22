@@ -42,11 +42,12 @@ public class MainActivity extends AppCompatActivity {
         } );
 
         dictionaryPage = new Intent( MainActivity.this, SearchRoom.class);
-        recipeButton.setOnClickListener(clk->
+        Button dictionaryButton=variableBinding.dictionary;
+        dictionaryButton.setOnClickListener(clk->
         {
-            CharSequence text = "Going to Recipe Project...";
+            CharSequence text = "Going to Dictionary Project...";
             Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
-            startActivity( nextPage);
+            startActivity( dictionaryPage);
 
         } );
     }
