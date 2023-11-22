@@ -82,18 +82,18 @@ public class DeezerAlbum extends AppCompatActivity {
 //            fragmentTransaction.commit();
 //        });
 
-        if (songs == null) {
-            songModel.songs.setValue(songs = new ArrayList<>());
-
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(() ->
-            {
-                songs.addAll( dsDAO.getAllSongs()); //Once you get the data from database
-
-                runOnUiThread( () -> binding.songrecyclerView.setAdapter( myAdapter )); //You can then load the RecyclerView
-            });
-        }
-        SharedPreferences prefer = getSharedPreferences("search history", Context.MODE_PRIVATE);
+//        if (songs == null) {
+//            songModel.songs.setValue(songs = new ArrayList<>());
+//
+//            Executor thread = Executors.newSingleThreadExecutor();
+//            thread.execute(() ->
+//            {
+//                songs.addAll( dsDAO.getAllSongs()); //Once you get the data from database
+//
+//                runOnUiThread( () -> binding.songrecyclerView.setAdapter( myAdapter )); //You can then load the RecyclerView
+//            });
+//        }
+        SharedPreferences prefer = getSharedPreferences("Search History", Context.MODE_PRIVATE);
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.searchSongText);
 
         // Handle a click on the Send button
@@ -104,16 +104,16 @@ public class DeezerAlbum extends AppCompatActivity {
             String text = binding.searchSongText.getText().toString();
             DeezerSong theSong = new DeezerSong("","",123,"");
             songs.add(theSong); // Add the message to the ArrayList
-            myAdapter.notifyItemInserted(songs.size() - 1);
-            binding.searchSongText.setText("");//remove the text in EditText
-
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(new Runnable() {
-                @Override
-                public void run() {
-                    dsDAO.insertSong(theSong);
-                }
-            });
+//            myAdapter.notifyItemInserted(songs.size() - 1);
+//            binding.searchSongText.setText("");//remove the text in EditText
+//
+//            Executor thread = Executors.newSingleThreadExecutor();
+//            thread.execute(new Runnable() {
+//                @Override
+//                public void run() {
+//                    dsDAO.insertSong(theSong);
+//                }
+//            });
         });
 
 
