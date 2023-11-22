@@ -19,6 +19,9 @@
         <activity
             android:name=".RecipeSearch"
             android:exported="false" />
+
+        <activity android:name=".DeezerAlbum"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
