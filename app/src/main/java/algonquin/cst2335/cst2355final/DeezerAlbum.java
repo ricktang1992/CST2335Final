@@ -7,29 +7,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 import android.widget.EditText;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicReference;
 
 import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 import algonquin.cst2335.cst2355final.databinding.SongMainBinding;
@@ -94,11 +93,16 @@ public class DeezerAlbum extends AppCompatActivity {
                 runOnUiThread( () -> binding.songrecyclerView.setAdapter( myAdapter )); //You can then load the RecyclerView
             });
         }
+        SharedPreferences prefer = getSharedPreferences("search history", Context.MODE_PRIVATE);
+        AtomicReference<EditText> searchText = new AtomicReference<>(binding.searchSongText);
 
         // Handle a click on the Send button
         binding.searchsongButton.setOnClickListener(click -> {
+            SharedPreferences.Editor editorText = prefer.edit();
+            editorText.putString("searchText", searchText.get().getText().toString());
+            editorText.apply();
             String text = binding.searchSongText.getText().toString();
-            DeezerSong theSong = new DeezerSong("","",0,"");
+            DeezerSong theSong = new DeezerSong("","",123,"");
             songs.add(theSong); // Add the message to the ArrayList
             myAdapter.notifyItemInserted(songs.size() - 1);
             binding.searchSongText.setText("");//remove the text in EditText
