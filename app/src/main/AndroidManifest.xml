@@ -14,10 +14,13 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".RecipeMain"
+            android:name=".ziyao.RecipeMain"
             android:exported="false" />
         <activity
-            android:name=".RecipeSearch"
+            android:name=".ziyao.RecipeSearch"
+            android:exported="false" />
+        <activity
+            android:name=".yuxing.SearchRoom"
             android:exported="false" />
 
         <activity android:name=".DeezerAlbum"

@@ -1,16 +1,12 @@
-package algonquin.cst2335.cst2355final;
+package algonquin.cst2335.cst2355final.ziyao;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,24 +20,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicReference;
 
 import algonquin.cst2335.cst2355final.Data.RecipeViewModel;
+import algonquin.cst2335.cst2355final.MainActivity;
+import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.RecipeMainBinding;
 import algonquin.cst2335.cst2355final.databinding.RecipeTitleBinding;
 
@@ -86,7 +75,7 @@ public class RecipeMain extends AppCompatActivity {
             {
                 recipes.addAll( mDAO.getAllRecipe() ); //Once you get the data from database
 
-                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+                runOnUiThread( () ->  binding.ziyaorecycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
             });
         }
 
@@ -95,11 +84,11 @@ public class RecipeMain extends AppCompatActivity {
             FragmentManager fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
             tx.addToBackStack("anything?");
-            tx.replace(R.id.fragmentLocation,chatFragment);
+            tx.replace(R.id.ziyaofragmentLocation,chatFragment);
             tx.commit();
         });
 
-        binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+        binding.ziyaorecycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -120,7 +109,7 @@ public class RecipeMain extends AppCompatActivity {
             }
         });
 
-        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
+        binding.ziyaorecycleView.setLayoutManager(new LinearLayoutManager(this));
 
     }
     class MyRowHolder extends RecyclerView.ViewHolder {
@@ -181,7 +170,7 @@ public class RecipeMain extends AppCompatActivity {
                                 mDAO.deleteRecipe(removedRecipe); //get the ID from the database
                                 Log.d("TAG", "The id removed is:" + removedRecipe.id);
                             }); //the body of run()
-                            Snackbar.make(this.findViewById(R.id.searchText),"You deleted message #"
+                            Snackbar.make(this.findViewById(R.id.ziyaosearchText),"You deleted message #"
                                             + position,Snackbar.LENGTH_LONG)
                                     .setAction("Undo", click -> {
                                         recipes.add(position,removedRecipe);

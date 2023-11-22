@@ -6,19 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
 import algonquin.cst2335.cst2355final.databinding.ActivityMainBinding;
+import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
+import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
+
 //test
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding variableBinding;
     private static String TAG = "MainActivity";
     Intent nextPage;
+
     Intent songPage;
+
+    Intent dictionaryPage;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -45,11 +51,23 @@ public class MainActivity extends AppCompatActivity {
 
         } );
 
+
         songButton.setOnClickListener(clk->
         {
             CharSequence text = "Going to Song Project...";
             Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
             startActivity( songPage);
+
+        } );
+
+
+        dictionaryPage = new Intent( MainActivity.this, SearchRoom.class);
+        Button dictionaryButton=variableBinding.dictionary;
+        dictionaryButton.setOnClickListener(clk->
+        {
+            CharSequence text = "Going to Dictionary Project...";
+            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            startActivity( dictionaryPage);
 
         } );
 
@@ -63,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 CharSequence text = "Going to Recipe Project...";
                 Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
                 startActivity( nextPage);
+                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
+                //asking if the user wants to delete this message.
+                break;
+            case R.id.dictionary:
+
+                CharSequence textdictionary = "Going to Dictionary Project...";
+                Toast.makeText(this,textdictionary, Toast.LENGTH_SHORT).show();
+                startActivity( dictionaryPage);
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;
