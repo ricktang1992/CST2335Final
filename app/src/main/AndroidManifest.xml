@@ -22,6 +22,9 @@
         <activity
             android:name=".yuxing.SearchRoom"
             android:exported="false" />
+
+        <activity android:name=".DeezerAlbum"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -20,7 +20,11 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding variableBinding;
     private static String TAG = "MainActivity";
     Intent nextPage;
+
+    Intent songPage;
+
     Intent dictionaryPage;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -34,7 +38,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(variableBinding.getRoot());
         setSupportActionBar( variableBinding.myToolbar);
         nextPage = new Intent( MainActivity.this, RecipeSearch.class);
+        songPage = new Intent( MainActivity.this, DeezerAlbum.class);
+
         Button recipeButton=variableBinding.recipe;
+        Button songButton = variableBinding.deezer;
+
         recipeButton.setOnClickListener(clk->
         {
             CharSequence text = "Going to Recipe Project...";
@@ -42,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity( nextPage);
 
         } );
+
+
+        songButton.setOnClickListener(clk->
+        {
+            CharSequence text = "Going to Song Project...";
+            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            startActivity( songPage);
+
+        } );
+
 
         dictionaryPage = new Intent( MainActivity.this, SearchRoom.class);
         Button dictionaryButton=variableBinding.dictionary;
@@ -52,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity( dictionaryPage);
 
         } );
+
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
