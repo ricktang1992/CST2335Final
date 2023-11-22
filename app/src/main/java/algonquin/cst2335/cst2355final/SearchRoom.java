@@ -122,7 +122,15 @@ public class SearchRoom extends AppCompatActivity {
             binding.editTextSearch.setText("");
         });
 
-
+        searchText.get().setText(prefs.getString("searchText",""));
+        chatModel.selectedMessage.observe(this, (newMessageValue) -> {
+            SearchDetailsFragment dictionaryFragment = new SearchDetailsFragment( newMessageValue );
+            FragmentManager fMgr = getSupportFragmentManager();
+            FragmentTransaction tx = fMgr.beginTransaction();
+            tx.addToBackStack("");
+            tx.replace(R.id.fragmentLocation,dictionaryFragment);
+            tx.commit();
+        });
 
         binding.recyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
