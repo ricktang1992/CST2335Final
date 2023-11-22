@@ -75,7 +75,7 @@ public class RecipeMain extends AppCompatActivity {
             {
                 recipes.addAll( mDAO.getAllRecipe() ); //Once you get the data from database
 
-                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+                runOnUiThread( () ->  binding.ziyaorecycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
             });
         }
 
@@ -84,11 +84,11 @@ public class RecipeMain extends AppCompatActivity {
             FragmentManager fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
             tx.addToBackStack("anything?");
-            tx.replace(R.id.fragmentLocation,chatFragment);
+            tx.replace(R.id.ziyaofragmentLocation,chatFragment);
             tx.commit();
         });
 
-        binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+        binding.ziyaorecycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -109,7 +109,7 @@ public class RecipeMain extends AppCompatActivity {
             }
         });
 
-        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
+        binding.ziyaorecycleView.setLayoutManager(new LinearLayoutManager(this));
 
     }
     class MyRowHolder extends RecyclerView.ViewHolder {
@@ -170,7 +170,7 @@ public class RecipeMain extends AppCompatActivity {
                                 mDAO.deleteRecipe(removedRecipe); //get the ID from the database
                                 Log.d("TAG", "The id removed is:" + removedRecipe.id);
                             }); //the body of run()
-                            Snackbar.make(this.findViewById(R.id.searchText),"You deleted message #"
+                            Snackbar.make(this.findViewById(R.id.ziyaosearchText),"You deleted message #"
                                             + position,Snackbar.LENGTH_LONG)
                                     .setAction("Undo", click -> {
                                         recipes.add(position,removedRecipe);
