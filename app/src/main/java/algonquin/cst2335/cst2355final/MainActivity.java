@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button recipeButton=variableBinding.recipe;
         Button songButton = variableBinding.deezer;
+
         recipeButton.setOnClickListener(clk->
         {
             CharSequence text = "Going to Recipe Project...";

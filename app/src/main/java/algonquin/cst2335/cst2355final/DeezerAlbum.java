@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -21,67 +23,65 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 import algonquin.cst2335.cst2355final.databinding.SongMainBinding;
 
 
 public class DeezerAlbum extends AppCompatActivity {
 
-    private SongMainBinding binding;
-
-    ArrayList<DeezerSong> songs = new ArrayList<>();
-    RecyclerView.Adapter myAdapter = null;
+    SongMainBinding binding; // Initialize a binding object
+    ArrayList<DeezerSong> songs = new ArrayList<>();// Create an ArrayList to store messages
+    RecyclerView.Adapter myAdapter = null; // Initialize an adapter for RecyclerView
     DeezerSongDAO dsDAO;
-    DeezerSongViewModel songModel;
+    int selectedRow;
+    DeezerSongViewModel songModel; // Initialize a ViewModel
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        super.onCreateOptionsMenu(menu);
-//        getMenuInflater().inflate(R.menu.song_memu, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch( item.getItemId() )
-//        {
-//            case R.id.savedSongMenu:
-//
-//                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-//                //asking if the user wants to delete this message.
-//                break;
-//
-//            case R.id.aboutSongMenu:
-//
-//                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-//                builder2.setMessage("This application is the song.").setTitle("About: ")
-//                        .setNegativeButton("OK", (dialog, cl) -> {
-//                        }).create().show();
-//                break;
-//            case R.id.saveTheSong:
-//
-//                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-//                //asking if the user wants to delete this message.
-//                break;
-//        }
-//
-//        return true;
-//    }
+    /**
+     * Called when the activity is created.
+     *
+     * @param savedInstanceState The saved instance state, if any.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = SongMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        binding = SongMainBinding.inflate(getLayoutInflater());// Inflate the layout using binding
+        setContentView(binding.getRoot());// Set the content view to the inflated layout
 
-        songModel = new ViewModelProvider(this).get(DeezerSongViewModel.class);
-        DeezerSongDatabase db = Room.databaseBuilder(getApplicationContext(), DeezerSongDatabase.class, "Deezer-song").build();
+
+        DeezerSongDatabase db = Room.databaseBuilder(getApplicationContext(), DeezerSongDatabase.class, "database-song").build();
         dsDAO = db.dsDAO();
+        setSupportActionBar( binding.mysongToolbar);
+//        songModel = new ViewModelProvider(this).get(DeezerSongViewModel.class); // Initialize ViewModel
+        //load messages from the database
+        //initialize the variable
+//        songs = songModel.songs.getValue();// Get messages from the ViewModel
 
-        songs = songModel.songs.getValue();
+//        songModel.selectedSong.observe(this, (newMessageValue) -> {
+//            // Create a new instance of MessageDetailsFragment and set the selected message
+//            DeezerSongDetailsFragment songFragment = new DeezerSongDetailsFragment(newMessageValue);
+//
+//            // Get the FragmentManager
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//
+//            // Begin the FragmentTransaction
+//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//            fragmentTransaction.addToBackStack("hi?");
+//            // Replace the existing fragment in fragmentLocation with the new MessageDetailsFragment
+//            fragmentTransaction.replace(R.id.fragmentLocation, songFragment);
+//
+//            // Commit the transaction
+//            fragmentTransaction.commit();
+//        });
 
         if (songs == null) {
             songModel.songs.setValue(songs = new ArrayList<>());
@@ -91,48 +91,17 @@ public class DeezerAlbum extends AppCompatActivity {
             {
                 songs.addAll( dsDAO.getAllSongs()); //Once you get the data from database
 
-                runOnUiThread( () -> binding.recyclerView.setAdapter( myAdapter )); //You can then load the RecyclerView
+                runOnUiThread( () -> binding.songrecyclerView.setAdapter( myAdapter )); //You can then load the RecyclerView
             });
         }
 
-        SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        EditText searchText =binding.titleTextInput;
-        Button searchButton = binding.searchButton;
-        searchButton.setOnClickListener(clk->
-        {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("searchText", searchText.getText().toString() );
-            editor.apply();
-            CharSequence text = "Searching...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
-        } );
-
-        setSupportActionBar(binding.songToolBar);
-        searchText.setText(prefs.getString("searchText",""));
-
-
-        songModel.selectedSong.observe(this, (newSongValue) ->{
-            DeezerSongDetailsFragment songFragment = new DeezerSongDetailsFragment(newSongValue);
-            // Get the FragmentManager
-            FragmentManager fragmentManager = getSupportFragmentManager();
-
-            // Begin the FragmentTransaction
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            // Replace the existing fragment in fragmentLocation with the new MessageDetailsFragment
-            fragmentTransaction.replace(R.id.fragmentLocation, songFragment);
-
-            fragmentTransaction.addToBackStack("");
-            // Commit the transaction
-            fragmentTransaction.commit();
-        });
-
         // Handle a click on the Send button
-        binding.searchButton.setOnClickListener(click -> {
-            DeezerSong theSong = new DeezerSong("title","", 0,"albumCoverText");
+        binding.searchsongButton.setOnClickListener(click -> {
+            String text = binding.searchSongText.getText().toString();
+            DeezerSong theSong = new DeezerSong("","",0,"");
             songs.add(theSong); // Add the message to the ArrayList
             myAdapter.notifyItemInserted(songs.size() - 1);
-            binding.titleTextInput.setText("");//remove the text in EditText
+            binding.searchSongText.setText("");//remove the text in EditText
 
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(new Runnable() {
@@ -144,22 +113,23 @@ public class DeezerAlbum extends AppCompatActivity {
         });
 
 
-        binding.recyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+        binding.songrecyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                //1)load a XML layout
 
-                return new MyRowHolder(binding.getRoot());
+                    SongDetailBinding binding =
+                            SongDetailBinding.inflate(getLayoutInflater(), parent, false);
+
+                    return new MyRowHolder(binding.getRoot());
+
             }
-
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 // Bind data to the views in each row
                 DeezerSong obj = songs.get(position); // Get the message at the current position
-                holder.messageText.setText(obj.getTitle()); // Set the message in the TextV
-                holder.timeText.setText(obj.getName());
+//                holder.songText.setText(obj.getTitle()); // Set the message in the TextV
 
             }
 
@@ -169,28 +139,78 @@ public class DeezerAlbum extends AppCompatActivity {
                 return songs.size();
             }
 
+            public int getItemViewType(int position) {
+                // Get the message at the current position
+                DeezerSong message = songs.get(position); // the first letter
+                    return 0;
+            }
         });
 
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.songrecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
     class MyRowHolder extends RecyclerView.ViewHolder {
-        public TextView messageText;
-        public TextView timeText;
+        public EditText songText;
 
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
+            songText = itemView.findViewById(R.id.searchSongText);
 
-            messageText = itemView.findViewById(R.id.title_text_input);
-
-            itemView.setOnClickListener(click -> {
-
+            itemView.setOnClickListener(click ->{
                 int position = getAbsoluteAdapterPosition();
                 DeezerSong selected = songs.get(position);
-                songModel.selectedSong.postValue(selected);
+                songModel.selectedSong.postValue(selected);//launch a fragment
 
+                selectedRow = position;
             });
+
         }
+    } //end of onCreat
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.song_memu,menu);
+
+        return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.returnHomeMenu:
+                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
+                //asking if the user wants to delete this message.
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(DeezerAlbum.this);
+
+                builder.setMessage("Do you want to return the home page: ")
+                        .setTitle("Question:")
+                        .setNegativeButton("No", (a, b) -> {
+                        })
+                        .setPositiveButton("Yes", (a, b) -> {
+
+                            Executors.newSingleThreadExecutor().execute(() -> {
+
+                            });
+
+
+                            Snackbar.make(binding.mysongToolbar, "You return to home page", Snackbar.LENGTH_LONG)
+                                    .setAction("Undo", clk -> {
+                                        Executors.newSingleThreadExecutor().execute(()->{
+//                                            dsDAO.insertMessage(removeMessage);
+                                        });
+
+                                    })
+                                    .show();
+                        }).create().show();
+                break;
+
+            case R.id.addToList:
+                Toast.makeText(this,"Version 1.0, created by Li Jiang", Toast.LENGTH_LONG).show();
+                break;
+        }
+        return true;
+    }
+
 }
