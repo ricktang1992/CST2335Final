@@ -1,6 +1,5 @@
-package algonquin.cst2335.cst2355final;
+package algonquin.cst2335.cst2355final.ziyao;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,14 +19,10 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.util.ArrayList;
 
 import algonquin.cst2335.cst2355final.databinding.RecipeInfoBinding;
+import algonquin.cst2335.cst2355final.ziyao.Recipe;
 
 public class RecipeDetailsFragment extends Fragment {
     Recipe selected;

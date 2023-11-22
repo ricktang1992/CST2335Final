@@ -6,13 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
 import algonquin.cst2335.cst2355final.databinding.ActivityMainBinding;
+import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
+import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
+
 //test
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding variableBinding;

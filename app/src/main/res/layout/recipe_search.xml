@@ -16,7 +16,7 @@
     app:layout_constraintTop_toTopOf="parent"
     android:id="@+id/myZiyaoToolBar"/>
     <FrameLayout
-        android:id="@+id/fragmentLocation"
+        android:id="@+id/ziyaofragmentLocation"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
     >
 
     <Button
-        android:id="@+id/searchButton"
+        android:id="@+id/ziyaosearchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
@@ -34,26 +34,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/searchText"
+        android:id="@+id/ziyaosearchText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
         android:hint="Search Text goes here"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/searchButton"
-        app:layout_constraintEnd_toStartOf="@+id/searchButton"
+        app:layout_constraintBottom_toBottomOf="@+id/ziyaosearchButton"
+        app:layout_constraintEnd_toStartOf="@+id/ziyaosearchButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/searchButton" />
+        app:layout_constraintTop_toTopOf="@+id/ziyaosearchButton" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView"
+        android:id="@+id/ziyaorecycleView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+        app:layout_constraintTop_toBottomOf="@+id/ziyaosearchButton" />
 
 
 

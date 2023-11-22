@@ -1,4 +1,4 @@
-package algonquin.cst2335.cst2355final;import androidx.room.ColumnInfo;
+package algonquin.cst2335.cst2355final.ziyao;import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 //test

@@ -1,11 +1,10 @@
-package algonquin.cst2335.cst2355final;
+package algonquin.cst2335.cst2355final.ziyao;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,7 +26,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-import androidx.room.util.StringUtil;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -50,7 +48,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
 import algonquin.cst2335.cst2355final.Data.RecipeViewModel;
-import algonquin.cst2335.cst2355final.databinding.RecipeSearchBinding;
+import algonquin.cst2335.cst2355final.MainActivity;
+import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.RecipeSearchBinding;
 import algonquin.cst2335.cst2355final.databinding.RecipeTitleBinding;
 
@@ -104,8 +103,8 @@ public class RecipeSearch extends AppCompatActivity {
 //        }
 
         SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        AtomicReference<EditText> searchText = new AtomicReference<>(binding.searchText);
-        Button searchButton = binding.searchButton;
+        AtomicReference<EditText> searchText = new AtomicReference<>(binding.ziyaosearchText);
+        Button searchButton = binding.ziyaosearchButton;
         searchButton.setOnClickListener(clk->
         {
             SharedPreferences.Editor editor = prefs.edit();
@@ -113,7 +112,7 @@ public class RecipeSearch extends AppCompatActivity {
             editor.apply();
             CharSequence text = "Searching...";
             Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
-            searchmess = binding.searchText.getText().toString();
+            searchmess = binding.ziyaosearchText.getText().toString();
 //            stringURL="https://api.spoonacular.com/recipes/complexSearch?query="
 //                     +searchmess
 //                     +"&apiKey=670608d3fd1e4b15b120493cad68231a";
@@ -186,10 +185,10 @@ public class RecipeSearch extends AppCompatActivity {
             FragmentManager fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
             tx.addToBackStack("anything?");
-            tx.replace(R.id.fragmentLocation,recipeFragment);
+            tx.replace(R.id.ziyaofragmentLocation,recipeFragment);
             tx.commit();
         });
-        binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+        binding.ziyaorecycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -210,7 +209,7 @@ public class RecipeSearch extends AppCompatActivity {
             }
         });
 
-        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
+        binding.ziyaorecycleView.setLayoutManager(new LinearLayoutManager(this));
 
     }
     class MyRowHolder extends RecyclerView.ViewHolder {
@@ -262,7 +261,7 @@ public class RecipeSearch extends AppCompatActivity {
                     addRecipe.id = (int)mDAO.insertRecipe(addRecipe); //get the ID from the database
                     Log.d("TAG", "The id created is:" + addRecipe.id);
                 }); //the body of run()
-                Snackbar.make(this.findViewById(R.id.searchText),"You added the recipe "
+                Snackbar.make(this.findViewById(R.id.ziyaosearchText),"You added the recipe "
                         +addRecipe.getTitle(),Snackbar.LENGTH_LONG).show();
                 getSupportFragmentManager() .popBackStack();
                 break;

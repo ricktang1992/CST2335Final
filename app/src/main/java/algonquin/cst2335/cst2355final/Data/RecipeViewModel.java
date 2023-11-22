@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import algonquin.cst2335.cst2355final.Recipe;
+import algonquin.cst2335.cst2355final.ziyao.Recipe;
 
 
 public class RecipeViewModel extends ViewModel {
