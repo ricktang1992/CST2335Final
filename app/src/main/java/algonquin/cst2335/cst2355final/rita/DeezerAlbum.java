@@ -63,23 +63,6 @@ public class DeezerAlbum extends AppCompatActivity {
         setContentView(binding.getRoot());// Set the content view to the inflated layout
 
         songModel = new ViewModelProvider(this).get(DeezerSongViewModel.class); // Initialize ViewModel
-        songModel.selectedSong.observe(this, (newMessageValue) -> {
-            // Create a new instance of MessageDetailsFragment and set the selected message
-            DeezerSongDetailsFragment songFragment = new DeezerSongDetailsFragment(newMessageValue);
-
-            // Get the FragmentManager
-            FragmentManager fragmentManager = getSupportFragmentManager();
-
-            // Begin the FragmentTransaction
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            fragmentTransaction.addToBackStack("hi?");
-            // Replace the existing fragment in fragmentLocation with the new MessageDetailsFragment
-            fragmentTransaction.replace(R.id.songfragmentLocation, songFragment);
-
-            // Commit the transaction
-            fragmentTransaction.commit();
-        });
 
         DeezerSongDatabase db = Room.databaseBuilder(getApplicationContext(), DeezerSongDatabase.class, "database-song").build();
         dsDAO = db.dsDAO();
@@ -131,6 +114,7 @@ public class DeezerAlbum extends AppCompatActivity {
         });
 
         searchText.get().setText(prefer.getString("searchText", ""));
+
         songModel.selectedSong.observe(this, (newSongValue) ->{
             // Create a new instance of MessageDetailsFragment and set the selected message
             DeezerSongDetailsFragment songFragment = new DeezerSongDetailsFragment(newSongValue);
