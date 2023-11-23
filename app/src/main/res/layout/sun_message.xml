@@ -9,8 +9,8 @@
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
         android:text="Message goes here"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,10 +20,10 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:textSize="10dp"
+        android:layout_marginStart="36dp"
         android:text="Times goes here"
-        app:layout_constraintBottom_toTopOf="@+id/message"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

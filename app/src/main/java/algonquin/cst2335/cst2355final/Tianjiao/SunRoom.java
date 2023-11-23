@@ -50,13 +50,13 @@ public class SunRoom extends AppCompatActivity {
 
         sunModel = new ViewModelProvider(this).get(SunViewModel.class);
         sunModel.selectedMessage.observe(this, (sundMessage) -> {
-            SunDetailsFragment newFragment = new SunDetailsFragment(sundMessage);
+            SunDetailsFragment sunFragment = new SunDetailsFragment(sundMessage);
 
             FragmentManager fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
 
             tx.addToBackStack("");
-            tx.replace(R.id.sunframeLayout, newFragment);
+            tx.replace(R.id.sunframeLayout, sunFragment);
             tx.commit();
 
         });
@@ -97,19 +97,20 @@ public class SunRoom extends AppCompatActivity {
 
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("sunText", sunText.get().getText().toString() );
-//            editor.putString("sunsText", sunsText.get().getText().toString() );
+            editor.putString("sunsText", sunsText.get().getText().toString() );
 
             editor.apply();
       //      SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
       //      String currentDateandTime = sdf.format(new Date());
             String inputMessage = binding.editTextSearch.getText().toString();
-//           String inputMessages = binding.latitudeSearch.getText().toString();
+            String inputMessages = binding.latitudeSearch.getText().toString();
 
-            SunTerm thisMessage = new SunTerm(inputMessage,"00000");
+            SunTerm thisMessage = new SunTerm("Ing:  " + inputMessage, "Iat: " + inputMessages);
             texts1.add(thisMessage);
 
             // clear teh previous text
             binding.editTextSearch.setText("");
+            binding.latitudeSearch.setText("");
             sunAdapter.notifyDataSetChanged();
 
             Executor thread = Executors.newSingleThreadExecutor();
