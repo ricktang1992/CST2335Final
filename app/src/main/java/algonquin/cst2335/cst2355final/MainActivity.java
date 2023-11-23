@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import algonquin.cst2335.cst2355final.Tianjiao.SunRoom;
 import algonquin.cst2335.cst2355final.databinding.ActivityMainBinding;
 import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
 import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     Intent songPage;
 
     Intent dictionaryPage;
+    Intent sunPage;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar( variableBinding.myToolbar);
         nextPage = new Intent( MainActivity.this, RecipeSearch.class);
         songPage = new Intent( MainActivity.this, DeezerAlbum.class);
+        sunPage = new Intent( MainActivity.this, SunRoom.class);
+
 
         Button recipeButton=variableBinding.recipe;
         Button songButton = variableBinding.deezer;
@@ -72,6 +77,16 @@ public class MainActivity extends AppCompatActivity {
 
         } );
 
+        sunPage = new Intent( MainActivity.this, SunRoom.class);
+        Button sunrise=variableBinding.sunrise;
+        sunrise.setOnClickListener(clk->
+        {
+            CharSequence text = "Going to Sun Project...";
+            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            startActivity( sunPage);
+
+        } );
+
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -93,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;
+
             case R.id.about:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
                 builder2.setMessage("This application is the final project of our class CST2355.\n" +
