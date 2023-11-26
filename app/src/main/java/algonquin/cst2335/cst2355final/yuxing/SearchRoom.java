@@ -2,7 +2,6 @@ package algonquin.cst2335.cst2355final.yuxing;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,8 +31,7 @@ import algonquin.cst2335.cst2355final.databinding.SearchMessageBinding;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -42,13 +39,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -59,8 +54,10 @@ public class SearchRoom extends AppCompatActivity {
 
     SearchViewModel chatModel ;
     SearchTermDAO mDAO;
+
+    SearchTerm dictionaryFromApi;
     private RecyclerView.Adapter myAdapter;
-    protected String term;
+    protected String searchMessage;
     protected String termurl;
     protected RequestQueue queue = null;
 
@@ -74,7 +71,7 @@ public class SearchRoom extends AppCompatActivity {
 
             FragmentManager fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
-
+            tx.addToBackStack("");
             tx.replace(R.id.yuxingframeLayout, newFragment);
             tx.commit();
 
@@ -90,9 +87,10 @@ public class SearchRoom extends AppCompatActivity {
 
         binding = SearchRoomBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        //volley
+        queue = Volley.newRequestQueue(this);
         setSupportActionBar(binding.yuxingtoolbar);
-//        queue = Volley.newRequestQueue(this);
+
         //SharedPreferences to save something about what was typed in the EditText for use the next time
         SharedPreferences prefs = getSharedPreferences("searchHistory", Context.MODE_PRIVATE);
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.yuxingeditTextSearch);
@@ -106,16 +104,25 @@ public class SearchRoom extends AppCompatActivity {
             String currentDateandTime = sdf.format(new Date());
             // search from url
             try {
-                term = URLEncoder.encode(binding.yuxingeditTextSearch.getText().toString(),"UTF-8");
-                termurl = "https://api.dictionaryapi.dev/api/v2/entries/en/" + term;
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, termurl, null, (response) -> {
+                searchMessage = URLEncoder.encode(binding.yuxingeditTextSearch.getText().toString(),"UTF-8");
+                termurl = "https://api.dictionaryapi.dev/api/v2/entries/en/" + searchMessage;
+                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, termurl, null, (response) -> {
                     try {
-                        JSONObject mainObject = response.getJSONObject("0");
+                        JSONObject mainObject = response.getJSONObject(0);
 
                         JSONArray meanings = mainObject.getJSONArray ( "meanings" );
 
                         for(int i = 0; i < meanings.length(); i++){
                             JSONObject aMeaning = meanings.getJSONObject(i);
+                            JSONArray aDefinition = aMeaning.getJSONArray("definitions");
+                            for(int j = 0; j < aDefinition.length(); j++){
+                                String def = aDefinition.getJSONObject(j).getString("definition");
+                                Log.d( "received meaning",def);
+
+                                dictionaryFromApi = new SearchTerm(searchMessage,currentDateandTime,def);
+                                messages.add(dictionaryFromApi);
+                                myAdapter.notifyDataSetChanged();
+                            }
                         }
 
 
@@ -129,28 +136,28 @@ public class SearchRoom extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
 
-            String termName = binding.yuxingeditTextSearch.getText().toString();
-            String termDefinnition = "";
-            SearchTerm thisMessage = new SearchTerm(termName, currentDateandTime,termDefinnition);
-            messages.add(thisMessage);
+//            String termName = binding.yuxingeditTextSearch.getText().toString();
+//            String termDefinnition = "";
+//            SearchTerm thisMessage = new SearchTerm(termName, currentDateandTime,termDefinnition);
+//            messages.add(thisMessage);
 
-            // clear the previous text
-            binding.yuxingeditTextSearch.setText("");
-            myAdapter.notifyDataSetChanged();
-
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(new Runnable() {
-                @Override
-                public void run() {
-                    long id = mDAO.insertSearchTerm(thisMessage);
-                    thisMessage.id = id;
-                }
-            });
-
-
-            runOnUiThread(() ->{myAdapter.notifyItemInserted(messages.size() - 1);});
-
-            binding.yuxingeditTextSearch.setText("");
+//            // clear the previous text
+//            binding.yuxingeditTextSearch.setText("");
+//            myAdapter.notifyDataSetChanged();
+//
+//            Executor thread = Executors.newSingleThreadExecutor();
+//            thread.execute(new Runnable() {
+//                @Override
+//                public void run() {
+//                    long id = mDAO.insertSearchTerm(thisMessage);
+//                    thisMessage.id = id;
+//                }
+//            });
+//
+//
+//            runOnUiThread(() ->{myAdapter.notifyItemInserted(messages.size() - 1);});
+//
+//            binding.yuxingeditTextSearch.setText("");
         });
 
         searchText.get().setText(prefs.getString("searchText",""));
@@ -168,12 +175,9 @@ public class SearchRoom extends AppCompatActivity {
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-
                 SearchMessageBinding binding = SearchMessageBinding.inflate(getLayoutInflater(), parent, false);
 
                     return new MyRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
-
-
             }
 
 
@@ -181,9 +185,8 @@ public class SearchRoom extends AppCompatActivity {
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 SearchTerm obj = messages.get(position);
                 holder.messageText.setText(obj.getTerm());
-//                holder.messageText.setText("");
+//              recylerview message format
                 holder.timeText.setText(obj.getTimeSent());
-                holder.definitionText.setText(obj.getDefinition());
             }
 
             @Override
@@ -265,7 +268,6 @@ public class SearchRoom extends AppCompatActivity {
 
         TextView messageText;
         TextView timeText;
-        TextView definitionText;
 
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
@@ -276,9 +278,8 @@ public class SearchRoom extends AppCompatActivity {
 
                 chatModel.selectedMessage.postValue(selected);
             });
-            messageText = itemView.findViewById(R.id.yuxingTermMessage);
+            messageText = itemView.findViewById(R.id.yuxingTermWord);
             timeText =itemView.findViewById(R.id.yuxingSearchtime);
-            definitionText = itemView.findViewById(R.id.yuxingtermDefinnition);
         }
     }
 }
