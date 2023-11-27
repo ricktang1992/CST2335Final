@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,7 +18,7 @@
         android:id="@+id/yuxingeditTextSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:hint="Enter word to search"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,12 +28,12 @@
 
     <Button
         android:id="@+id/yuxingbtnSearch"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Search the definition"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/yuxingsavedBtn"
         app:layout_constraintTop_toBottomOf="@id/yuxingeditTextSearch" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -46,25 +47,26 @@
         app:layout_constraintTop_toBottomOf="@id/yuxingbtnSearch"
         app:layout_constraintVertical_bias="1.0" />
 
+    <Button
+        android:id="@+id/yuxingsavedBtn"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="See saved term"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yuxingeditTextSearch" />
+
     <FrameLayout
         android:id="@+id/yuxingframeLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yuxingtoolbar"></FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/yuxingtoolbar"
+        app:layout_constraintVertical_bias="0.0">
 
-    <Button
-        android:id="@+id/savedBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/design_default_color_secondary"
-        android:text="Saved Term"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/yuxingeditTextSearch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yuxingtoolbar" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

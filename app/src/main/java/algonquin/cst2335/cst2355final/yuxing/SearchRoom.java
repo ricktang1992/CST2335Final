@@ -1,6 +1,7 @@
 package algonquin.cst2335.cst2355final.yuxing;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import algonquin.cst2335.cst2355final.Data.SearchViewModel;
+import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SearchRoomBinding;
 import algonquin.cst2335.cst2355final.databinding.SearchMessageBinding;
@@ -44,6 +46,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -61,6 +64,8 @@ public class SearchRoom extends AppCompatActivity {
     protected String termurl;
     protected RequestQueue queue = null;
 
+    Intent dictionarySavedPage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,11 +82,8 @@ public class SearchRoom extends AppCompatActivity {
 
         });
 
-        SearchDatabase db = Room.databaseBuilder(getApplicationContext(), SearchDatabase.class, "databaseFileOnPhone").build();
+        SearchDatabase db = Room.databaseBuilder(getApplicationContext(), SearchDatabase.class, "yuxingDictionary").build();
         mDAO = db.searchTermDao();
-
-
-
         //database
 
 
@@ -91,6 +93,12 @@ public class SearchRoom extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         setSupportActionBar(binding.yuxingtoolbar);
 
+
+        //go to saved term page
+        binding.yuxingsavedBtn.setOnClickListener(clk ->{
+            dictionarySavedPage = new Intent( SearchRoom.this, SearchSaved.class);
+            startActivity( dictionarySavedPage);
+        });
         //SharedPreferences to save something about what was typed in the EditText for use the next time
         SharedPreferences prefs = getSharedPreferences("searchHistory", Context.MODE_PRIVATE);
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.yuxingeditTextSearch);
@@ -211,8 +219,8 @@ public class SearchRoom extends AppCompatActivity {
         {
             case R.id.delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Do you want to delete the selected message?");
-                builder.setTitle("Delete Message")
+                builder.setMessage("Do you want to delete the selected term?");
+                builder.setTitle("Delete Term")
                         .setPositiveButton("Yes", (dialog, cl) -> {
                             // Get the selected message
                             SearchTerm selectedMessage = chatModel.selectedMessage.getValue();
@@ -251,12 +259,27 @@ public class SearchRoom extends AppCompatActivity {
 
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
+                SearchTerm addTerm = chatModel.selectedMessage.getValue();
+                messages.add(addTerm);
+                myAdapter.notifyDataSetChanged();
+                Executor addthread = Executors.newSingleThreadExecutor();
+                addthread.execute(( ) -> {
+                    //this is on a background thread
+                    addTerm.id = (int)mDAO.insertSearchTerm(addTerm); //get the ID from the database
+                    Log.d("TAG", "The id created is:" + addTerm.id);
+                }); //the body of run()
+                Snackbar.make(this.findViewById(R.id.yuxingeditTextSearch),"You added the term "
+                        +addTerm.getTerm(),Snackbar.LENGTH_LONG).show();
+                getSupportFragmentManager().popBackStack();
                 break;
             case R.id.about:
 
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-                //asking if the user wants to delete this message.
-                Toast.makeText(this,"Version 1.0, Created by Yuxing Xu",Toast.LENGTH_LONG).show();
+                //show how to use this app.
+                AlertDialog.Builder dictionayUse = new AlertDialog.Builder(this);
+                dictionayUse.setMessage("How to use").setTitle("About: ")
+                        .setNegativeButton("OK", (dialog, cl) -> {
+                        }).create().show();
                 break;
         }
 
