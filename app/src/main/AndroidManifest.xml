@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST2355Final"
         tools:targetApi="31">
-
+        <activity
+            android:name=".yuxing.SearchSaved"
+            android:exported="false" />
         <activity
             android:name=".ziyao.RecipeMain"
             android:exported="false" />
@@ -25,9 +29,8 @@
         <activity
             android:name=".Tianjiao.SunRoom"
             android:exported="false" />
-
-
-        <activity android:name=".rita.DeezerAlbum"
+        <activity
+            android:name=".rita.DeezerAlbum"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

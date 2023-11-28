@@ -25,9 +25,9 @@ public class SearchDetailsFragment extends Fragment {
         super.onCreateView(inflater,container,savedInstanceState);
         SearchDetailsLayoutBinding binding = SearchDetailsLayoutBinding.inflate(inflater);
 
-        binding.messageText.setText(selected.term);
+        binding.yuxingTermView.setText(selected.term);
         binding.timeView.setText(selected.timeSent);
-        binding.idView.setText("Id = " + selected.id);
+        binding.yuxingDefinitionView.setText(selected.definition);
         return binding.getRoot();
     }
 }
