@@ -18,12 +18,15 @@ public class SearchTerm {
     @ColumnInfo(name="timeSent")
     protected String timeSent;
 
+    @ColumnInfo(name="isSentButton")
+    protected boolean isSaveButton;
     public  SearchTerm(){}
 
-    public SearchTerm(String term, String timeSent, String definition) {
+    public SearchTerm(String term, String timeSent, String definition, boolean isSaveButton) {
         this.term = term;
         this.timeSent = timeSent;
         this.definition = definition;
+        this.isSaveButton = isSaveButton;
     }
 
 
@@ -35,6 +38,9 @@ public class SearchTerm {
     }
     public String getTimeSent() {
         return timeSent;
+    }
+
+    public boolean isSaveButton() { return isSaveButton;
     }
 }
 

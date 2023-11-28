@@ -1,27 +1,12 @@
 <resources>
     <string name="app_name">CST2355Final</string>
-    <!-- xingxing.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    -->
+    <!-- xingxing.-->
+    <string name="yxeditSearchName">Enter word to search</string>
+    <string name="yxSearchBtNname">Seach</string>
+    <string name="yxSaveBtnName">See Saved Term</string>
+    <string name="yxSave_name">Saved Term</string>
+    <string name="yxAbout_name">About</string>
     <!-- Rick.
 
 

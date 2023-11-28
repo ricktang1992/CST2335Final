@@ -28,28 +28,34 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.cst2355final.Data.SearchViewModel;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SearchMessageBinding;
-import algonquin.cst2335.cst2355final.databinding.SearchRoomBinding;
 import algonquin.cst2335.cst2355final.databinding.SearchSavedBinding;
 
 
 public class SearchSaved extends AppCompatActivity {
     SearchSavedBinding binding;
-    SearchRoomBinding anotherBinding;
     ArrayList<SearchTerm> messages = new ArrayList<>();
 
     SearchViewModel saveModel ;
     SearchTermDAO mDAO;
 
-    private RecyclerView.Adapter myAdapter;
+    private RecyclerView.Adapter savedAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = SearchSavedBinding.inflate(getLayoutInflater());
-        anotherBinding = SearchRoomBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         saveModel = new ViewModelProvider(this).get(SearchViewModel.class);
+        saveModel.selectedMessage.observe(this, (selectedMessage) -> {
+            SearchDetailsFragment newFragment = new SearchDetailsFragment(selectedMessage);
+
+            FragmentManager fMgr = getSupportFragmentManager();
+            FragmentTransaction tx = fMgr.beginTransaction();
+            tx.addToBackStack("");
+            tx.replace(R.id.yuxingframeLayout, newFragment);
+            tx.commit();
+        });
         SearchDatabase db = Room.databaseBuilder(getApplicationContext(), SearchDatabase.class, "yuxingDictionary").build();
         mDAO = db.searchTermDao();
         messages = saveModel.messages.getValue();
@@ -63,11 +69,11 @@ public class SearchSaved extends AppCompatActivity {
             {
                 messages.addAll( mDAO.getAllSearchTerms() ); //Once you get the data from database
 
-                runOnUiThread( () ->  binding.yuxingsavedRecyclerView.setAdapter( myAdapter )); //You can then load the RecyclerView
+                runOnUiThread( () ->  binding.yuxingsavedRecyclerView.setAdapter( savedAdapter )); //You can then load the RecyclerView
             });
         }
 
-        binding.yuxingsavedRecyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<SearchSaved.MyRowHolder>() {
+        binding.yuxingsavedRecyclerView.setAdapter(savedAdapter = new RecyclerView.Adapter<SearchSaved.MyRowHolder>() {
             @NonNull
             @Override
             public SearchSaved.MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,7 +81,6 @@ public class SearchSaved extends AppCompatActivity {
                 SearchMessageBinding binding = SearchMessageBinding.inflate(getLayoutInflater(), parent, false);
                 return new SearchSaved.MyRowHolder(binding.getRoot());// getRoot returns a ConstraintLayout with TextViews inside
             }
-
 
 
             @Override

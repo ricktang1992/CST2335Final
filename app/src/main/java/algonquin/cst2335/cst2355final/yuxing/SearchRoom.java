@@ -29,6 +29,7 @@ import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SearchRoomBinding;
 import algonquin.cst2335.cst2355final.databinding.SearchMessageBinding;
+import algonquin.cst2335.cst2355final.databinding.SearchSavedBinding;
 
 
 import com.android.volley.Request;
@@ -67,8 +68,15 @@ public class SearchRoom extends AppCompatActivity {
     Intent dictionarySavedPage;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.yuxing_menu_file, menu);
+        return true;
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         chatModel = new ViewModelProvider(this).get(SearchViewModel.class);
         chatModel.selectedMessage.observe(this, (selectedMessage) -> {
@@ -104,7 +112,7 @@ public class SearchRoom extends AppCompatActivity {
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.yuxingeditTextSearch);
 
         binding.yuxingbtnSearch.setOnClickListener(clk -> {
-
+            boolean saveButton = true;
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("searchText", searchText.get().getText().toString() );
             editor.apply();
@@ -127,7 +135,7 @@ public class SearchRoom extends AppCompatActivity {
                                 String def = aDefinition.getJSONObject(j).getString("definition");
                                 Log.d( "received meaning",def);
 
-                                dictionaryFromApi = new SearchTerm(searchMessage,currentDateandTime,def);
+                                dictionaryFromApi = new SearchTerm(searchMessage,currentDateandTime,def,saveButton);
                                 messages.add(dictionaryFromApi);
                                 myAdapter.notifyDataSetChanged();
                             }
@@ -149,10 +157,10 @@ public class SearchRoom extends AppCompatActivity {
 //            SearchTerm thisMessage = new SearchTerm(termName, currentDateandTime,termDefinnition);
 //            messages.add(thisMessage);
 
-//            // clear the previous text
+//             clear the previous text
 //            binding.yuxingeditTextSearch.setText("");
 //            myAdapter.notifyDataSetChanged();
-//
+
 //            Executor thread = Executors.newSingleThreadExecutor();
 //            thread.execute(new Runnable() {
 //                @Override
@@ -181,13 +189,38 @@ public class SearchRoom extends AppCompatActivity {
         binding.yuxingrecyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
+
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                SearchMessageBinding binding = SearchMessageBinding.inflate(getLayoutInflater(), parent, false);
+                // viewType will either be 0 or 1
 
+                if (viewType == 0) {
+                    // 1. load a XML layout
+                    SearchMessageBinding binding =                            // parent is incase matchparent
+                            SearchMessageBinding.inflate(getLayoutInflater(), parent, false);
+
+                    // 2. call our constructor below
                     return new MyRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
+                }
+                else{
+                    // 1. load a XML layout
+                    SearchMessageBinding binding =                            // parent is incase matchparent
+                            SearchMessageBinding.inflate(getLayoutInflater(), parent, false);
+
+                    // 2. call our constructor below
+                    return new MyRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
+
+                }
             }
 
+            public int  getItemViewType(int position){
+                // determine which layout to load at row position
+                if (messages.get(position).isSaveButton() == true) // for the first 5 rows
+                {
+                    return 0;
+                }
+                else return 1;
+            }
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
@@ -206,11 +239,23 @@ public class SearchRoom extends AppCompatActivity {
         binding.yuxingrecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.yuxing_menu_file, menu);
-        return true;
+    class MyRowHolder extends RecyclerView.ViewHolder {
+
+        TextView messageText;
+        TextView timeText;
+
+        public MyRowHolder(@NonNull View itemView) {
+            super(itemView);
+
+            itemView.setOnClickListener(clk -> {
+                int position = getAbsoluteAdapterPosition();
+                SearchTerm selected = messages.get(position);
+
+                chatModel.selectedMessage.postValue(selected);
+            });
+            messageText = itemView.findViewById(R.id.yuxingTermWord);
+            timeText =itemView.findViewById(R.id.yuxingSearchtime);
+        }
     }
 
     @Override
@@ -287,22 +332,5 @@ public class SearchRoom extends AppCompatActivity {
     }
 
 
-    class MyRowHolder extends RecyclerView.ViewHolder {
 
-        TextView messageText;
-        TextView timeText;
-
-        public MyRowHolder(@NonNull View itemView) {
-            super(itemView);
-
-            itemView.setOnClickListener(clk -> {
-                int position = getAbsoluteAdapterPosition();
-                SearchTerm selected = messages.get(position);
-
-                chatModel.selectedMessage.postValue(selected);
-            });
-            messageText = itemView.findViewById(R.id.yuxingTermWord);
-            timeText =itemView.findViewById(R.id.yuxingSearchtime);
-        }
-    }
 }

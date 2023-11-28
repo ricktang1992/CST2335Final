@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CST2355Final</string>
+    <string name="yxeditSearchName">输入一个单词开始查询</string>
+    <string name="yxSearchBtNname">查询定义</string>
+    <string name="yxSaveBtnName">查看保存的单词</string>
+    <string name="yxSave_name">保存的单词</string>
+    <string name="yxAbout_name">关于</string>
+</resources>
