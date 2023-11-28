@@ -27,9 +27,12 @@ import androidx.room.Room;
 import algonquin.cst2335.cst2355final.Data.SearchViewModel;
 import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
+import algonquin.cst2335.cst2355final.Tianjiao.SunRoom;
 import algonquin.cst2335.cst2355final.databinding.SearchRoomBinding;
 import algonquin.cst2335.cst2355final.databinding.SearchMessageBinding;
 import algonquin.cst2335.cst2355final.databinding.SearchSavedBinding;
+import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
+import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
 
 
 import com.android.volley.Request;
@@ -66,6 +69,11 @@ public class SearchRoom extends AppCompatActivity {
     protected RequestQueue queue = null;
 
     Intent dictionarySavedPage;
+    Intent songPage;
+
+    Intent RecipePage;
+    Intent sunPage;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -331,6 +339,28 @@ public class SearchRoom extends AppCompatActivity {
                         .setTitle("How to Use")
                         .setNegativeButton("OK", (dialog, cl) -> {})
                         .create().show();
+                break;
+            case R.id.yxrecipepage:
+                // Display instructions on how to use the interface
+                RecipePage = new Intent( SearchRoom.this, RecipeSearch.class);
+                CharSequence text = "Going to Recipe Project...";
+                Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+                startActivity( RecipePage);
+                break;
+            case R.id.yxSongpage:
+                // Display instructions on how to use the interface
+                songPage = new Intent( SearchRoom.this, DeezerAlbum.class);
+                CharSequence text1 = "Going to Song Project...";
+                Toast.makeText(this,text1, Toast.LENGTH_SHORT).show();
+                startActivity( songPage);
+
+            case R.id.yxSunpage:
+                // Display instructions on how to use the interface
+                sunPage = new Intent( SearchRoom.this, SunRoom.class);
+                CharSequence text2 = "Going to Sun Project...";
+                Toast.makeText(this,text2, Toast.LENGTH_SHORT).show();
+                startActivity( sunPage);
+
                 break;
 
         }

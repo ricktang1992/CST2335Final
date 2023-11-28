@@ -16,5 +16,11 @@
         android:icon="@drawable/save"
         android:title="Save this item"
         app:showAsAction="always" />
+    <item android:title="@string/yxRecipename"
+        android:id="@+id/yxrecipepage"/>
+    <item android:title="@string/yxSongname"
+        android:id="@+id/yxSongpage"/>
+    <item android:title="@string/yxSunname"
+        android:id="@+id/yxSunpage"/>
 
 </menu>

@@ -64,19 +64,19 @@ public class SunRoom extends AppCompatActivity {
         SunDatabase db = Room.databaseBuilder(getApplicationContext(), SunDatabase.class, "databaseFileOnPhone").build();
         mDAO = db.sunTermDao();
 
-        texts1 = sunModel.messages.getValue();
-        if(texts1 == null)
-        {
-            sunModel.messages.setValue(texts1 = new ArrayList<>());
-
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(() ->
-            {
-                texts1.addAll( mDAO.getAllSunTerms() ); //Once you get the data from database
-
-                runOnUiThread( () ->  binding.recyclerView.setAdapter( sunAdapter )); //You can then load the RecyclerView
-            });
-        }
+//        texts1 = sunModel.messages.getValue();
+//        if(texts1 == null)
+//        {
+//            sunModel.messages.setValue(texts1 = new ArrayList<>());
+//
+//            Executor thread = Executors.newSingleThreadExecutor();
+//            thread.execute(() ->
+//            {
+//                texts1.addAll( mDAO.getAllSunTerms() ); //Once you get the data from database
+//
+//                runOnUiThread( () ->  binding.recyclerView.setAdapter( sunAdapter )); //You can then load the RecyclerView
+//            });
+//        }
 
 
         //database

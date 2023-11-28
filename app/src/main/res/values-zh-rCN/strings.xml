@@ -6,4 +6,7 @@
     <string name="yxSaveBtnName">查看保存的单词</string>
     <string name="yxSave_name">保存的单词</string>
     <string name="yxAbout_name">关于</string>
+    <string name="yxSongname">去歌曲页面</string>
+    <string name="yxRecipename">去食谱界面</string>
+    <string name="yxSunname">去日出界面</string>
 </resources>
