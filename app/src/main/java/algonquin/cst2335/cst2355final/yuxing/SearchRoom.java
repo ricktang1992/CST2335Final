@@ -318,14 +318,21 @@ public class SearchRoom extends AppCompatActivity {
                 getSupportFragmentManager().popBackStack();
                 break;
             case R.id.about:
-
-                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-                //show how to use this app.
-                AlertDialog.Builder dictionayUse = new AlertDialog.Builder(this);
-                dictionayUse.setMessage("How to use").setTitle("About: ")
-                        .setNegativeButton("OK", (dialog, cl) -> {
-                        }).create().show();
+                // Display instructions on how to use the interface
+                AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
+                instructionsDialog.setMessage("Instructions on how to use the interface:\n\n" +
+                                "1. Enter a search term in the provided EditText.\n" +
+                                "2. Click the 'Search' button to retrieve definitions from the dictionary API.\n" +
+                                "3. Click on a search result to see detailed information in a separate fragment.\n" +
+                                "4. Click the 'Save' icon to add a term to the saved terms list.\n" +
+                                "6. Access the saved terms by clicking the 'Saved' button.\n" +
+                                "7. To delete a term, select it and choose the 'Delete' icon from the menu.\n" +
+                                "8. For more help, you can contact support.")
+                        .setTitle("How to Use")
+                        .setNegativeButton("OK", (dialog, cl) -> {})
+                        .create().show();
                 break;
+
         }
 
         return true;
