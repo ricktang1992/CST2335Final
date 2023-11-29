@@ -50,8 +50,11 @@ import java.util.concurrent.atomic.AtomicReference;
 import algonquin.cst2335.cst2355final.Data.RecipeViewModel;
 import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
+import algonquin.cst2335.cst2355final.Tianjiao.SunRoom;
 import algonquin.cst2335.cst2355final.databinding.RecipeSearchBinding;
 import algonquin.cst2335.cst2355final.databinding.RecipeTitleBinding;
+import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
+import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 
 public class RecipeSearch extends AppCompatActivity {
     private RecipeSearchBinding binding;
@@ -66,6 +69,21 @@ public class RecipeSearch extends AppCompatActivity {
     Intent homePage;
     Intent savedPage;
     Recipe recipefromAPI;
+
+    /**
+     * Intent for navigating to the song project.
+     */
+    Intent songPage;
+
+    /**
+     * Intent for navigating to the dictionary project.
+     */
+    Intent ziyaodictionarypage;
+
+    /**
+     * Intent for navigating to the sun project.
+     */
+    Intent sunPage;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -268,6 +286,30 @@ public class RecipeSearch extends AppCompatActivity {
                 Snackbar.make(this.findViewById(R.id.ziyaosearchText),ziyaosaveTheRecipe1
                         +addRecipe.getTitle(),Snackbar.LENGTH_LONG).show();
                 getSupportFragmentManager() .popBackStack();
+                break;
+            case R.id.ziyaodictionary:
+                // Display instructions on how to use the interface
+                String ziyaodictionary = getResources().getString(R.string.ziyaodictionarying);
+                CharSequence ziyaodictionary1 = ziyaodictionary;
+                ziyaodictionarypage = new Intent( RecipeSearch.this, SearchRoom.class);
+                Toast.makeText(this,ziyaodictionary1, Toast.LENGTH_SHORT).show();
+                startActivity( ziyaodictionarypage);
+                break;
+            case R.id.yxSongpage:
+                // Display instructions on how to use the interface
+                String ziyaosongPage = getResources().getString(R.string.ziyaosongPage);
+                CharSequence ziyaosongPage1 = ziyaosongPage;
+                songPage = new Intent( RecipeSearch.this, DeezerAlbum.class);
+                Toast.makeText(this,ziyaosongPage1, Toast.LENGTH_SHORT).show();
+                startActivity( songPage);
+                break;
+            case R.id.yxSunpage:
+                String ziyaoyxSunpage = getResources().getString(R.string.ziyaoyxSunpage);
+                CharSequence ziyaoyxSunpage1 = ziyaoyxSunpage;
+                // Display instructions on how to use the interface
+                sunPage = new Intent( RecipeSearch.this, SunRoom.class);
+                Toast.makeText(this,ziyaoyxSunpage1, Toast.LENGTH_SHORT).show();
+                startActivity( sunPage);
                 break;
         }
 

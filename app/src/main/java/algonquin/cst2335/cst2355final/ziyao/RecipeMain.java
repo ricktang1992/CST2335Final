@@ -219,7 +219,7 @@ public class RecipeMain extends AppCompatActivity {
                 CharSequence ziyaodictionary1 = ziyaodictionary;
                 ziyaodictionarypage = new Intent( RecipeMain.this, SearchRoom.class);
                 Toast.makeText(this,ziyaodictionary1, Toast.LENGTH_SHORT).show();
-                startActivity( songPage);
+                startActivity( ziyaodictionarypage);
                 break;
             case R.id.yxSongpage:
                 // Display instructions on how to use the interface
