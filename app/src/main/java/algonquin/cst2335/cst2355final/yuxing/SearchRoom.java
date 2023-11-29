@@ -54,33 +54,133 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * The main activity for the search functionality in the application.
+ * Allows users to search for terms, view detailed information, save terms, and access saved terms.
+ * Uses Volley for API requests, Room for local database storage, and implements RecyclerView
+ * for displaying search results and saved terms.
+ *
+ * Features:
+ * - Search for terms using the dictionary API and display definitions.
+ * - View detailed information about a selected term in a separate fragment.
+ * - Save terms to a local database and access the saved terms.
+ * - Delete saved terms from the database.
+ * - Provide instructions on how to use the interface.
+ * - Navigate to other projects (Recipe, Song, Sun) from the menu.
+ *
+ * The activity includes functionality to create and manage fragments, perform API requests,
+ * persist data using Room database, and handle user interactions through RecyclerView.
+ *
+ * Layout components:
+ * - EditText for entering search terms.
+ * - Button for initiating the search.
+ * - RecyclerView for displaying search results and saved terms.
+ * - Toolbar for displaying options menu.
+ *
+ * Dependencies:
+ * - SearchViewModel: View Model for managing data related to search.
+ * - SearchDetailsFragment: Fragment for displaying detailed information about a search term.
+ * - SearchTerm, SearchTermDAO: Entities and Data Access Object for Room database.
+ * - DeezerAlbum, RecipeSearch, SunRoom: Intents for navigating to other projects.
+ *
+ * Usage:
+ * - Enter a search term in the provided EditText and click the 'Search' button.
+ * - View detailed information about a selected term in a separate fragment.
+ * - Save terms to the local database and access the saved terms.
+ * - Delete saved terms from the database.
+ * - Provide instructions on how to use the interface through the options menu.
+ * - Navigate to other projects (Recipe, Song, Sun) from the menu.
+ *
+ * @author Yuxing Xu
+ * @version 1.0
+ * @since 2023-11-29
+ */
 
 public class SearchRoom extends AppCompatActivity {
+    /**
+     * SearchRoomBinding object for data binding.
+     */
     SearchRoomBinding binding;
+
+    /**
+     * ArrayList to store SearchTerm objects representing search results.
+     */
     ArrayList<SearchTerm> messages = new ArrayList<>();
 
-    SearchViewModel chatModel ;
+    /**
+     * ViewModel for managing data related to search.
+     */
+    SearchViewModel chatModel;
+
+    /**
+     * Data Access Object for Room database.
+     */
     SearchTermDAO mDAO;
 
+    /**
+     * Represents a search term retrieved from the dictionary API.
+     */
     SearchTerm dictionaryFromApi;
+
+    /**
+     * Adapter for the RecyclerView displaying search results and saved terms.
+     */
     private RecyclerView.Adapter<MyRowHolder> myAdapter;
+
+    /**
+     * The search term entered by the user.
+     */
     protected String searchMessage;
+
+    /**
+     * The URL for making API requests based on the search term.
+     */
     protected String termurl;
+
+    /**
+     * RequestQueue for managing Volley network requests.
+     */
     protected RequestQueue queue = null;
 
+    /**
+     * Intent for navigating to the saved terms page.
+     */
     Intent dictionarySavedPage;
+
+    /**
+     * Intent for navigating to the song project.
+     */
     Intent songPage;
 
+    /**
+     * Intent for navigating to the recipe project.
+     */
     Intent RecipePage;
+
+    /**
+     * Intent for navigating to the sun project.
+     */
     Intent sunPage;
 
-
+    /**
+     * Initializes the options menu.
+     *
+     * @param menu The menu to be initialized.
+     * @return true if the menu is successfully created; false otherwise.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.yuxing_menu_file, menu);
         return true;
     }
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     *                           Note: Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,10 +289,21 @@ public class SearchRoom extends AppCompatActivity {
             tx.commit();
         });
 
+        /**
+         * Adapter for the RecyclerView displaying search results and saved terms in the SearchRoom activity.
+         * The adapter binds the data to the RecyclerView and handles the creation of ViewHolder objects.
+         */
         binding.yuxingrecyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+
+            /**
+             * Called when RecyclerView needs a new ViewHolder of the given type to represent an item.
+             *
+             * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position.
+             * @param viewType The view type of the new View.
+             * @return A new ViewHolder that holds a View of the given view type.
+             */
             @NonNull
             @Override
-
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
                     // 1. load a XML layout
@@ -205,7 +316,13 @@ public class SearchRoom extends AppCompatActivity {
             }
 
 
-
+            /**
+             * Called by RecyclerView to display the data at the specified position.
+             *
+             * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position
+             *                 in the data set.
+             * @param position The position of the item within the adapter's data set.
+             */
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 SearchTerm obj = messages.get(position);
@@ -213,21 +330,42 @@ public class SearchRoom extends AppCompatActivity {
 //              recylerview message format
                 holder.timeText.setText(obj.getTimeSent());
             }
-
+            /**
+             * Returns the total number of items in the data set held by the adapter.
+             *
+             * @return The total number of items in this adapter.
+             */
             @Override
             public int getItemCount() {
                 return messages.size();
             }
         });
-
+        /**
+         * Sets the layout manager for the RecyclerView in the SearchRoom activity.
+         */
         binding.yuxingrecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
+    /**
+     * ViewHolder class for the items in the RecyclerView used in the SearchRoom activity.
+     * Represents a single item view and holds references to its child views.
+     */
     class MyRowHolder extends RecyclerView.ViewHolder {
 
+        /**
+         * TextView for displaying the search term.
+         */
         TextView messageText;
+
+        /**
+         * TextView for displaying the time the search was performed.
+         */
         TextView timeText;
 
+        /**
+         * Constructor for MyRowHolder.
+         *
+         * @param itemView The root view of the item layout.
+         */
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -238,10 +376,15 @@ public class SearchRoom extends AppCompatActivity {
                 chatModel.selectedMessage.postValue(selected);
             });
             messageText = itemView.findViewById(R.id.yuxingTermWord);
-            timeText =itemView.findViewById(R.id.yuxingSearchtime);
+            timeText = itemView.findViewById(R.id.yuxingSearchtime);
         }
     }
-
+    /**
+     * Called when an item in the options menu is selected.
+     *
+     * @param item The menu item that was selected.
+     * @return true if the menu item was successfully handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch( item.getItemId() )

@@ -37,25 +37,99 @@ import algonquin.cst2335.cst2355final.databinding.SearchSavedBinding;
 import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
 import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
 
-
+/**
+ * The {@code SearchSaved} class represents the activity for displaying and managing saved search terms.
+ * It includes functionality for retrieving data from a database, displaying it in a RecyclerView,
+ * allowing users to view detailed information about a selected term, and deleting saved terms.
+ *
+ * This class extends {@link AppCompatActivity} and implements features such as a contextual menu with options
+ * to delete selected terms and navigate to other project pages.
+ *
+ * Features:
+ * - Display a list of saved search terms in a RecyclerView.
+ * - Allow users to view detailed information about a selected term in a separate fragment.
+ * - Provide the option to delete a selected term from the saved list.
+ * - Include menu options to navigate to other project pages such as Recipe, Song, Sun, and the Saved term page.
+ *
+ * Usage:
+ * - To delete a term, select it and choose the 'Delete' option from the menu.
+ * - Click on a saved term to view detailed information in a separate fragment.
+ * - Use the menu to navigate to other project pages (Recipe, Song, Sun, and Saved term page).
+ *
+ * Important Notes:
+ * - This class assumes the existence of a {@link SearchViewModel} for managing UI-related data.
+ * - The class relies on a {@link SearchDatabase} for storing and retrieving search terms from a Room database.
+ * - The layout includes a RecyclerView (yuxingsavedRecyclerView) for displaying saved search terms.
+ * - The class uses a custom RecyclerView Adapter ({@code savedAdapter}) for handling the display of search terms.
+ *
+ * @author Yuxing Xu
+ * @version 1.0
+ * @since 2023-11-29
+ */
 public class SearchSaved extends AppCompatActivity {
+    /**
+     * The binding object for the layout of the {@code SearchSaved} activity.
+     * It provides direct access to views defined in the layout.
+     */
     SearchSavedBinding binding;
+
+    /**
+     * The list of saved search terms to be displayed in the RecyclerView.
+     */
     ArrayList<SearchTerm> messages = null;
 
-    SearchViewModel saveModel ;
+    /**
+     * The ViewModel for managing UI-related data in the {@code SearchSaved} activity.
+     */
+    SearchViewModel saveModel;
+
+    /**
+     * The Data Access Object (DAO) for interacting with the Room database to handle {@link SearchTerm} entities.
+     */
     SearchTermDAO mDAO;
+
+    /**
+     * Intent to navigate to the page displaying saved terms in the dictionary.
+     */
     Intent dictionarySavedPage;
+
+    /**
+     * Intent to navigate to the song page.
+     */
     Intent songPage;
 
+    /**
+     * Intent to navigate to the recipe page.
+     */
     Intent RecipePage;
-    Intent sunPage;
-    private RecyclerView.Adapter savedAdapter;
 
+    /**
+     * Intent to navigate to the sun page.
+     */
+    Intent sunPage;
+
+    /**
+     * The RecyclerView Adapter for managing the display of saved search terms.
+     */
+    private RecyclerView.Adapter savedAdapter;
+    /**
+     * Initializes the options menu.
+     *
+     * @param menu The menu to be initialized.
+     * @return true if the menu is successfully created; false otherwise.
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.yuxing_menu_file, menu);
         return true;
     }
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     *                           Note: Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,9 +188,15 @@ public class SearchSaved extends AppCompatActivity {
 
 
         binding.yuxingsavedRecyclerView.setAdapter(savedAdapter = new RecyclerView.Adapter<myRowHolder>() {
+            /**
+             * Called when RecyclerView needs a new ViewHolder of the given type to represent an item.
+             *
+             * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position.
+             * @param viewType The view type of the new View.
+             * @return A new ViewHolder that holds a View of the given view type.
+             */
             @NonNull
             @Override
-
             public myRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
                 // 1. load a XML layout
@@ -129,7 +209,13 @@ public class SearchSaved extends AppCompatActivity {
             }
 
 
-
+            /**
+             * Called by RecyclerView to display the data at the specified position.
+             *
+             * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position
+             *                 in the data set.
+             * @param position The position of the item within the adapter's data set.
+             */
             @Override
             public void onBindViewHolder(@NonNull myRowHolder holder, int position) {
 //                SearchTerm obj = messages.get(position);
@@ -140,7 +226,11 @@ public class SearchSaved extends AppCompatActivity {
                 String obj = messages.get(position).getTerm();
                 holder.messageText.setText(obj);
             }
-
+            /**
+             * Returns the total number of items in the data set held by the adapter.
+             *
+             * @return The total number of items in this adapter.
+             */
             @Override
             public int getItemCount() {
                 return messages.size();
@@ -151,12 +241,21 @@ public class SearchSaved extends AppCompatActivity {
         binding.yuxingsavedRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-
+    /**
+     * ViewHolder class for the items in the RecyclerView used in the SearchRoom activity.
+     * Represents a single item view and holds references to its child views.
+     */
     class myRowHolder extends RecyclerView.ViewHolder {
-
+        /**
+         * TextView for displaying the search term.
+         */
         TextView messageText;
-        TextView timeText;
 
+        /**
+         * Constructor for MyRowHolder.
+         *
+         * @param itemView The root view of the item layout.
+         */
         public myRowHolder(@NonNull View itemView) {
             super(itemView);
             messageText = itemView.findViewById(R.id.yuxingTermWord);
@@ -170,6 +269,12 @@ public class SearchSaved extends AppCompatActivity {
 
         }
     }
+    /**
+     * Called when an item in the options menu is selected.
+     *
+     * @param item The menu item that was selected.
+     * @return true if the menu item was successfully handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch( item.getItemId() )
