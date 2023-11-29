@@ -171,7 +171,7 @@ public class SearchSaved extends AppCompatActivity {
                 FragmentManager fMgr = getSupportFragmentManager();
                 FragmentTransaction tx = fMgr.beginTransaction();
                 tx.addToBackStack("");
-                tx.replace(R.id.yuxingframeLayout, newFragment);
+                tx.replace(R.id.yuxingSavedframeLayout, newFragment);
                 tx.commit();
             }
         });
