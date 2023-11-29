@@ -9,4 +9,15 @@
     <string name="yxSongname">去歌曲页面</string>
     <string name="yxRecipename">去食谱界面</string>
     <string name="yxSunname">去日出界面</string>
+    <string name="ziyaorecipename">菜谱来这里</string>
+    <string name="ziyaorecipeInfoSum">菜谱汇总</string>
+    <string name="ziyaoSavedRecipes">保存的菜谱</string>
+    <string name="ziyaoSearch">搜索</string>
+    <string name="ziyaoSearchTextgoeshere">搜索信息来这里</string>
+    <string name="ziyaoRecipetitlegoeshere">菜谱名称来这里</string>
+    <string name="ziyaoHomePage">主页</string>
+    <string name="ziyaoDeleteRecipe">删除菜谱</string>
+    <string name="ziyaoAbout">关于</string>
+    <string name="ziyaoSearchRecipes">搜索菜谱</string>
+    <string name="ziyaoSaveTheRecipe">删除菜谱</string>
 </resources>

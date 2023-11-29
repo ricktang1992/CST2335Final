@@ -10,7 +10,18 @@
     <string name="yxSongname">Go to Song Page</string>
     <string name="yxRecipename">Go to Recipe Page</string>
     <string name="yxSunname">Go to Sun Page</string>
-    <!-- Rick.
+    <!-- Rick.-->
+    <string name="ziyaorecipename">Recipe info goes here</string>
+    <string name="ziyaorecipeInfoSum">Recipe Info Sum</string>
+    <string name="ziyaoSavedRecipes">Saved Recipes</string>
+    <string name="ziyaoSearch">Search</string>
+    <string name="ziyaoSearchTextgoeshere">Search Text goes here</string>
+    <string name="ziyaoRecipetitlegoeshere">Recipe title goes here</string>
+    <string name="ziyaoHomePage">Home Page</string>
+    <string name="ziyaoSearchRecipes">Search Recipes</string>
+    <string name="ziyaoAbout">About</string>
+    <string name="ziyaoDeleteRecipe">Delete Recipe</string>
+    <string name="ziyaoSaveTheRecipe">Delete Recipe</string>
 
 
 
@@ -41,7 +52,8 @@
 
 
 
-     -->
+
+    <!-- Rick.-->
     <!-- Rita.
 
 
