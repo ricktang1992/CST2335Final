@@ -23,7 +23,7 @@ import algonquin.cst2335.cst2355final.yuxing.SearchTerm;
  * - It provides a convenient way to communicate between different parts of the app by observing changes in the LiveData objects.
  * - The class is associated with the search functionality, and its LiveData objects are used to update the UI accordingly.
  *
- * @author Your Name
+ * @author Yuxing Xu
  * @version 1.0
  * @since 2023-11-29
  */

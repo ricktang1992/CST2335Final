@@ -465,7 +465,7 @@ public class SearchRoom extends AppCompatActivity {
                 CharSequence text1 = "Going to Song Project...";
                 Toast.makeText(this,text1, Toast.LENGTH_SHORT).show();
                 startActivity( songPage);
-
+                break;
             case R.id.yxSunpage:
                 // Display instructions on how to use the interface
                 sunPage = new Intent( SearchRoom.this, SunRoom.class);
