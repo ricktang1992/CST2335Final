@@ -33,7 +33,8 @@
     <string name="ziyaoYes">Yes</string>
     <string name="ziyaoUndo">Undo</string>
     <string name="ziyaodeleteM">You deleted message #</string>
-
+    <string name="yxAboutTitle">How to Use</string>
+    <string name="yxAboutUse">Instructions on how to use the interface:\n1. Enter a search term in the provided EditText.\n2. Click the Search button to retrieve definitions from the dictionary API.\n3. Click on a search result to see detailed information in a separate fragment.\n4. Click the Save icon to add a term to the saved terms list.\n5. Access the saved terms by clicking the Saved button.\n6. To delete a term, select it and choose the Delete icon from the menu.\n7. For more help, you can contact support.</string>
     <string name="ziyaoSearching">Searching.....</string>
     <string name="ziyaogosavedRecipeMenu">Going to searching page...</string>
     <string name="ziyaosaveTheRecipe">You added the recipe :</string>
