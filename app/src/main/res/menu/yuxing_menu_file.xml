@@ -18,13 +18,21 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/yxrecipepage"
-        android:title="@string/yxRecipename" />
-    <item android:title="@string/yxSongname"
-        android:id="@+id/yxSongpage"/>
+        android:icon="@drawable/recipe"
+        android:title="@string/yxRecipename"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/yxSongpage"
+        android:icon="@drawable/song"
+        android:title="@string/yxSongname"
+        app:showAsAction="always" />
     <item
         android:id="@+id/yxsavedTerm"
         android:title="@string/yxSaveBtnName" />
-    <item android:title="@string/yxSunname"
-        android:id="@+id/yxSunpage"/>
+    <item
+        android:id="@+id/yxSunpage"
+        android:icon="@drawable/sunrise"
+        android:title="@string/yxSunname"
+        app:showAsAction="always" />
 
 </menu>

@@ -171,7 +171,7 @@ public class SearchSaved extends AppCompatActivity {
                 FragmentManager fMgr = getSupportFragmentManager();
                 FragmentTransaction tx = fMgr.beginTransaction();
                 tx.addToBackStack("");
-                tx.replace(R.id.yuxingframeLayout, newFragment);
+                tx.replace(R.id.yuxingSavedframeLayout, newFragment);
                 tx.commit();
             }
         });
@@ -202,7 +202,10 @@ public class SearchSaved extends AppCompatActivity {
                 // 1. load a XML layout
                 SearchMessageBinding binding =                            // parent is incase matchparent
                         SearchMessageBinding.inflate(getLayoutInflater(), parent, false);
-
+                // Set layout parameters to wrap content
+                binding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
                 // 2. call our constructor below
                 return new myRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
 
@@ -218,13 +221,13 @@ public class SearchSaved extends AppCompatActivity {
              */
             @Override
             public void onBindViewHolder(@NonNull myRowHolder holder, int position) {
-//                SearchTerm obj = messages.get(position);
-//                holder.messageText.setText(obj.getTerm());
-////              recylerview message format
-//                holder.timeText.setText(obj.getTimeSent());
-                holder.messageText.setText("aaaaaaaaa");
-                String obj = messages.get(position).getTerm();
-                holder.messageText.setText(obj);
+                SearchTerm obj = messages.get(position);
+                holder.messageText.setText(obj.getTerm());
+//              recylerview message format
+                holder.timeText.setText(obj.getTimeSent());
+//                holder.messageText.setText("aaaaaaaaa");
+//                String obj = messages.get(position).getTerm();
+//                holder.messageText.setText(obj);
             }
             /**
              * Returns the total number of items in the data set held by the adapter.
@@ -250,7 +253,10 @@ public class SearchSaved extends AppCompatActivity {
          * TextView for displaying the search term.
          */
         TextView messageText;
-
+        /**
+         * TextView for displaying the time the search was performed.
+         */
+        TextView timeText;
         /**
          * Constructor for MyRowHolder.
          *
@@ -259,7 +265,7 @@ public class SearchSaved extends AppCompatActivity {
         public myRowHolder(@NonNull View itemView) {
             super(itemView);
             messageText = itemView.findViewById(R.id.yuxingTermWord);
-
+            timeText = itemView.findViewById(R.id.yuxingSearchtime);
             itemView.setOnClickListener(clk -> {
                 int position = getAbsoluteAdapterPosition();
                 SearchTerm selected = messages.get(position);
@@ -321,15 +327,8 @@ public class SearchSaved extends AppCompatActivity {
             case R.id.about:
                 // Display instructions on how to use the interface
                 AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
-                instructionsDialog.setMessage("Instructions on how to use the interface:\n\n" +
-                                "1. Enter a search term in the provided EditText.\n" +
-                                "2. Click the 'Search' button to retrieve definitions from the dictionary API.\n" +
-                                "3. Click on a search result to see detailed information in a separate fragment.\n" +
-                                "4. Click the 'Save' icon to add a term to the saved terms list.\n" +
-                                "6. Access the saved terms by clicking the 'Saved' button.\n" +
-                                "7. To delete a term, select it and choose the 'Delete' icon from the menu.\n" +
-                                "8. For more help, you can contact support.")
-                        .setTitle("How to Use")
+                instructionsDialog.setMessage(R.string.yxAboutUse)
+                        .setTitle(R.string.yxAboutTitle)
                         .setNegativeButton("OK", (dialog, cl) -> {})
                         .create().show();
                 break;
