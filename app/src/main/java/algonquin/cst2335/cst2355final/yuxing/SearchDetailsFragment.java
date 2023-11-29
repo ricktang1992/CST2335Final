@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import algonquin.cst2335.cst2355final.databinding.SearchDetailsLayoutBinding;
+import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 
 
 public class SearchDetailsFragment extends Fragment {
@@ -23,11 +24,16 @@ public class SearchDetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
-        SearchDetailsLayoutBinding binding = SearchDetailsLayoutBinding.inflate(inflater);
 
-        binding.yuxingTermView.setText(selected.term);
-        binding.timeView.setText(selected.timeSent);
-        binding.yuxingDefinitionView.setText(selected.definition);
-        return binding.getRoot();
+            SearchDetailsLayoutBinding binding = SearchDetailsLayoutBinding.inflate(inflater);
+
+            binding.yuxingTermView.setText(selected.term);
+            binding.timeView.setText(selected.timeSent);
+            binding.yuxingDefinitionView.setText(selected.definition);
+
+
+            return binding.getRoot();
+
+
     }
 }

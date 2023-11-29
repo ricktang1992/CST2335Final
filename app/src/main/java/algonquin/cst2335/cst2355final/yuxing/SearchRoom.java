@@ -63,7 +63,7 @@ public class SearchRoom extends AppCompatActivity {
     SearchTermDAO mDAO;
 
     SearchTerm dictionaryFromApi;
-    private RecyclerView.Adapter myAdapter;
+    private RecyclerView.Adapter<MyRowHolder> myAdapter;
     protected String searchMessage;
     protected String termurl;
     protected RequestQueue queue = null;
@@ -98,7 +98,7 @@ public class SearchRoom extends AppCompatActivity {
 
         });
 
-        SearchDatabase db = Room.databaseBuilder(getApplicationContext(), SearchDatabase.class, "yuxingDictionary").build();
+        SearchDatabase db = Room.databaseBuilder(getApplicationContext(), SearchDatabase.class, "Dictionary").build();
         mDAO = db.searchTermDao();
         //database
 
@@ -110,17 +110,11 @@ public class SearchRoom extends AppCompatActivity {
         setSupportActionBar(binding.yuxingtoolbar);
 
 
-        //go to saved term page
-        binding.yuxingsavedBtn.setOnClickListener(clk ->{
-            dictionarySavedPage = new Intent( SearchRoom.this, SearchSaved.class);
-            startActivity( dictionarySavedPage);
-        });
         //SharedPreferences to save something about what was typed in the EditText for use the next time
         SharedPreferences prefs = getSharedPreferences("searchHistory", Context.MODE_PRIVATE);
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.yuxingeditTextSearch);
 
         binding.yuxingbtnSearch.setOnClickListener(clk -> {
-            boolean saveButton = true;
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("searchText", searchText.get().getText().toString() );
             editor.apply();
@@ -135,7 +129,7 @@ public class SearchRoom extends AppCompatActivity {
                         JSONObject mainObject = response.getJSONObject(0);
 
                         JSONArray meanings = mainObject.getJSONArray ( "meanings" );
-
+                        messages.clear();
                         for(int i = 0; i < meanings.length(); i++){
                             JSONObject aMeaning = meanings.getJSONObject(i);
                             JSONArray aDefinition = aMeaning.getJSONArray("definitions");
@@ -143,10 +137,10 @@ public class SearchRoom extends AppCompatActivity {
                                 String def = aDefinition.getJSONObject(j).getString("definition");
                                 Log.d( "received meaning",def);
 
-                                dictionaryFromApi = new SearchTerm(searchMessage,currentDateandTime,def,saveButton);
+                                dictionaryFromApi = new SearchTerm(searchMessage,currentDateandTime,def);
                                 messages.add(dictionaryFromApi);
-                                myAdapter.notifyDataSetChanged();
                             }
+                            myAdapter.notifyDataSetChanged();
                         }
 
 
@@ -156,6 +150,7 @@ public class SearchRoom extends AppCompatActivity {
                     }
                 }, (error) -> { });
                 queue.add(request);
+                binding.yuxingeditTextSearch.setText("");
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
@@ -163,7 +158,7 @@ public class SearchRoom extends AppCompatActivity {
 //            String termName = binding.yuxingeditTextSearch.getText().toString();
 //            String termDefinnition = "";
 //            SearchTerm thisMessage = new SearchTerm(termName, currentDateandTime,termDefinnition);
-//            messages.add(thisMessage);
+//            RecyclerView.Adapter<MyRowHolder>
 
 //             clear the previous text
 //            binding.yuxingeditTextSearch.setText("");
@@ -200,17 +195,6 @@ public class SearchRoom extends AppCompatActivity {
 
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                // viewType will either be 0 or 1
-
-                if (viewType == 0) {
-                    // 1. load a XML layout
-                    SearchMessageBinding binding =                            // parent is incase matchparent
-                            SearchMessageBinding.inflate(getLayoutInflater(), parent, false);
-
-                    // 2. call our constructor below
-                    return new MyRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
-                }
-                else{
                     // 1. load a XML layout
                     SearchMessageBinding binding =                            // parent is incase matchparent
                             SearchMessageBinding.inflate(getLayoutInflater(), parent, false);
@@ -218,17 +202,9 @@ public class SearchRoom extends AppCompatActivity {
                     // 2. call our constructor below
                     return new MyRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
 
-                }
             }
 
-            public int  getItemViewType(int position){
-                // determine which layout to load at row position
-                if (messages.get(position).isSaveButton() == true) // for the first 5 rows
-                {
-                    return 0;
-                }
-                else return 1;
-            }
+
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
@@ -362,7 +338,14 @@ public class SearchRoom extends AppCompatActivity {
                 startActivity( sunPage);
 
                 break;
+            case R.id.yxsavedTerm:
+                // Display instructions on how to use the interface
+                dictionarySavedPage = new Intent( SearchRoom.this, SearchSaved.class);
+                CharSequence text3 = "Going to Saved term page...";
+                Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
+                startActivity( dictionarySavedPage);
 
+                break;
         }
 
         return true;

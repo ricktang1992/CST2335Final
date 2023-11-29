@@ -13,7 +13,8 @@ public interface SearchTermDAO {
     @Insert
     public long insertSearchTerm(SearchTerm searchTerm);
     @Delete
-    public int deleteMessage(SearchTerm searchTerm);
+    public void deleteMessage(SearchTerm searchTerm);
     @Query("SELECT * FROM search_terms")
     public List<SearchTerm> getAllSearchTerms();
+
 }
