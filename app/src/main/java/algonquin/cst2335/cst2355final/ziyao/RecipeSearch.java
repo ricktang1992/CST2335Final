@@ -106,19 +106,6 @@ public class RecipeSearch extends AppCompatActivity {
         //recipeModel.recipes.setValue(recipes = new ArrayList<>());
         //get data from Database
         recipeModel.recipes.setValue(recipes = new ArrayList<>());
-//        if(recipes == null)
-//        {
-// test
-//            recipeModel.recipes.setValue(recipes = new ArrayList<>());
-//
-//            Executor thread = Executors.newSingleThreadExecutor();
-//            thread.execute(() ->
-//            {
-//                recipes.addAll( mDAO.getAllRecipe() ); //Once you get the data from database
-//
-//                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
-//            });
-//        }
 
         SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.ziyaosearchText);
