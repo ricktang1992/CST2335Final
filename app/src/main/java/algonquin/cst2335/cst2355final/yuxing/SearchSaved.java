@@ -202,7 +202,10 @@ public class SearchSaved extends AppCompatActivity {
                 // 1. load a XML layout
                 SearchMessageBinding binding =                            // parent is incase matchparent
                         SearchMessageBinding.inflate(getLayoutInflater(), parent, false);
-
+                // Set layout parameters to wrap content
+                binding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
                 // 2. call our constructor below
                 return new myRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
 
@@ -218,13 +221,13 @@ public class SearchSaved extends AppCompatActivity {
              */
             @Override
             public void onBindViewHolder(@NonNull myRowHolder holder, int position) {
-//                SearchTerm obj = messages.get(position);
-//                holder.messageText.setText(obj.getTerm());
-////              recylerview message format
-//                holder.timeText.setText(obj.getTimeSent());
-                holder.messageText.setText("aaaaaaaaa");
-                String obj = messages.get(position).getTerm();
-                holder.messageText.setText(obj);
+                SearchTerm obj = messages.get(position);
+                holder.messageText.setText(obj.getTerm());
+//              recylerview message format
+                holder.timeText.setText(obj.getTimeSent());
+//                holder.messageText.setText("aaaaaaaaa");
+//                String obj = messages.get(position).getTerm();
+//                holder.messageText.setText(obj);
             }
             /**
              * Returns the total number of items in the data set held by the adapter.
@@ -250,7 +253,10 @@ public class SearchSaved extends AppCompatActivity {
          * TextView for displaying the search term.
          */
         TextView messageText;
-
+        /**
+         * TextView for displaying the time the search was performed.
+         */
+        TextView timeText;
         /**
          * Constructor for MyRowHolder.
          *
@@ -259,7 +265,7 @@ public class SearchSaved extends AppCompatActivity {
         public myRowHolder(@NonNull View itemView) {
             super(itemView);
             messageText = itemView.findViewById(R.id.yuxingTermWord);
-
+            timeText = itemView.findViewById(R.id.yuxingSearchtime);
             itemView.setOnClickListener(clk -> {
                 int position = getAbsoluteAdapterPosition();
                 SearchTerm selected = messages.get(position);
