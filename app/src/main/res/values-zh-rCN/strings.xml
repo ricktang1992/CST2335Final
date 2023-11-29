@@ -19,5 +19,20 @@
     <string name="ziyaoDeleteRecipe">删除菜谱</string>
     <string name="ziyaoAbout">关于</string>
     <string name="ziyaoSearchRecipes">搜索菜谱</string>
+    <string name="ziyaogohome">回到主页</string>
+    <string name="ziyaosearchRecipeMenu">去搜索界面</string>
+    <string name="ziyaoaboutRecipeMenu">他合格程序是关于搜索菜谱的，他的作者是Ziyao Tang.</string>
+    <string name="ziyaoaboutRecipeMenuAbout">关于:</string>
+    <string name="ziyaodeleteRecipe">问题:</string>
+    <string name="ziyaodeleteRecipeAbout">你想删了这个信息?</string>
+    <string name="ziyaoOK">好的</string>
+    <string name="ziyaoNO">不是</string>
+    <string name="ziyaoYes">是</string>
+    <string name="ziyaoUndo">回退</string>
+    <string name="ziyaodeleteM">你删除了第</string>
     <string name="ziyaoSaveTheRecipe">删除菜谱</string>
+    <string name="ziyaoSearching">搜索中...</string>
+    <string name="ziyaogosavedRecipeMenu">去往搜索页面...</string>
+    <string name="ziyaosaveTheRecipe">你保存了菜谱:</string>
+    <string name="ziyaosearchTitle">搜索菜谱</string>
 </resources>

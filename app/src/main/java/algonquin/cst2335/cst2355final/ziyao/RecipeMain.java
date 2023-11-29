@@ -98,7 +98,7 @@ public class RecipeMain extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
-                holder.recipeTitle.setText("aaaaaaaaa");
+                //holder.recipeTitle.setText("aaaaaaaaa");
                 String obj = recipes.get(position).getTitle();
                 holder.recipeTitle.setText(obj);
             }
@@ -131,36 +131,45 @@ public class RecipeMain extends AppCompatActivity {
         switch( item.getItemId() )
         {
             case R.id.homeMenuZ:
-                CharSequence text = "Back to home page...";
-                Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+                String ziyaogohome = getResources().getString(R.string.ziyaogohome);
+                CharSequence ziyaogohome1 = ziyaogohome;
+                Toast.makeText(this,ziyaogohome1, Toast.LENGTH_SHORT).show();
                 startActivity( homePage);
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;
             case R.id.searchRecipeMenu:
-                CharSequence text2 = "Going to searching page...";
-                Toast.makeText(this,text2, Toast.LENGTH_SHORT).show();
+                String ziyaosearchRecipeMenu = getResources().getString(R.string.ziyaosearchRecipeMenu);
+                CharSequence ziyaosearchRecipeMenu1 = ziyaosearchRecipeMenu;
+                Toast.makeText(this,ziyaosearchRecipeMenu1, Toast.LENGTH_SHORT).show();
                 startActivity( searchPage);
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;
             case R.id.aboutRecipeMenu:
+                String ziyaoaboutRecipeMenu = getResources().getString(R.string.ziyaoaboutRecipeMenu);
+                String ziyaoaboutRecipeMenuAbout = getResources().getString(R.string.ziyaoaboutRecipeMenuAbout);
+                String ziyaoOK = getResources().getString(R.string.ziyaoOK);
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-                builder2.setMessage("This application is the recipe search application created by Ziyao Tang.").setTitle("About: ")
-                        .setNegativeButton("OK", (dialog, cl) -> {
+                builder2.setMessage(ziyaoaboutRecipeMenu).setTitle(ziyaoaboutRecipeMenuAbout)
+                        .setNegativeButton(ziyaoOK, (dialog, cl) -> {
                         }).create().show();
                 break;
             case R.id.deleteRecipe:
-
+                String ziyaodeleteRecipe = getResources().getString(R.string.ziyaodeleteRecipe);
+                String ziyaodeleteRecipeAbout = getResources().getString(R.string.ziyaodeleteRecipeAbout);
                 Recipe removedRecipe = recipeModel.selectedRecipe.getValue();
                 int position = recipes.indexOf(removedRecipe);
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecipeMain.this);
-
-                builder.setMessage("Do you want to delete the message:"
-                                + removedRecipe.getTitle()).setTitle("Question: ")
-                        .setNegativeButton("No", (dialog, cl) -> {
+                String ziyaoNO = getResources().getString(R.string.ziyaoNO);
+                String ziyaoYes = getResources().getString(R.string.ziyaoYes);
+                String ziyaoUndo = getResources().getString(R.string.ziyaoUndo);
+                String ziyaodeleteM = getResources().getString(R.string.ziyaodeleteM);
+                builder.setMessage(ziyaodeleteRecipeAbout
+                                + removedRecipe.getTitle()).setTitle(ziyaodeleteRecipe)
+                        .setNegativeButton(ziyaoNO, (dialog, cl) -> {
                         })
-                        .setPositiveButton("Yes", (dialog, cl) -> {
+                        .setPositiveButton(ziyaoYes, (dialog, cl) -> {
 
                             recipes.remove(position);
                             myAdapter.notifyDataSetChanged();
@@ -170,9 +179,9 @@ public class RecipeMain extends AppCompatActivity {
                                 mDAO.deleteRecipe(removedRecipe); //get the ID from the database
                                 Log.d("TAG", "The id removed is:" + removedRecipe.id);
                             }); //the body of run()
-                            Snackbar.make(this.findViewById(R.id.ziyaosearchText),"You deleted message #"
+                            Snackbar.make(this.findViewById(R.id.ziyaosearchText),ziyaodeleteM
                                             + position,Snackbar.LENGTH_LONG)
-                                    .setAction("Undo", click -> {
+                                    .setAction(ziyaoUndo, click -> {
                                         recipes.add(position,removedRecipe);
                                         myAdapter.notifyDataSetChanged();
                                         Executor thread2 = Executors.newSingleThreadExecutor();
