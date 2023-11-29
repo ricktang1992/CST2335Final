@@ -20,4 +20,19 @@
         android:title="@string/ziyaoDeleteRecipe"
         android:icon="@drawable/delete"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/ziyaodictionary"
+        android:icon="@drawable/recipe"
+        android:title="@string/ziyaodictionary"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/yxSongpage"
+        android:icon="@drawable/song"
+        android:title="@string/yxSongname"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/yxSunpage"
+        android:icon="@drawable/sunrise"
+        android:title="@string/yxSunname"
+        app:showAsAction="always" />
 </menu>

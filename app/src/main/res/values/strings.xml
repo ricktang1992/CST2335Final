@@ -39,10 +39,12 @@
     <string name="ziyaogosavedRecipeMenu">Going to searching page...</string>
     <string name="ziyaosaveTheRecipe">You added the recipe :</string>
     <string name="ziyaosearchTitle">Search Recipe</string>
+    <string name="ziyaodictionary">Go to Dictionary</string>
 
 
-
-
+    <string name="ziyaosongPage">Going to Song Project...</string>
+    <string name="ziyaoyxSunpage">Going to Sun Project...</string>
+    <string name="ziyaodictionarying">Going to Dictionary Project...</string>
 
 
 
