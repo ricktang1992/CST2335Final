@@ -9,4 +9,6 @@
     <string name="yxSongname">去歌曲页面</string>
     <string name="yxRecipename">去食谱界面</string>
     <string name="yxSunname">去日出界面</string>
+    <string name="yxAboutTitle">如何使用</string>
+    <string name="yxAboutUse">界面使用说明：\n1. 在提供的 EditText 中输入搜索词。\n2. 单击“搜索”按钮从词典 API 检索定义。\n3. 单击搜索结果可在单独的片段中查看详细信息。\n4. 单击“保存”图标将术语添加到已保存的术语列表中。\n5. 单击“已保存”按钮访问已保存的条款。\n6. 要删除术语，请选择它，然后从菜单中选择“删除”图标。\n7. 如需更多帮助，您可以联系支持人员。</string>
 </resources>
