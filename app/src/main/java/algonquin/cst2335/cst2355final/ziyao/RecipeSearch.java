@@ -110,12 +110,10 @@ public class RecipeSearch extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("searchText", searchText.get().getText().toString() );
             editor.apply();
-            CharSequence text = "Searching...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            String ziyaoSearching = getResources().getString(R.string.ziyaoSearching);
+            CharSequence ziyaoSearching1 = ziyaoSearching;
+            Toast.makeText(this,ziyaoSearching1, Toast.LENGTH_SHORT).show();
             searchmess = binding.ziyaosearchText.getText().toString();
-//            stringURL="https://api.spoonacular.com/recipes/complexSearch?query="
-//                     +searchmess
-//                     +"&apiKey=670608d3fd1e4b15b120493cad68231a";
             try {
                 stringURL = "https://api.spoonacular.com/recipes/complexSearch?query="
                         + URLEncoder.encode(searchmess, "UTF-8")
@@ -231,27 +229,33 @@ public class RecipeSearch extends AppCompatActivity {
         switch( item.getItemId() )
         {
             case R.id.homeMenuZ:
-                CharSequence text = "Back to home page...";
-                Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+                String ziyaogohome = getResources().getString(R.string.ziyaogohome);
+                CharSequence ziyaogohome2 = ziyaogohome;
+                Toast.makeText(this,ziyaogohome2, Toast.LENGTH_SHORT).show();
                 startActivity( homePage);
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;
             case R.id.savedRecipeMenu   :
-                CharSequence text2 = "Going to searching page...";
-                Toast.makeText(this,text2, Toast.LENGTH_SHORT).show();
+                String ziyaogosavedRecipeMenu = getResources().getString(R.string.ziyaogosavedRecipeMenu);
+                CharSequence ziyaogosavedRecipeMenu1 = ziyaogosavedRecipeMenu;
+                Toast.makeText(this,ziyaogosavedRecipeMenu1, Toast.LENGTH_SHORT).show();
                 startActivity( savedPage );
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;
             case R.id.aboutRecipeMenu:
+                String ziyaoaboutRecipeMenu = getResources().getString(R.string.ziyaoaboutRecipeMenu);
+                String ziyaoaboutRecipeMenuAbout = getResources().getString(R.string.ziyaoaboutRecipeMenuAbout);
+                String ziyaoOK = getResources().getString(R.string.ziyaoOK);
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-                builder2.setMessage("This application is the recipe search application created by Ziyao Tang.").setTitle("About: ")
-                        .setNegativeButton("OK", (dialog, cl) -> {
+                builder2.setMessage(ziyaoaboutRecipeMenu).setTitle(ziyaoaboutRecipeMenuAbout)
+                        .setNegativeButton(ziyaoOK, (dialog, cl) -> {
                         }).create().show();
                 break;
             case R.id.saveTheRecipe:
-
+                String ziyaosaveTheRecipe = getResources().getString(R.string.ziyaosaveTheRecipe);
+                CharSequence ziyaosaveTheRecipe1 = ziyaosaveTheRecipe;
                 Recipe addRecipe = recipeModel.selectedRecipe.getValue();
                 recipes.add(addRecipe);
                 myAdapter.notifyDataSetChanged();
@@ -261,7 +265,7 @@ public class RecipeSearch extends AppCompatActivity {
                     addRecipe.id = (int)mDAO.insertRecipe(addRecipe); //get the ID from the database
                     Log.d("TAG", "The id created is:" + addRecipe.id);
                 }); //the body of run()
-                Snackbar.make(this.findViewById(R.id.ziyaosearchText),"You added the recipe "
+                Snackbar.make(this.findViewById(R.id.ziyaosearchText),ziyaosaveTheRecipe1
                         +addRecipe.getTitle(),Snackbar.LENGTH_LONG).show();
                 getSupportFragmentManager() .popBackStack();
                 break;

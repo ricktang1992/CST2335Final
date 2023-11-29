@@ -10,9 +10,35 @@
     <string name="yxSongname">Go to Song Page</string>
     <string name="yxRecipename">Go to Recipe Page</string>
     <string name="yxSunname">Go to Sun Page</string>
+    <!-- Rick.-->
+    <string name="ziyaorecipename">Recipe info goes here</string>
+    <string name="ziyaorecipeInfoSum">Recipe Info Sum</string>
+    <string name="ziyaoSavedRecipes">Saved Recipes</string>
+    <string name="ziyaoSearch">Search</string>
+    <string name="ziyaoSearchTextgoeshere">Search Text goes here</string>
+    <string name="ziyaoRecipetitlegoeshere">Recipe title goes here</string>
+    <string name="ziyaoHomePage">Home Page</string>
+    <string name="ziyaoSearchRecipes">Search Recipes</string>
+    <string name="ziyaoSaveTheRecipe">Save the Recipe</string>
+    <string name="ziyaoAbout">About</string>
+    <string name="ziyaoDeleteRecipe">Delete Recipe</string>
+    <string name="ziyaogohome">Going to Home page...</string>
+    <string name="ziyaosearchRecipeMenu">Going to searching page...</string>
+    <string name="ziyaoaboutRecipeMenu">This application is the recipe search application created by Ziyao Tang.</string>
+    <string name="ziyaoaboutRecipeMenuAbout">About:</string>
+    <string name="ziyaodeleteRecipe">Question:</string>
+    <string name="ziyaodeleteRecipeAbout">Do you want to delete the message:</string>
+    <string name="ziyaoOK">OK</string>
+    <string name="ziyaoNO">No</string>
+    <string name="ziyaoYes">Yes</string>
+    <string name="ziyaoUndo">Undo</string>
+    <string name="ziyaodeleteM">You deleted message #</string>
     <string name="yxAboutTitle">How to Use</string>
     <string name="yxAboutUse">Instructions on how to use the interface:\n1. Enter a search term in the provided EditText.\n2. Click the Search button to retrieve definitions from the dictionary API.\n3. Click on a search result to see detailed information in a separate fragment.\n4. Click the Save icon to add a term to the saved terms list.\n5. Access the saved terms by clicking the Saved button.\n6. To delete a term, select it and choose the Delete icon from the menu.\n7. For more help, you can contact support.</string>
-    <!-- Rick.
+    <string name="ziyaoSearching">Searching.....</string>
+    <string name="ziyaogosavedRecipeMenu">Going to searching page...</string>
+    <string name="ziyaosaveTheRecipe">You added the recipe :</string>
+    <string name="ziyaosearchTitle">Search Recipe</string>
 
 
 
@@ -43,7 +69,7 @@
 
 
 
-     -->
+    <!-- Rick.-->
     <!-- Rita.
 
 

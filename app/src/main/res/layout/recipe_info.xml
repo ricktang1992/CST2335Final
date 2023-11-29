@@ -14,7 +14,7 @@
         android:layout_marginStart="32dp"
         android:textSize="30dp"
         android:layout_marginTop="32dp"
-        android:text="Message Goes Here"
+        android:text="@string/ziyaorecipename"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="recipeInfoSum"
+        android:text="@string/ziyaorecipeInfoSum"
         app:layout_constraintStart_toStartOf="@+id/imageRecipe"
         app:layout_constraintTop_toBottomOf="@+id/imageRecipe" />
 </androidx.constraintlayout.widget.ConstraintLayout>

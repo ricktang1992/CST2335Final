@@ -5,19 +5,19 @@
     <!-- Text color. -->
     <item
         android:id="@+id/homeMenuZ"
-        android:title="Home Page"
+        android:title="@string/ziyaoHomePage"
         app:showAsAction="never" />
     <item
         android:id="@+id/searchRecipeMenu"
-        android:title="Search Recipes"
+        android:title="@string/ziyaoSearchRecipes"
         app:showAsAction="never" />
     <item
         android:id="@+id/aboutRecipeMenu"
-        android:title="About"
+        android:title="@string/ziyaoAbout"
         app:showAsAction="never" />
     <item
         android:id="@+id/deleteRecipe"
-        android:title="Delete Recipe"
+        android:title="@string/ziyaoDeleteRecipe"
         android:icon="@drawable/delete"
         app:showAsAction="always" />
 </menu>
