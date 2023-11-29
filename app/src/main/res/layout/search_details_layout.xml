@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/timeView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="10dp"
-        android:text="Time goes Here" />
-
-    <TextView
         android:id="@+id/yuxingTermView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:text="TermGoesHere"
         android:textSize="20dp"
-        android:text="TermGoesHere" />
+        app:layout_constraintStart_toStartOf="@+id/timeView"
+        app:layout_constraintTop_toBottomOf="@+id/timeView" />
+
+    <TextView
+        android:id="@+id/timeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="56dp"
+        android:text="Time goes Here"
+        android:textSize="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/yuxingDefinitionView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:text="Definition goes here"
         android:textSize="20dp"
-        android:text="Definition goes here" />
+        app:layout_constraintStart_toStartOf="@+id/yuxingTermView"
+        app:layout_constraintTop_toBottomOf="@+id/yuxingTermView" />
 
 
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

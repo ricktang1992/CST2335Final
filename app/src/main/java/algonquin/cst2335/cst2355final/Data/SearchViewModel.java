@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import algonquin.cst2335.cst2355final.yuxing.SearchTerm;
 
 public class SearchViewModel extends ViewModel {
-    public MutableLiveData<ArrayList<SearchTerm>> messages = new MutableLiveData< >(null);
+    public MutableLiveData<ArrayList<SearchTerm>> messages = new MutableLiveData< >();
     public MutableLiveData<SearchTerm> selectedMessage = new MutableLiveData< >();
 
 }
