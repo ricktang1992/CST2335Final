@@ -16,6 +16,10 @@
         android:title="@string/ziyaoAbout"
         app:showAsAction="never" />
     <item
+        android:id="@+id/helpRecipeMenu"
+        android:title="@string/helpRecipeMenu"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/saveTheRecipe"
         android:title="@string/ziyaoSaveTheRecipe"
         android:icon="@drawable/save"

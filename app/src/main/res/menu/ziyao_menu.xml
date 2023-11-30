@@ -16,6 +16,10 @@
         android:title="@string/ziyaoAbout"
         app:showAsAction="never" />
     <item
+        android:id="@+id/helpRecipeMenu"
+        android:title="@string/helpRecipeMenu"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/deleteRecipe"
         android:title="@string/ziyaoDeleteRecipe"
         android:icon="@drawable/delete"

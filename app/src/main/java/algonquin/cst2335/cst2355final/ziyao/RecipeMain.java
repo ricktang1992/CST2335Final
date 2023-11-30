@@ -279,6 +279,16 @@ public class RecipeMain extends AppCompatActivity {
                         .setNegativeButton(ziyaoOK, (dialog, cl) -> {
                         }).create().show();
                 break;
+
+            case R.id.helpRecipeMenu:
+                String helpRecipeMenu = getResources().getString(R.string.helpRecipeMenu);
+                String ziyaoaboutRecipeMenuAbout11 = getResources().getString(R.string.ziyaoaboutRecipeMenuAbout);
+                String ziyaoOK11 = getResources().getString(R.string.ziyaoOK);
+                AlertDialog.Builder builder22 = new AlertDialog.Builder(this);
+                builder22.setMessage(helpRecipeMenu).setTitle(ziyaoaboutRecipeMenuAbout11)
+                        .setNegativeButton(ziyaoOK11, (dialog, cl) -> {
+                        }).create().show();
+                break;
             case R.id.deleteRecipe:
                 String ziyaodeleteRecipe = getResources().getString(R.string.ziyaodeleteRecipe);
                 String ziyaodeleteRecipeAbout = getResources().getString(R.string.ziyaodeleteRecipeAbout);
