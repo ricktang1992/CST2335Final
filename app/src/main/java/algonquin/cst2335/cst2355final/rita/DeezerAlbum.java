@@ -130,7 +130,7 @@ public class DeezerAlbum extends AppCompatActivity {
                                                int duration = song.getInt("duration");
                                                JSONObject album = song.getJSONObject("album");
                                                String name = album.getString("title");
-                                               String cover = album.getString("cover")+ ".jpg";
+                                               String cover = album.getString("cover");
 
                                                // Create DeezerSong object and add to the list
                                                DeezerSong deezer = new DeezerSong(title, name, duration, cover);
@@ -164,23 +164,20 @@ public class DeezerAlbum extends AppCompatActivity {
         songModel.selectedSong.observe(this, (newSongValue) ->{
             // Create a new instance of MessageDetailsFragment and set the selected message
             DeezerSongDetailsFragment songFragment = new DeezerSongDetailsFragment(newSongValue);
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.addToBackStack("hi?");
-            fragmentTransaction.replace(R.id.songfragmentLocation, songFragment);
-            fragmentTransaction.commit();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.addToBackStack("hi?");
+            ft.replace(R.id.songfragmentLocation, songFragment);
+            ft.commit();
         });
 
         binding.songrecyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
                     SongListBinding binding =
                             SongListBinding.inflate(getLayoutInflater(), parent, false);
-
                     return new MyRowHolder(binding.getRoot());
-
             }
 
             @Override
@@ -194,9 +191,7 @@ public class DeezerAlbum extends AppCompatActivity {
             @Override
             public int getItemCount() {
                 return songs.size();
-            }
-
-        });
+            } });
 
         binding.songrecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -213,7 +208,6 @@ public class DeezerAlbum extends AppCompatActivity {
                 int position = getAbsoluteAdapterPosition();
                 DeezerSong selected = songs.get(position);
                 songModel.selectedSong.postValue(selected);//launch a fragment
-//                selectedRow = position;
             });
 
         }
