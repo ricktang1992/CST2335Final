@@ -47,7 +47,55 @@
     <string name="ziyaodictionarying">Going to Dictionary Project...</string>
     <string name="helpRecipeMenu">1.Search Recipes:\nEnter the name or ingredients of the recipe you\'re looking for in the search bar.\nTap the search button to get a list of matching recipes.\n2.View Recipe Details:\nClick on a recipe from the list to view detailed information.\nExplore ingredients, cooking instructions, and more.\n3.Save Your Favorites:Found a recipe you love? \nClick on Save Recipe in the detailed view.\nYour saved recipes can be accessed from the Saved Recipes menu.</string>
     <string name="helpziyao">Help</string>
-
+    <!--The following strings belong to Sun Activity-->
+    <string name="sun_toolbar_title">Sunrise &amp; Sunset</string>
+    <string name="sun_fav">☀️ My Favourites 🌒</string>
+    <string name="sun_lat_hint">Latitude: </string>
+    <string name="sun_lng_hint">Longitude: </string>
+    <string name="sun_lat_text">Latitude</string>
+    <string name="sun_lng_text">Longitude</string>
+    <string name="sun_search_btn">Lookup</string>
+    <string name="sun_del_warning_text">Do you want to delete this record: </string>
+    <string name="sun_del_warning_title">Question: </string>
+    <string name="sun_del_text">Do you want to delete this record: </string>
+    <string name="sun_del_title">Question: </string>
+    <string name="sun_del_after">You deleted message #</string>
+    <string name="sun_yes">Yes</string>
+    <string name="sun_no">No</string>
+    <string name="sun_about_title">About</string>
+    <string name="sun_about_detail">Sunrise &amp; Sunset, Version 1.0, created by Yu Song</string>
+    <string name="sun_to_main">Back to main page</string>
+    <string name="sun_undo">Undo</string>
+    <string name="sun_help1">How to use SunSeeker:</string>
+    <string name="sun_help2"><![CDATA[
+        Enter a city name, CHECK Latitude & Longitude\n\n
+        Enter both Latitude and Longitude, LOOKUP\n\n
+        \u2764 My Saved Records\n\n
+        \uD83D\uDCE5 Save this Record\n\n
+        \uD83D\uDDD1 ️Delete this Record\n\n
+        \uD83C\uDF73 Goto RecipeRover\n\n
+        \uD83C\uDFB5 Goto DeezerDiscover\n\n
+        \uD83D\uDCD5 Goto WordWiz\n
+    ]]></string>
+    <string name="sun_save_no_record_warning">No sun record selected</string>
+    <string name="sun_save_dupe_record_warning">Sun record already in your Favourite</string>
+    <string name="sun_save_success">Sun saved successfully</string>
+    <string name="sunrise_title">🌄 Sunrise</string>
+    <string name="sunset_title">🌅 Sunset</string>
+    <string name="solar_noon_title">☀️ Solar Noon</string>
+    <string name="golden_hour_title">🌇 Golden Hour</string>
+    <string name="timezone_title">🌍 Timezone</string>
+    <string name="invalid_input_title">Invalid Input</string>
+    <string name="valid_input_lat">Valid Latitude Range: -90 to +90</string>
+    <string name="valid_input_lng">Valid Longitude Range: -180 to +180</string>
+    <string name="sun_refresh">Refresh / Details</string>
+    <string name="sun_find_city"><![CDATA[Find a city\'s Lat & Lng]]></string>
+    <string name="sun_check">Check</string>
+    <string name="sun_no_name_location">XYZ Location</string>
+    <string name="sun_found_nothing">Found nothing, Array length = 0</string>
+    <string name="sun_sun_api_status_not_ok">Sunrise sunset API status not OK</string>
+    <string name="sun_sun_api_ok">Sun API Results and Status OK</string>
+    <string name="sun_sun_api_not_available">The Sun API is not available now</string>
 
 
 

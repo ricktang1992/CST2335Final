@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CST2355Final"
         tools:targetApi="31" >
         <activity
+            android:name=".tianjiaosun.SunActivity"
+            android:exported="false" />
+        <activity
             android:name=".yuxing.SearchSaved"
             android:exported="false" />
         <activity
