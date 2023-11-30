@@ -56,18 +56,64 @@ import algonquin.cst2335.cst2355final.databinding.RecipeTitleBinding;
 import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
 import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 
+/**
+ * Activity class responsible for searching and displaying recipe information.
+ */
 public class RecipeSearch extends AppCompatActivity {
+
+    /**
+     * Binding object for the activity layout.
+     */
     private RecipeSearchBinding binding;
+
+    /**
+     * RequestQueue for handling network requests.
+     */
     RequestQueue queue = null;
+
+    /**
+     * Adapter for managing the data to be displayed in the RecyclerView.
+     */
     private RecyclerView.Adapter myAdapter;
+
+    /**
+     * String containing the search message used to fetch recipes.
+     */
     String searchmess;
+
+    /**
+     * URL string for fetching recipe information.
+     */
     String stringURL;
-    //ArrayList<String> messages = new ArrayList<>();
+
+    /**
+     * ArrayList to store Recipe objects.
+     */
     ArrayList<Recipe> recipes = null;
+
+    /**
+     * Data Access Object (DAO) for interacting with the Recipe entity in the Room Database.
+     */
     RecipeDAO mDAO;
+
+    /**
+     * ViewModel for managing UI-related data for the RecipeSearch activity.
+     */
     RecipeViewModel recipeModel;
+
+    /**
+     * Intent for navigating to the home page.
+     */
     Intent homePage;
+
+    /**
+     * Intent for navigating to the saved page.
+     */
     Intent savedPage;
+
+    /**
+     * Recipe object representing data fetched from the API.
+     */
     Recipe recipefromAPI;
 
     /**
@@ -84,12 +130,29 @@ public class RecipeSearch extends AppCompatActivity {
      * Intent for navigating to the sun project.
      */
     Intent sunPage;
+
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return You must return true for the menu to be displayed; if you return false, it will not be shown.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.ziyaos_menu, menu);
         return true;
     }
+
+    /**
+     * Called when the activity is first created. This is where you should do all of your normal static set up: create
+     * views, bind data to lists, etc. This method also provides a Bundle containing the activity's previously saved
+     * state, if that state was captured.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle
+     *                           contains the data it most recently supplied in onSaveInstanceState(Bundle). Note: Otherwise,
+     *                           it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,6 +278,10 @@ public class RecipeSearch extends AppCompatActivity {
         binding.ziyaorecycleView.setLayoutManager(new LinearLayoutManager(this));
 
     }
+
+    /**
+     * ViewHolder class for holding views of individual rows in the RecyclerView.
+     */
     class MyRowHolder extends RecyclerView.ViewHolder {
         TextView recipeTitle;
         public MyRowHolder(@NonNull View itemView) {
@@ -229,6 +296,13 @@ public class RecipeSearch extends AppCompatActivity {
             });
         }
     }
+
+    /**
+     * Called when a menu item is selected. Handle actions based on the selected item.
+     *
+     * @param item The selected MenuItem.
+     * @return true to consume the event, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch( item.getItemId() )
