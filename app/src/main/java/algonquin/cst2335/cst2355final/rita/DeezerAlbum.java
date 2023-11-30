@@ -113,7 +113,6 @@ public class DeezerAlbum extends AppCompatActivity {
                     (response) -> {
                         try {
                             JSONArray data = response.getJSONArray("data");
-//                            ArrayList<DeezerSong> newSongs = new ArrayList<>(); // Create a new ArrayList
 
                             for (int i = 0; i < data.length(); i++) {
                                 JSONObject anAblum = data.getJSONObject(i);

@@ -30,7 +30,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/songrecyclerView"
                 android:layout_width="400dp"
-                android:layout_height="750dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mysongToolbar"
