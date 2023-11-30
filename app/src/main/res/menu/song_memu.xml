@@ -7,7 +7,17 @@
         android:title="Home Page"
         app:showAsAction="never" />
     <item
-        android:id="@+id/addToList"
+        android:id="@+id/showSaveList"
+        android:title="Add to list"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/about"
+        android:title="Add to list"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/help"
         android:title="Add to list"
         app:showAsAction="never" />
 </menu>

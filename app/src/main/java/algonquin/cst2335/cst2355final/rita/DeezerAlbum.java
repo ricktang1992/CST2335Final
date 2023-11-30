@@ -250,8 +250,16 @@ public class DeezerAlbum extends AppCompatActivity {
                         }).create().show();
                 break;
 
-            case R.id.addToList:
+            case R.id.showSaveList:
+
+                break;
+
+            case R.id.about:
                 Toast.makeText(this,"Version 1.0, created by Li Jiang", Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.help:
+                Toast.makeText(this,"help!",Toast.LENGTH_LONG).show();
                 break;
         }
         return true;
