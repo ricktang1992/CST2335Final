@@ -49,7 +49,7 @@
     <string name="helpziyao">Help</string>
     <!--The following strings belong to Sun Activity-->
     <string name="sun_toolbar_title">Sunrise &amp; Sunset</string>
-    <string name="sun_fav">☀️ My Favourites 🌒</string>
+    <string name="sun_fav"> My Favourites </string>
     <string name="sun_lat_hint">Latitude: </string>
     <string name="sun_lng_hint">Longitude: </string>
     <string name="sun_lat_text">Latitude</string>
@@ -80,11 +80,11 @@
     <string name="sun_save_no_record_warning">No sun record selected</string>
     <string name="sun_save_dupe_record_warning">Sun record already in your Favourite</string>
     <string name="sun_save_success">Sun saved successfully</string>
-    <string name="sunrise_title">🌄 Sunrise</string>
-    <string name="sunset_title">🌅 Sunset</string>
-    <string name="solar_noon_title">☀️ Solar Noon</string>
-    <string name="golden_hour_title">🌇 Golden Hour</string>
-    <string name="timezone_title">🌍 Timezone</string>
+    <string name="sunrise_title">Sunrise</string>
+    <string name="sunset_title"> Sunset</string>
+    <string name="solar_noon_title">☀Solar Noon</string>
+    <string name="golden_hour_title"> Golden Hour</string>
+    <string name="timezone_title"> Timezone</string>
     <string name="invalid_input_title">Invalid Input</string>
     <string name="valid_input_lat">Valid Latitude Range: -90 to +90</string>
     <string name="valid_input_lng">Valid Longitude Range: -180 to +180</string>

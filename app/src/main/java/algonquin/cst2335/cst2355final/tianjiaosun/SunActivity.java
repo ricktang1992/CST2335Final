@@ -159,70 +159,6 @@ public class SunActivity extends AppCompatActivity {
             });
         }
 
-//        binding.citySearchButton.setOnClickListener(cli -> {
-//            cityName = binding.editCity.getText().toString();
-//
-//            SharedPreferences.Editor editor = prefs.edit();
-//            editor.putString("cityName", cityName);
-//            editor.apply();
-//
-//            String cityNameEncode = "0";
-//            try {
-//                cityNameEncode = URLEncoder.encode(cityName, "UTF-8");
-//            } catch (UnsupportedEncodingException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//            String urlCity = "https://api.openweathermap.org/data/2.5/weather?q=" + cityNameEncode + "&appid=" + "f5e255b0ecc652c392230100b5230cdb" + "&units=metric";
-//
-//            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, urlCity, null,
-//                    (response) -> {
-//                        try {
-//                            if (response.has("coord")) {
-//                                Log.d("City API response", "City API response has coord");
-//                            }
-//                        } catch (Exception e) {
-//                            Log.e("City API response: ", "City API response don't have coord");
-//                            e.printStackTrace();
-//                            Toast.makeText(SunActivity.this, getString(R.string.sun_sun_api_not_available), Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                        try {
-//                            JSONObject coord = response.getJSONObject("coord");
-//                            if (coord.length() == 0) {
-//                                Log.e("City API response: ", "JSONObject abnormal, City API response coord length == 0");
-//                                Toast.makeText(this, getString(R.string.sun_found_nothing), Toast.LENGTH_SHORT).show();
-//                            } else {
-//                                Log.d("City API response ok", "City API response ok, has coord");
-//                            }
-//
-//                            // Extract "lat" and "lon" values
-//                            double latitude = coord.getDouble("lat");
-//                            double longitude = coord.getDouble("lon");
-//
-//                            // Pass the lat and lon values to the class variable
-////                            latClass = String.valueOf(latitude);
-////                            lngClass = String.valueOf(longitude);
-//
-//                            // bind "lat" and "lon" values to TextViews
-//                            binding.latInput.setText(String.valueOf(latitude));
-//                            binding.lngInput.setText(String.valueOf(longitude));
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            throw new RuntimeException(e);
-//                        }
-//                        Log.d("City Response", "Received " + response.toString()); //this gets called if the server responded
-//                    },
-//                    (error) -> {
-//                    }
-//            );
-//            queue.add(request);
-//
-//            //clear the previous text
-//            binding.latInput.setText("");
-//            binding.lngInput.setText("");
-//        });
 
         binding.sunSearchButton.setOnClickListener( cli ->{
 
@@ -311,7 +247,7 @@ public class SunActivity extends AppCompatActivity {
                                 //clear the previous text
                                 binding.latInput.setText("");
                                 binding.lngInput.setText("");
-//                                binding.editCity.setText("");
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
