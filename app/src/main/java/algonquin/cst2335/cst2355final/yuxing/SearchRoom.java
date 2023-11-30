@@ -27,11 +27,12 @@ import androidx.room.Room;
 import algonquin.cst2335.cst2355final.Data.SearchViewModel;
 import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
-import algonquin.cst2335.cst2355final.Tianjiao.SunRoom;
+
 import algonquin.cst2335.cst2355final.databinding.SearchRoomBinding;
 import algonquin.cst2335.cst2355final.databinding.SearchMessageBinding;
 import algonquin.cst2335.cst2355final.databinding.SearchSavedBinding;
 import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
+import algonquin.cst2335.cst2355final.tianjiaosun.SunActivity;
 import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
 
 
@@ -468,7 +469,7 @@ public class SearchRoom extends AppCompatActivity {
                 break;
             case R.id.yxSunpage:
                 // Display instructions on how to use the interface
-                sunPage = new Intent( SearchRoom.this, SunRoom.class);
+                sunPage = new Intent( SearchRoom.this, SunActivity.class);
                 CharSequence text2 = "Going to Sun Project...";
                 Toast.makeText(this,text2, Toast.LENGTH_SHORT).show();
                 startActivity( sunPage);

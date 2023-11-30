@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
-import algonquin.cst2335.cst2355final.Tianjiao.SunRoom;
+
 import algonquin.cst2335.cst2355final.databinding.ActivityMainBinding;
 import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
 import algonquin.cst2335.cst2355final.tianjiaosun.SunActivity;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar( variableBinding.myToolbar);
         nextPage = new Intent( MainActivity.this, RecipeSearch.class);
         songPage = new Intent( MainActivity.this, DeezerAlbum.class);
-        sunPage = new Intent( MainActivity.this, SunRoom.class);
+        sunPage = new Intent( MainActivity.this, SunActivity.class);
 
 
         Button recipeButton=variableBinding.recipe;

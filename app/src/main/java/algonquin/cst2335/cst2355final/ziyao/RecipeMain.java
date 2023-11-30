@@ -31,10 +31,11 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.cst2355final.Data.RecipeViewModel;
 import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
-import algonquin.cst2335.cst2355final.Tianjiao.SunRoom;
+//import algonquin.cst2335.cst2355final.Tianjiao.SunRoom;
 import algonquin.cst2335.cst2355final.databinding.RecipeMainBinding;
 import algonquin.cst2335.cst2355final.databinding.RecipeTitleBinding;
 import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
+import algonquin.cst2335.cst2355final.tianjiaosun.SunActivity;
 import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 
 /**
@@ -348,7 +349,7 @@ public class RecipeMain extends AppCompatActivity {
                 String ziyaoyxSunpage = getResources().getString(R.string.ziyaoyxSunpage);
                 CharSequence ziyaoyxSunpage1 = ziyaoyxSunpage;
                 // Display instructions on how to use the interface
-                sunPage = new Intent( RecipeMain.this, SunRoom.class);
+                sunPage = new Intent( RecipeMain.this, SunActivity.class);
                 Toast.makeText(this,ziyaoyxSunpage1, Toast.LENGTH_SHORT).show();
                 startActivity( sunPage);
                 break;

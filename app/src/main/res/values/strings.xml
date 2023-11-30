@@ -66,16 +66,15 @@
     <string name="sun_about_detail">Sunrise &amp; Sunset, Version 1.0, created by Yu Song</string>
     <string name="sun_to_main">Back to main page</string>
     <string name="sun_undo">Undo</string>
-    <string name="sun_help1">How to use SunSeeker:</string>
+    <string name="sun_help1">How to use:</string>
     <string name="sun_help2"><![CDATA[
-        Enter a city name, CHECK Latitude & Longitude\n\n
         Enter both Latitude and Longitude, LOOKUP\n\n
-        \u2764 My Saved Records\n\n
-        \uD83D\uDCE5 Save this Record\n\n
-        \uD83D\uDDD1 ️Delete this Record\n\n
-        \uD83C\uDF73 Goto RecipeRover\n\n
-        \uD83C\uDFB5 Goto DeezerDiscover\n\n
-        \uD83D\uDCD5 Goto WordWiz\n
+         My Saved Records\n\n
+         Save this Record\n\n
+         ️Delete this Record\n\n
+         Goto Recipe\n\n
+         Goto Deezer\n\n
+         Goto Word\n
     ]]></string>
     <string name="sun_save_no_record_warning">No sun record selected</string>
     <string name="sun_save_dupe_record_warning">Sun record already in your Favourite</string>
