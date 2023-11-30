@@ -14,6 +14,7 @@ import android.widget.Toast;
 import algonquin.cst2335.cst2355final.Tianjiao.SunRoom;
 import algonquin.cst2335.cst2355final.databinding.ActivityMainBinding;
 import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
+import algonquin.cst2335.cst2355final.tianjiaosun.SunActivity;
 import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         } );
 
-        sunPage = new Intent( MainActivity.this, SunRoom.class);
+        sunPage = new Intent( MainActivity.this, SunActivity.class);
         Button sunrise=variableBinding.sunrise;
         sunrise.setOnClickListener(clk->
         {

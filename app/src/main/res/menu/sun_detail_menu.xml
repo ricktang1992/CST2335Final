@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/sunGotoRecipeItem"
+        android:icon="@drawable/recipe"
+        android:title="RecipeRover"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/sunGotoMusicItem"
+        android:icon="@drawable/song"
+        android:title="DeezerDiscover"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/sunGotoDictItem"
+        android:icon="@drawable/dictionary"
+        android:title="WordWiz"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/favoriteSun"
+        android:icon="@drawable/save"
+        android:title="saved" />
+
+    <item
+        android:id="@+id/saveSun"
+        android:checkable="false"
+        android:checked="true"
+        android:icon="@drawable/save"
+        android:title="Save"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/deleteSun"
+        android:icon="@drawable/delete"
+        android:title="Delete this location"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/sunBackToMainItem"
+        android:title="@string/sun_to_main"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/sunHelp"
+        android:title="help"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/aboutSun"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/sun_about_title"
+        app:showAsAction="never" />
+</menu>
