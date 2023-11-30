@@ -42,4 +42,5 @@
     <string name="ziyaoyxSunpage">去往太阳项目...</string>
     <string name="ziyaodictionarying">去往字典项目...</string>
     <string name="helpRecipeMenu">1.搜索菜谱：\\n在搜索栏中输入您要查找的菜谱的名称或成分。\\n点击搜索按钮即可获取匹配菜谱的列表。\\n2.查看菜谱详细信息：\\n单击菜谱 从列表中查看详细信息。\\n探索食材、烹饪说明等。\\n3.保存您的最爱：找到您喜欢的食谱？ \\n在详细视图中单击“保存食谱”。\\n可以从“保存的食谱”菜单访问您保存的食谱。</string>
+    <string name="helpziyao">帮助</string>
 </resources>
