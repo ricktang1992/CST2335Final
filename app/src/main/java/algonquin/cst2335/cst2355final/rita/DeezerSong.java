@@ -2,6 +2,7 @@ package algonquin.cst2335.cst2355final.rita;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -18,7 +19,7 @@ public class DeezerSong {
     @ColumnInfo(name="AlbumCover")
     protected String cover;
 
-
+    @Ignore
     public DeezerSong(){};
 
     public DeezerSong(String title,String name,int duration, String cover)

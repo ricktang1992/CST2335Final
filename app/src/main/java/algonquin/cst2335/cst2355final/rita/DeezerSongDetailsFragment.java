@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import algonquin.cst2335.cst2355final.databinding.RecipeInfoBinding;
 import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 
 
@@ -25,6 +26,7 @@ public class DeezerSongDetailsFragment extends Fragment {
         // No need to call super.onCreateView(inflater, container, savedInstanceState);
 
         if (selected != null) {
+
             SongDetailBinding binding = SongDetailBinding.inflate(inflater);
 
             binding.songTitle.setText(selected.title);
@@ -35,6 +37,7 @@ public class DeezerSongDetailsFragment extends Fragment {
             return binding.getRoot();
 
         } else {
+
             // Handle the case where selected is null, return an appropriate view or null
             return super.onCreateView(inflater, container, savedInstanceState);
         }
