@@ -46,6 +46,7 @@
     <string name="ziyaoyxSunpage">Going to Sun Project...</string>
     <string name="ziyaodictionarying">Going to Dictionary Project...</string>
     <string name="helpRecipeMenu">1.Search Recipes:\nEnter the name or ingredients of the recipe you\'re looking for in the search bar.\nTap the search button to get a list of matching recipes.\n2.View Recipe Details:\nClick on a recipe from the list to view detailed information.\nExplore ingredients, cooking instructions, and more.\n3.Save Your Favorites:Found a recipe you love? \nClick on Save Recipe in the detailed view.\nYour saved recipes can be accessed from the Saved Recipes menu.</string>
+    <string name="helpziyao">Help</string>
 
 
 

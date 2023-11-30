@@ -17,7 +17,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/helpRecipeMenu"
-        android:title="@string/helpRecipeMenu"
+        android:title="@string/helpziyao"
         app:showAsAction="never" />
     <item
         android:id="@+id/deleteRecipe"
