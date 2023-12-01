@@ -42,7 +42,6 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.squareup.picasso:picasso:2.8")
     //implementation(fileTree(mapOf("dir" to "C:\\Users\\RickT\\AppData\\Local\\Android\\Sdk\\platforms\\android-33", "include" to listOf("*.aar", "*.jar"), "exclude" to listOf("*.abc"))))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
