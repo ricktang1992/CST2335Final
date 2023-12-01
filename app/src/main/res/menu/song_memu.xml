@@ -6,18 +6,37 @@
         android:id="@+id/returnHomeMenu"
         android:title="Home Page"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/saveSong"
+        android:icon="@drawable/save"
+        android:title="Save this item"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/showSaveList"
-        android:title="Add to list"
+        android:title="Show saved list"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/delete"
+        android:title="Delete this item"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/removeSaveList"
+        android:title="remove to list"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/about"
-        android:title="Add to list"
+        android:title="about"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/help"
-        android:title="Add to list"
+        android:title="Help"
         app:showAsAction="never" />
+
 </menu>

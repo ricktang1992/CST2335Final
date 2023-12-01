@@ -1,6 +1,7 @@
 package algonquin.cst2335.cst2355final.rita;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -60,6 +61,7 @@ import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 import algonquin.cst2335.cst2355final.databinding.SongListBinding;
 import algonquin.cst2335.cst2355final.databinding.SongMainBinding;
 import algonquin.cst2335.cst2355final.yuxing.SearchDetailsFragment;
+import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 
 
 public class DeezerAlbum extends AppCompatActivity {
@@ -72,6 +74,7 @@ public class DeezerAlbum extends AppCompatActivity {
     protected DeezerSongViewModel songModel; // Initialize a ViewModel
     protected RequestQueue queue = null; //create a Volley object that will connect to a server
 
+    Intent SongSavedList;
 
     /**
      * Called when the activity is created.
@@ -207,7 +210,21 @@ public class DeezerAlbum extends AppCompatActivity {
             itemView.setOnClickListener(click ->{
                 int position = getAbsoluteAdapterPosition();
                 DeezerSong selected = songs.get(position);
-                songModel.selectedSong.postValue(selected);//launch a fragment
+
+                AlertDialog.Builder builder = new AlertDialog.Builder( itemView.getContext());
+                builder.setTitle("Choose Action")
+                        .setMessage("What would you like to do?")
+                        .setPositiveButton("View Details", (dialog, which)->{
+                            songModel.selectedSong.postValue(selected);//launch a fragment
+                        })
+                        .setNegativeButton("Save to List", (dialog, which) ->{
+                            songs.add(selected);
+                            myAdapter.notifyDataSetChanged();
+
+
+
+                            Snackbar.make(itemView, "Song saved to the list", Snackbar.LENGTH_SHORT).show();
+                        }).show();
             });
 
         }
@@ -238,11 +255,10 @@ public class DeezerAlbum extends AppCompatActivity {
 
                             });
 
-
                             Snackbar.make(binding.mysongToolbar, "You return to home page", Snackbar.LENGTH_LONG)
                                     .setAction("Undo", clk -> {
                                         Executors.newSingleThreadExecutor().execute(()->{
-//                                            dsDAO.insertMessage(removeMessage);
+
                                         });
 
                                     })
@@ -250,8 +266,28 @@ public class DeezerAlbum extends AppCompatActivity {
                         }).create().show();
                 break;
 
-            case R.id.showSaveList:
+            case R.id.saveSong:
+                DeezerSong addTerm = songModel.selectedSong.getValue();
+                songs.add(addTerm);
+                myAdapter.notifyDataSetChanged();
+                Executor addthread = Executors.newSingleThreadExecutor();
+                addthread.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        dsDAO.insertSong(addTerm);
+                    }
+                });
+//            my/the body of run()
+                Snackbar.make(this.findViewById(R.id.searchSongText),"You added the term "
+                        +addTerm.getTitle(),Snackbar.LENGTH_LONG).show();
+                getSupportFragmentManager().popBackStack();
+                break;
 
+            case R.id.showSaveList:
+                SongSavedList = new Intent( DeezerAlbum.this, DeezerSongList.class );
+                CharSequence text3 = "Going to Saved term page...";
+                Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
+                startActivity( SongSavedList);
                 break;
 
             case R.id.about:

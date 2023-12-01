@@ -54,7 +54,17 @@
 
 
      -->
-    <!-- Rita.
+    <!-- Rita.-->
+    <string name="addFavorites">Add song to favorites</string>
+    <string name="confirm">Yes</string>
+    <string name="addQuestion">Add to favorites?</string>
+    <string name="addTitle">Add to favorites</string>
+    <string name="favoritesAdded"> added to favorites</string>
+    <string name="songInFavorties">Song already in favorites</string>
+    <string name="deleteQuestion">Do you want to delete this song?</string>
+    <string name="deleteTitle">Delete</string>
+    <string name="deletedSong">You deleted </string>
+    <string name="undo">Undo </string>
 
 
 
@@ -90,7 +100,6 @@
 
 
 
-     -->
     <!-- feng.
 
 

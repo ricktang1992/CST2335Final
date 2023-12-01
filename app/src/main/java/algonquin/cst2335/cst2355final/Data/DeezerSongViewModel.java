@@ -15,5 +15,6 @@ public class DeezerSongViewModel extends ViewModel {
     public MutableLiveData<ArrayList<DeezerSong>> songs = new MutableLiveData<>();
 
     public MutableLiveData<DeezerSong> selectedSong = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<DeezerSong>> favoriteSongsArray = new MutableLiveData<>();
 
 }

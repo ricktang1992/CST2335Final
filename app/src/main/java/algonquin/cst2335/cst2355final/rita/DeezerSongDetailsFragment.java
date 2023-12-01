@@ -5,19 +5,25 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -29,8 +35,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import algonquin.cst2335.cst2355final.Data.DeezerSongViewModel;
+import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 
 
@@ -38,23 +47,46 @@ public class DeezerSongDetailsFragment extends Fragment {
 
     DeezerSong selected;
     RequestQueue queue; //create a Volley object that will connect to a server
-    protected DeezerSongViewModel songModel; // Initialize a ViewModel
-    ArrayList<DeezerSong> savedSong = new ArrayList<>();// Create an ArrayList to store messages
+    Executor thread = Executors.newSingleThreadExecutor();
+    DeezerSongDAO dsDAO;
+    SongDetailBinding binding;
+    /**
+     * The name of the song
+     */
+    private String songName;
+    /**
+     * the duration of the song
+     */
+    private int songDuration;
+    /**
+     * the name of the album
+     */
+    private String songAlbum;
+    /**
+     * the image of the album
+     */
+    private String songAlbumImage;
 
 
-    public DeezerSongDetailsFragment(){}
+    public DeezerSongDetailsFragment() {
+    }
 
-    public DeezerSongDetailsFragment(DeezerSong s){
+    public DeezerSongDetailsFragment(DeezerSong s) {
         selected = s;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+
+        DeezerSongDatabase db = Room.databaseBuilder(requireActivity(), DeezerSongDatabase.class, "Song-favorite").build();
+        dsDAO = db.dsDAO();
 
         if (selected != null) {
 
             SongDetailBinding binding = SongDetailBinding.inflate(inflater);
 
+            songName = selected.getName();
             binding.songTitle.setText(selected.title);
             binding.duration.setText(String.valueOf(selected.duration));
             binding.albumName.setText(selected.name);
@@ -66,45 +98,51 @@ public class DeezerSongDetailsFragment extends Fragment {
             // Use Picasso to load and display the image
             Picasso.get().load(coverURL).into(binding.albumCover);
 
-            Button saveButton = binding.saveSongButton;
+            binding.saveSongButton.setOnClickListener(c -> {
+                thread.execute(() -> {
+                    DeezerSong song = selected;
+                    DeezerSong songExists = dsDAO.searchSongByName(songName, songAlbum);
+                    // If the song already is in the db, don't insert it.
+                    if (songExists == null) {
+                        requireActivity().runOnUiThread(() -> {
+                            String addQuestion = getString(R.string.addQuestion);
+                            String addFavorites = getString(R.string.addTitle);
+                            String confirm = getString(R.string.confirm);
+                            String favoritesAdded = getString(R.string.favoritesAdded);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+                            builder.setMessage(addQuestion)
+                                    .setTitle(addFavorites).
+                                    setNegativeButton("No", (dialog, cl) -> {
 
-            songModel = new ViewModelProvider(this).get(DeezerSongViewModel.class); // Initialize ViewModel
-
-            saveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Save the selected song to the database
-                    savedSong.add(selected);
-
-                    // Convert the list of saved songs to a JSON array
-                    JSONArray jsonArray = new JSONArray();
-                    for (DeezerSong song: savedSong) {
-                        JSONObject jsonSong = new JSONObject();
-                        try {
-                            jsonSong.put("title", song.getTitle());
-                            jsonSong.put("name", song.getName());
-                            jsonSong.put("duration", song.getDuration());
-                            jsonSong.put("cover", song.getCover());
-                            jsonArray.put(jsonSong);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                                    })
+                                    .setPositiveButton(confirm, (dialog, cl) -> {
+                                        thread.execute(() -> {
+                                            long id = dsDAO.insertSong(song);
+                                            song.id = id;
+                                            requireActivity().runOnUiThread(() -> {
+                                                Toast.makeText(requireActivity(), songName + " " + favoritesAdded, Toast.LENGTH_SHORT).show();
+                                            });
+                                        });
+                                    })
+                                    .create().show();
+                        });
+                    } else {
+                        String alreadyFavs = getString(R.string.songInFavorties);
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(requireActivity(), alreadyFavs, Toast.LENGTH_SHORT).show();
+                        });
                     }
-
-                    // Save the JSON array to SharedPreferences
-                    SharedPreferences preferences = requireContext().getSharedPreferences("SavedSongs", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("savedSongs", jsonArray.toString());
-                    editor.apply();
-                }
+                });
             });
 
             return binding.getRoot();
-            } else {
+        } else {
             // Handle the case where selected is null, return an appropriate view or null
             return super.onCreateView(inflater, container, savedInstanceState);
-
         }
     }
-
 }
+
+
+
+
