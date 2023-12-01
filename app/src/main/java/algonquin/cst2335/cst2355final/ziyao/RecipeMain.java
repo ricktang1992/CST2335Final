@@ -31,27 +31,107 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.cst2355final.Data.RecipeViewModel;
 import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
+//import algonquin.cst2335.cst2355final.Tianjiao.SunRoom;
 import algonquin.cst2335.cst2355final.databinding.RecipeMainBinding;
 import algonquin.cst2335.cst2355final.databinding.RecipeTitleBinding;
+import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
+import algonquin.cst2335.cst2355final.tianjiaosun.SunActivity;
+import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 
+/**
+ * The main activity class responsible for displaying the recipe information.
+ */
 public class RecipeMain extends AppCompatActivity {
+
+    /**
+     * Binding object for the main activity layout.
+     */
     private RecipeMainBinding binding;
+
+    /**
+     * RequestQueue for handling network requests.
+     */
     RequestQueue queue = null;
+
+    /**
+     * Adapter for managing the data to be displayed in the RecyclerView.
+     */
     private RecyclerView.Adapter myAdapter;
+
+    /**
+     * String containing the search message used to fetch recipes.
+     */
     String searchmess;
+
+    /**
+     * URL string for fetching recipe information.
+     */
     String stringURL;
-    //ArrayList<String> messages = new ArrayList<>();
+
+    /**
+     * ArrayList to store Recipe objects.
+     */
     ArrayList<Recipe> recipes = null;
+
+    /**
+     * Data Access Object (DAO) for interacting with the Recipe entity in the Room Database.
+     */
     RecipeDAO mDAO;
+
+    /**
+     * ViewModel for managing UI-related data for the RecipeMain activity.
+     */
     RecipeViewModel recipeModel;
+
+    /**
+     * Intent for navigating to the home page.
+     */
     Intent homePage;
+
+    /**
+     * Intent for navigating to the search page.
+     */
     Intent searchPage;
+
+    /**
+     * Intent for navigating to the song project.
+     */
+    Intent songPage;
+
+    /**
+     * Intent for navigating to the dictionary project.
+     */
+    Intent ziyaodictionarypage;
+
+    /**
+     * Intent for navigating to the sun project.
+     */
+    Intent sunPage;
+
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return You must return true for the menu to be displayed; if you return false, it will not be shown.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
+
+        // Inflating the menu layout (ziyao_menu) into the Menu object
         getMenuInflater().inflate(R.menu.ziyao_menu, menu);
         return true;
     }
+
+    /**
+     * Called when the activity is first created. This is where you should do all of your normal static set up: create
+     * views, bind data to lists, etc. This method also provides a Bundle containing the activity's previously saved
+     * state, if that state was captured.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle
+     *                           contains the data it most recently supplied in onSaveInstanceState(Bundle). Note: Otherwise,
+     *                           it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +168,18 @@ public class RecipeMain extends AppCompatActivity {
             tx.commit();
         });
 
+        /**
+         * Sets up the RecyclerView adapter and layout manager for displaying a list of recipes.
+         */
         binding.ziyaorecycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+
+            /**
+             * Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
+             *
+             * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position.
+             * @param viewType The view type of the new View.
+             * @return A new MyRowHolder that holds a View of the given view type.
+             */
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -96,24 +187,51 @@ public class RecipeMain extends AppCompatActivity {
                 return new MyRowHolder( binding.getRoot() );
             }
 
+            /**
+             * Called by RecyclerView to display the data at the specified position.
+             *
+             * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position
+             *                 in the data set.
+             * @param position The position of the item within the adapter's data set.
+             */
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
-                holder.recipeTitle.setText("aaaaaaaaa");
+                //holder.recipeTitle.setText("aaaaaaaaa");
                 String obj = recipes.get(position).getTitle();
                 holder.recipeTitle.setText(obj);
             }
 
+            /**
+             * Returns the total number of items in the data set held by the adapter.
+             *
+             * @return The total number of items in this adapter.
+             */
             @Override
             public int getItemCount() {
                 return recipes.size();
             }
         });
 
+        // Setting the layout manager for the RecyclerView
         binding.ziyaorecycleView.setLayoutManager(new LinearLayoutManager(this));
 
     }
+
+    /**
+     * ViewHolder class for holding views of individual recipe items in the RecyclerView.
+     */
     class MyRowHolder extends RecyclerView.ViewHolder {
+
+        /**
+         * TextView for displaying the title of the recipe.
+         */
         TextView recipeTitle;
+
+        /**
+         * Constructs a new MyRowHolder with the specified itemView.
+         *
+         * @param itemView The view representing an individual item in the RecyclerView.
+         */
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
             recipeTitle=itemView.findViewById(R.id.recipeTitle);
@@ -126,41 +244,67 @@ public class RecipeMain extends AppCompatActivity {
             });
         }
     }
+
+    /**
+     * Called when a menu item is selected. Handles the actions to be performed based on the selected menu item.
+     *
+     * @param item The menu item that was selected.
+     * @return true to consume the item here, or false to allow normal menu processing to proceed.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch( item.getItemId() )
         {
             case R.id.homeMenuZ:
-                CharSequence text = "Back to home page...";
-                Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+                String ziyaogohome = getResources().getString(R.string.ziyaogohome);
+                CharSequence ziyaogohome1 = ziyaogohome;
+                Toast.makeText(this,ziyaogohome1, Toast.LENGTH_SHORT).show();
                 startActivity( homePage);
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;
             case R.id.searchRecipeMenu:
-                CharSequence text2 = "Going to searching page...";
-                Toast.makeText(this,text2, Toast.LENGTH_SHORT).show();
+                String ziyaosearchRecipeMenu = getResources().getString(R.string.ziyaosearchRecipeMenu);
+                CharSequence ziyaosearchRecipeMenu1 = ziyaosearchRecipeMenu;
+                Toast.makeText(this,ziyaosearchRecipeMenu1, Toast.LENGTH_SHORT).show();
                 startActivity( searchPage);
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;
             case R.id.aboutRecipeMenu:
+                String ziyaoaboutRecipeMenu = getResources().getString(R.string.ziyaoaboutRecipeMenu);
+                String ziyaoaboutRecipeMenuAbout = getResources().getString(R.string.ziyaoaboutRecipeMenuAbout);
+                String ziyaoOK = getResources().getString(R.string.ziyaoOK);
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-                builder2.setMessage("This application is the recipe search application created by Ziyao Tang.").setTitle("About: ")
-                        .setNegativeButton("OK", (dialog, cl) -> {
+                builder2.setMessage(ziyaoaboutRecipeMenu).setTitle(ziyaoaboutRecipeMenuAbout)
+                        .setNegativeButton(ziyaoOK, (dialog, cl) -> {
+                        }).create().show();
+                break;
+
+            case R.id.helpRecipeMenu:
+                String helpRecipeMenu = getResources().getString(R.string.helpRecipeMenu);
+                String ziyaoaboutRecipeMenuAbout11 = getResources().getString(R.string.ziyaoaboutRecipeMenuAbout);
+                String ziyaoOK11 = getResources().getString(R.string.ziyaoOK);
+                AlertDialog.Builder builder22 = new AlertDialog.Builder(this);
+                builder22.setMessage(helpRecipeMenu).setTitle(ziyaoaboutRecipeMenuAbout11)
+                        .setNegativeButton(ziyaoOK11, (dialog, cl) -> {
                         }).create().show();
                 break;
             case R.id.deleteRecipe:
-
+                String ziyaodeleteRecipe = getResources().getString(R.string.ziyaodeleteRecipe);
+                String ziyaodeleteRecipeAbout = getResources().getString(R.string.ziyaodeleteRecipeAbout);
                 Recipe removedRecipe = recipeModel.selectedRecipe.getValue();
                 int position = recipes.indexOf(removedRecipe);
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecipeMain.this);
-
-                builder.setMessage("Do you want to delete the message:"
-                                + removedRecipe.getTitle()).setTitle("Question: ")
-                        .setNegativeButton("No", (dialog, cl) -> {
+                String ziyaoNO = getResources().getString(R.string.ziyaoNO);
+                String ziyaoYes = getResources().getString(R.string.ziyaoYes);
+                String ziyaoUndo = getResources().getString(R.string.ziyaoUndo);
+                String ziyaodeleteM = getResources().getString(R.string.ziyaodeleteM);
+                builder.setMessage(ziyaodeleteRecipeAbout
+                                + removedRecipe.getTitle()).setTitle(ziyaodeleteRecipe)
+                        .setNegativeButton(ziyaoNO, (dialog, cl) -> {
                         })
-                        .setPositiveButton("Yes", (dialog, cl) -> {
+                        .setPositiveButton(ziyaoYes, (dialog, cl) -> {
 
                             recipes.remove(position);
                             myAdapter.notifyDataSetChanged();
@@ -170,9 +314,9 @@ public class RecipeMain extends AppCompatActivity {
                                 mDAO.deleteRecipe(removedRecipe); //get the ID from the database
                                 Log.d("TAG", "The id removed is:" + removedRecipe.id);
                             }); //the body of run()
-                            Snackbar.make(this.findViewById(R.id.ziyaosearchText),"You deleted message #"
+                            Snackbar.make(this.findViewById(R.id.ziyaosearchText),ziyaodeleteM
                                             + position,Snackbar.LENGTH_LONG)
-                                    .setAction("Undo", click -> {
+                                    .setAction(ziyaoUndo, click -> {
                                         recipes.add(position,removedRecipe);
                                         myAdapter.notifyDataSetChanged();
                                         Executor thread2 = Executors.newSingleThreadExecutor();
@@ -184,6 +328,30 @@ public class RecipeMain extends AppCompatActivity {
                                     }).show();
                         }).create().show();
                 getSupportFragmentManager() .popBackStack();
+                break;
+            case R.id.ziyaodictionary:
+                // Display instructions on how to use the interface
+                String ziyaodictionary = getResources().getString(R.string.ziyaodictionarying);
+                CharSequence ziyaodictionary1 = ziyaodictionary;
+                ziyaodictionarypage = new Intent( RecipeMain.this, SearchRoom.class);
+                Toast.makeText(this,ziyaodictionary1, Toast.LENGTH_SHORT).show();
+                startActivity( ziyaodictionarypage);
+                break;
+            case R.id.yxSongpage:
+                // Display instructions on how to use the interface
+                String ziyaosongPage = getResources().getString(R.string.ziyaosongPage);
+                CharSequence ziyaosongPage1 = ziyaosongPage;
+                songPage = new Intent( RecipeMain.this, DeezerAlbum.class);
+                Toast.makeText(this,ziyaosongPage1, Toast.LENGTH_SHORT).show();
+                startActivity( songPage);
+                break;
+            case R.id.yxSunpage:
+                String ziyaoyxSunpage = getResources().getString(R.string.ziyaoyxSunpage);
+                CharSequence ziyaoyxSunpage1 = ziyaoyxSunpage;
+                // Display instructions on how to use the interface
+                sunPage = new Intent( RecipeMain.this, SunActivity.class);
+                Toast.makeText(this,ziyaoyxSunpage1, Toast.LENGTH_SHORT).show();
+                startActivity( sunPage);
                 break;
         }
 //test

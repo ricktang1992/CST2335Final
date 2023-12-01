@@ -1,6 +1,115 @@
 <resources>
     <string name="app_name">CST2355Final</string>
-    <!-- xingxing.
+
+    <!-- xingxing.-->
+    <string name="yxeditSearchName">Enter word to search</string>
+    <string name="yxSearchBtNname">Seach</string>
+    <string name="yxSaveBtnName">See Saved Term</string>
+    <string name="yxSave_name">Saved Term</string>
+    <string name="yxAbout_name">About</string>
+    <string name="yxSongname">Go to Song Page</string>
+    <string name="yxRecipename">Go to Recipe Page</string>
+    <string name="yxSunname">Go to Sun Page</string>
+    <!-- Rick.-->
+    <string name="ziyaorecipename">Recipe info goes here</string>
+    <string name="ziyaorecipeInfoSum">Recipe Info Sum</string>
+    <string name="ziyaoSavedRecipes">Saved Recipes</string>
+    <string name="ziyaoSearch">Search</string>
+    <string name="ziyaoSearchTextgoeshere">Search Text goes here</string>
+    <string name="ziyaoRecipetitlegoeshere">Recipe title goes here</string>
+    <string name="ziyaoHomePage">Home Page</string>
+    <string name="ziyaoSearchRecipes">Search Recipes</string>
+    <string name="ziyaoSaveTheRecipe">Save the Recipe</string>
+    <string name="ziyaoAbout">About</string>
+    <string name="ziyaoDeleteRecipe">Delete Recipe</string>
+    <string name="ziyaogohome">Going to Home page...</string>
+    <string name="ziyaosearchRecipeMenu">Going to searching page...</string>
+    <string name="ziyaoaboutRecipeMenu">This application is the recipe search application created by Ziyao Tang.</string>
+    <string name="ziyaoaboutRecipeMenuAbout">About:</string>
+    <string name="ziyaodeleteRecipe">Question:</string>
+    <string name="ziyaodeleteRecipeAbout">Do you want to delete the message:</string>
+    <string name="ziyaoOK">OK</string>
+    <string name="ziyaoNO">No</string>
+    <string name="ziyaoYes">Yes</string>
+    <string name="ziyaoUndo">Undo</string>
+    <string name="ziyaodeleteM">You deleted message #</string>
+    <string name="yxAboutTitle">How to Use</string>
+    <string name="yxAboutUse">Instructions on how to use the interface:\n1. Enter a search term in the provided EditText.\n2. Click the Search button to retrieve definitions from the dictionary API.\n3. Click on a search result to see detailed information in a separate fragment.\n4. Click the Save icon to add a term to the saved terms list.\n5. Access the saved terms by clicking the Saved button.\n6. To delete a term, select it and choose the Delete icon from the menu.\n7. For more help, you can contact support.</string>
+    <string name="ziyaoSearching">Searching.....</string>
+    <string name="ziyaogosavedRecipeMenu">Going to searching page...</string>
+    <string name="ziyaosaveTheRecipe">You added the recipe :</string>
+    <string name="ziyaosearchTitle">Search Recipe</string>
+    <string name="ziyaodictionary">Go to Dictionary</string>
+
+
+    <string name="ziyaosongPage">Going to Song Project...</string>
+    <string name="ziyaoyxSunpage">Going to Sun Project...</string>
+    <string name="ziyaodictionarying">Going to Dictionary Project...</string>
+    <string name="helpRecipeMenu">1.Search Recipes:\nEnter the name or ingredients of the recipe you\'re looking for in the search bar.\nTap the search button to get a list of matching recipes.\n2.View Recipe Details:\nClick on a recipe from the list to view detailed information.\nExplore ingredients, cooking instructions, and more.\n3.Save Your Favorites:Found a recipe you love? \nClick on Save Recipe in the detailed view.\nYour saved recipes can be accessed from the Saved Recipes menu.</string>
+    <string name="helpziyao">Help</string>
+    <!--The following strings belong to Sun Activity-->
+    <string name="sun_toolbar_title">Sunrise &amp; Sunset</string>
+    <string name="sun_fav"> My Favourites </string>
+    <string name="sun_lat_hint">Latitude: </string>
+    <string name="sun_lng_hint">Longitude: </string>
+    <string name="sun_lat_text">Latitude</string>
+    <string name="sun_lng_text">Longitude</string>
+    <string name="sun_search_btn">Lookup</string>
+    <string name="sun_del_warning_text">Do you want to delete this record: </string>
+    <string name="sun_del_warning_title">Question: </string>
+    <string name="sun_del_text">Do you want to delete this record: </string>
+    <string name="sun_del_title">Question: </string>
+    <string name="sun_del_after">You deleted message #</string>
+    <string name="sun_yes">Yes</string>
+    <string name="sun_no">No</string>
+    <string name="sun_about_title">About</string>
+    <string name="sun_about_detail">Sunrise &amp; Sunset, Version 1.0, created by Yu Song</string>
+    <string name="sun_to_main">Back to main page</string>
+    <string name="sun_undo">Undo</string>
+    <string name="sun_help1">How to use:</string>
+    <string name="sun_help2"><![CDATA[
+        Enter both Latitude and Longitude, LOOKUP\n\n
+         My Saved Records\n\n
+         Save this Record\n\n
+         ️Delete this Record\n\n
+         Goto Recipe\n\n
+         Goto Deezer\n\n
+         Goto Word\n
+    ]]></string>
+    <string name="sun_save_no_record_warning">No sun record selected</string>
+    <string name="sun_save_dupe_record_warning">Sun record already in your Favourite</string>
+    <string name="sun_save_success">Sun saved successfully</string>
+    <string name="sunrise_title">Sunrise</string>
+    <string name="sunset_title"> Sunset</string>
+    <string name="solar_noon_title">☀Solar Noon</string>
+    <string name="golden_hour_title"> Golden Hour</string>
+    <string name="timezone_title"> Timezone</string>
+    <string name="invalid_input_title">Invalid Input</string>
+    <string name="valid_input_lat">Valid Latitude Range: -90 to +90</string>
+    <string name="valid_input_lng">Valid Longitude Range: -180 to +180</string>
+    <string name="sun_refresh">Refresh / Details</string>
+    <string name="sun_find_city"><![CDATA[Find a city\'s Lat & Lng]]></string>
+    <string name="sun_check">Check</string>
+    <string name="sun_no_name_location">XYZ Location</string>
+    <string name="sun_found_nothing">Found nothing, Array length = 0</string>
+    <string name="sun_sun_api_status_not_ok">Sunrise sunset API status not OK</string>
+    <string name="sun_sun_api_ok">Sun API Results and Status OK</string>
+    <string name="sun_sun_api_not_available">The Sun API is not available now</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
