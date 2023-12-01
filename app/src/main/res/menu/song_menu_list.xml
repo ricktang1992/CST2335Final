@@ -6,13 +6,9 @@
         android:title="Home Page"
         app:showAsAction="never" />
     <item
-        android:id="@+id/searchSongListMenu"
-        android:title="Search Songs"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/removeToList"
         android:title="Remove Song"
         android:icon="@drawable/delete"
         app:showAsAction="always" />
+
 </menu>
