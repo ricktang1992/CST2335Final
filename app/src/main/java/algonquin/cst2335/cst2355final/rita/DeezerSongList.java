@@ -31,7 +31,9 @@ import algonquin.cst2335.cst2355final.Data.DeezerSongViewModel;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SongListBinding;
 import algonquin.cst2335.cst2355final.databinding.SongSavedBinding;
-
+/**
+ * DeezerSongList is an activity that displays a list of saved Deezer songs and allows users to interact with them.
+ */
 public class DeezerSongList extends AppCompatActivity {
     SongSavedBinding binding;
     ArrayList<DeezerSong> saveSongs = new ArrayList<>();
@@ -39,7 +41,11 @@ public class DeezerSongList extends AppCompatActivity {
     DeezerSongDAO dsDAO;
     RecyclerView.Adapter savedAdapter; // Initialize an adapter for RecyclerView
     Executor thread = Executors.newSingleThreadExecutor();
-
+    /**
+     * Initializes the activity when it is created.
+     *
+     * @param savedInstanceState The saved instance state, if any.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,10 +114,19 @@ public class DeezerSongList extends AppCompatActivity {
         });
 
     }
-
+    /**
+     * Custom ViewHolder class for the RecyclerView in the saved song list.
+     */
     class MySaveRowHolder extends RecyclerView.ViewHolder {
+        /**
+         * TextView to display the title of a saved song.
+         */
         public TextView songTitleText;
-
+        /**
+         * Constructor for the ViewHolder.
+         *
+         * @param itemView The view representing each item in the RecyclerView.
+         */
         public MySaveRowHolder(@NonNull View itemView) {
             super(itemView);
             songTitleText = itemView.findViewById(R.id.songTitleText);
@@ -124,7 +139,7 @@ public class DeezerSongList extends AppCompatActivity {
                 String confirm = getString(R.string.confirm);
                 builder.setMessage(deleteQuestion)
                         .setTitle(deleteTitle).
-                        setNegativeButton("No", (dialog, cl) -> {
+                        setNegativeButton(getString(R.string.reject), (dialog, cl) -> {
 
                         })
                         .setPositiveButton(confirm, (dialog, cl) -> {
@@ -158,14 +173,24 @@ public class DeezerSongList extends AppCompatActivity {
 
         }
     } //end of onCreat
-
+    /**
+     * Handles options menu creation.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return True to display the menu, false to prevent it from being displayed.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.song_memu,menu);
         return true;
     }
-
+    /**
+     * Handles options menu item selection.
+     *
+     * @param item The menu item that was selected.
+     * @return True if the item was successfully handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -196,21 +221,6 @@ public class DeezerSongList extends AppCompatActivity {
                         }).create().show();
                 break;
 
-            case R.id.saveSong:
-
-                DeezerSong saveSong = saveModel.selectedSong.getValue();
-                saveSongs.add(saveSong);
-                savedAdapter.notifyDataSetChanged();
-                Executor addthread = Executors.newSingleThreadExecutor();
-                addthread.execute(( ) -> {
-                    //this is on a background thread
-                    saveSong.id = dsDAO.insertSong(saveSong); //get the ID from the database
-                    Log.d("TAG", "The id created is:" + saveSong.id);
-                }); //the body of run()
-                Snackbar.make(this.findViewById(R.id.searchSongText),"You added the term "
-                        +saveSong.getTitle(),Snackbar.LENGTH_LONG).show();
-                getSupportFragmentManager().popBackStack();
-                break;
             case R.id.showSaveList:
               Intent SongSavedList = new Intent( DeezerSongList.this, DeezerSongList.class );
                 CharSequence text3 = "Going to Saved term page...";

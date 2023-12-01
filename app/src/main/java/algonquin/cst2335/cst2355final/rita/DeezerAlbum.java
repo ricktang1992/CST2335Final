@@ -56,14 +56,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
 import algonquin.cst2335.cst2355final.Data.DeezerSongViewModel;
+import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 import algonquin.cst2335.cst2355final.databinding.SongListBinding;
 import algonquin.cst2335.cst2355final.databinding.SongMainBinding;
 import algonquin.cst2335.cst2355final.yuxing.SearchDetailsFragment;
 import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
-
-
+/**
+ * DeezerAlbum is an activity that allows users to search for songs on Deezer, view details, and navigate to a saved song list.
+ */
 public class DeezerAlbum extends AppCompatActivity {
 
     protected SongMainBinding binding;
@@ -104,7 +106,7 @@ public class DeezerAlbum extends AppCompatActivity {
             SharedPreferences.Editor editor = prefer.edit();
             editor.putString("searchText", binding.searchSongText.getText().toString() );
             editor.apply();
-            CharSequence text = "Searching for the artist...";
+            CharSequence text = getString(R.string.songsearch);
             Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
 
             String stringURL = null;
@@ -186,7 +188,6 @@ public class DeezerAlbum extends AppCompatActivity {
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 DeezerSong obj = songs.get(position);
-                Log.d("RecyclerView","Position"+position+",song:"+ obj.getTitle());
                 holder.songText.setText(obj.getTitle());
             }
 
@@ -210,53 +211,47 @@ public class DeezerAlbum extends AppCompatActivity {
             itemView.setOnClickListener(click ->{
                 int position = getAbsoluteAdapterPosition();
                 DeezerSong selected = songs.get(position);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder( itemView.getContext());
-                builder.setTitle("Choose Action")
-                        .setMessage("What would you like to do?")
-                        .setPositiveButton("View Details", (dialog, which)->{
-                            songModel.selectedSong.postValue(selected);//launch a fragment
-                        })
-                        .setNegativeButton("Save to List", (dialog, which) ->{
-                            songs.add(selected);
-                            myAdapter.notifyDataSetChanged();
-
-
-
-                            Snackbar.make(itemView, "Song saved to the list", Snackbar.LENGTH_SHORT).show();
-                        }).show();
+                songModel.selectedSong.postValue(selected);//launch a fragment
             });
 
         }
     } //end of onCreat
+    /**
+     * Handles options menu creation.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return True to display the menu, false to prevent it from being displayed.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.song_memu,menu);
         return true;
     }
-
+    /**
+     * Handles options menu item selection.
+     *
+     * @param item The menu item that was selected.
+     * @return True if the item was successfully handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.returnHomeMenu:
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeezerAlbum.this);
-
-                builder.setMessage("Do you want to return the home page: ")
-                        .setTitle("Question:")
-                        .setNegativeButton("No", (a, b) -> {
+                builder.setMessage(getString(R.string.reject))
+                        .setTitle(R.string.question)
+                        .setNegativeButton(getString(R.string.reject), (a, b) -> {
                         })
-                        .setPositiveButton("Yes", (a, b) -> {
-
-                            Executors.newSingleThreadExecutor().execute(() -> {
-
-                            });
-
-                            Snackbar.make(binding.mysongToolbar, "You return to home page", Snackbar.LENGTH_LONG)
-                                    .setAction("Undo", clk -> {
+                        .setPositiveButton(getString(R.string.confirm), (a, b) -> {
+                            SongSavedList = new Intent( DeezerAlbum.this, MainActivity.class );
+                            CharSequence text3 = getString(R.string.goToHomeSnack);
+                            Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
+                            startActivity( SongSavedList);
+                            Snackbar.make(binding.mysongToolbar, getString(R.string.goToHomeSnack), Snackbar.LENGTH_LONG)
+                                    .setAction(getString(R.string.undo), clk -> {
                                         Executors.newSingleThreadExecutor().execute(()->{
 
                                         });
@@ -266,32 +261,16 @@ public class DeezerAlbum extends AppCompatActivity {
                         }).create().show();
                 break;
 
-            case R.id.saveSong:
-                DeezerSong addTerm = songModel.selectedSong.getValue();
-                songs.add(addTerm);
-                myAdapter.notifyDataSetChanged();
-                Executor addthread = Executors.newSingleThreadExecutor();
-                addthread.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        dsDAO.insertSong(addTerm);
-                    }
-                });
-//            my/the body of run()
-                Snackbar.make(this.findViewById(R.id.searchSongText),"You added the term "
-                        +addTerm.getTitle(),Snackbar.LENGTH_LONG).show();
-                getSupportFragmentManager().popBackStack();
-                break;
 
             case R.id.showSaveList:
                 SongSavedList = new Intent( DeezerAlbum.this, DeezerSongList.class );
-                CharSequence text3 = "Going to Saved term page...";
+                CharSequence text3 = getString(R.string.goToSaveList);
                 Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
                 startActivity( SongSavedList);
                 break;
 
             case R.id.about:
-                Toast.makeText(this,"Version 1.0, created by Li Jiang", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,getString(R.string.version), Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.help:

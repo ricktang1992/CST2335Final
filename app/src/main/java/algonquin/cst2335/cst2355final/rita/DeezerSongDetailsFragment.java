@@ -42,39 +42,57 @@ import algonquin.cst2335.cst2355final.Data.DeezerSongViewModel;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 
-
+/**
+ * DeezerSongDetailsFragment is a fragment that displays details of a selected Deezer song,
+ * including the song title, duration, album name, and album cover image.
+ */
 public class DeezerSongDetailsFragment extends Fragment {
-
+    /**
+     * The selected DeezerSong object to display details for.
+     */
     DeezerSong selected;
+    /**
+     * RequestQueue for handling network requests using Volley.
+     */
     RequestQueue queue; //create a Volley object that will connect to a server
+    /**
+     * Executor for handling background thread tasks.
+     */
     Executor thread = Executors.newSingleThreadExecutor();
+    /**
+     * Data Access Object for interacting with the DeezerSong database.
+     */
     DeezerSongDAO dsDAO;
-    SongDetailBinding binding;
+
     /**
      * The name of the song
      */
-    private String songName;
+     String songName;
     /**
-     * the duration of the song
+     * The name of the Album
      */
-    private int songDuration;
+     String songAlbum;
     /**
-     * the name of the album
+     * Default constructor for DeezerSongDetailsFragment.
      */
-    private String songAlbum;
-    /**
-     * the image of the album
-     */
-    private String songAlbumImage;
-
-
     public DeezerSongDetailsFragment() {
     }
-
+    /**
+     * Constructor for DeezerSongDetailsFragment that takes a DeezerSong object as a parameter.
+     *
+     * @param s The DeezerSong object to display details for.
+     */
     public DeezerSongDetailsFragment(DeezerSong s) {
         selected = s;
     }
-
+    /**
+     * Called to create and return the view hierarchy associated with the fragment.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return Return the View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -112,7 +130,7 @@ public class DeezerSongDetailsFragment extends Fragment {
                             AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
                             builder.setMessage(addQuestion)
                                     .setTitle(addFavorites).
-                                    setNegativeButton("No", (dialog, cl) -> {
+                                    setNegativeButton(getString(R.string.reject), (dialog, cl) -> {
 
                                     })
                                     .setPositiveButton(confirm, (dialog, cl) -> {
