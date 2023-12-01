@@ -120,18 +120,13 @@
 
 
 
+    <!-- Rick.-->
+    <!-- Rita.
 
 
 
 
 
-
-
-
-
-
-    -->
-    <!-- Rick.
 
 
 
@@ -163,61 +158,6 @@
 
 
      -->
-    <!-- Rita.-->
-    <string name="songsearch">Searching for the artist...</string>
-    <string name="question">Question:</string>
-    <string name="goToHomeToast">Going to Saved term page...</string>
-    <string name="goToHomeSnack">You return to home page.</string>
-    <string name="undo">Undo </string>
-    <string name="goToSaveList">You are going to favorite list.</string>
-    <string name="version">Version 1.0, created by Li Jiang</string>
-    <string name="addFavorites">Add song to favorites</string>
-    <string name="confirm">Yes</string>
-    <string name="reject">No</string>
-    <string name="addQuestion">Add to favorites?</string>
-    <string name="addTitle">Add to favorites</string>
-    <string name="favoritesAdded"> added to favorite list</string>
-    <string name="songInFavorties">Song already in favorites</string>
-    <string name="deleteQuestion">Do you want to delete this song?</string>
-    <string name="deleteTitle">Delete</string>
-    <string name="deletedSong">You deleted </string>
-    <string name="returnHomeQuestion">Do you want to return the home page:</string>
-    <string name="title">Deezer Song</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- feng.
 
 
