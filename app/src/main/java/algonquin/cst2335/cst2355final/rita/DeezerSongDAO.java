@@ -16,5 +16,8 @@ public interface DeezerSongDAO {
     @Delete
     void deleteSong(DeezerSong s);
 
+    @Query("Select * from DeezerSong WHERE Title = :Title AND AlbumName = :AlbumName")
+    DeezerSong searchSongByName(String Title, String AlbumName);
+
 }
 

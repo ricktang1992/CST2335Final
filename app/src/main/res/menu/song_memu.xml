@@ -6,8 +6,21 @@
         android:id="@+id/returnHomeMenu"
         android:title="Home Page"
         app:showAsAction="never" />
+
     <item
-        android:id="@+id/addToList"
-        android:title="Add to list"
+        android:id="@+id/showSaveList"
+        android:icon="@drawable/songlist"
+        android:title="Show saved list"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/about"
+        android:title="about"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/help"
+        android:title="Help"
+        app:showAsAction="never" />
+
 </menu>
