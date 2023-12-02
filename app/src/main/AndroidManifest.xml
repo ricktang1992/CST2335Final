@@ -29,9 +29,7 @@
         <activity
             android:name=".yuxing.SearchRoom"
             android:exported="false" />
-        <activity
-            android:name=".Tianjiao.SunRoom"
-            android:exported="false" />
+
         <activity
             android:name=".rita.DeezerAlbum"
             android:exported="false" />
