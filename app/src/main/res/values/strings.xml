@@ -87,7 +87,7 @@
     <string name="invalid_input_title">Invalid Input</string>
     <string name="valid_input_lat">Valid Latitude Range: -90 to +90</string>
     <string name="valid_input_lng">Valid Longitude Range: -180 to +180</string>
-    <string name="sun_refresh">Refresh / Details</string>
+    <string name="sun_refresh">Details</string>
     <string name="sun_find_city"><![CDATA[Find a city\'s Lat & Lng]]></string>
     <string name="sun_check">Check</string>
     <string name="sun_no_name_location">XYZ Location</string>

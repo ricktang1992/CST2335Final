@@ -33,120 +33,81 @@ import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
-
 import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.ActivitySunBinding;
 import algonquin.cst2335.cst2355final.databinding.SunRecordBinding;
 import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
-import algonquin.cst2335.cst2355final.rita.DeezerSong;
 import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 import algonquin.cst2335.cst2355final.ziyao.RecipeMain;
 
 
 public class SunActivity extends AppCompatActivity {
 
+    // Binding class for accessing views in the layout.
     ActivitySunBinding binding;
-    ArrayList<Sun> suns = null; // At the beginning, there are no messages; initialize in SunViewModel.java
-    SunViewModel sunModel; // use a ViewModel to make sure data survive the rotation change
-    private RecyclerView.Adapter sunAdapter; // to hold the object below
-    SunDAO sDAO;
-    int selectedRow; // to hold the "position", find which row this is"
 
-    Sun sToPass; // to hold the "sun" object to pass to other classes or methods
-    protected String cityName; // to hold the city name input
-//    protected String latClass; // to hold the latitude
-//    protected String lngClass; // to hold the longitude
+    // List to store Sun objects, initially set in SunViewModel.
+    ArrayList<Sun> suns = null;
 
-    protected RequestQueue queue = null; // for volley
+    // ViewModel for maintaining data persistence during configuration changes.
+    SunViewModel sunModel;
+    private RecyclerView.Adapter sunAdapter;     // Adapter for displaying Sun objects in the RecyclerView.
 
+    SunDAO sDAO;     // DAO for interacting with the Sun database.
+
+    int selectedRow;     // Variable to store the position of the selected row.
+
+
+    Sun sToPass;  // Sun object used for passing data between classes or methods.
+    protected String cityName;  // Variable to hold the user-input city name.
+
+
+    protected RequestQueue queue = null; // Volley request queue for network requests.
+
+    // Called when the activity is created.
+
+    // SharedPreferences for persistent storage.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySunBinding.inflate(getLayoutInflater());
-        queue = Volley.newRequestQueue(this);//HTTP Connections: Volley. A Volley object that will connect to a server
+        queue = Volley.newRequestQueue(this);
         setContentView(binding.getRoot());
-//        String cityName; // to hold the city name input
+
 
         SharedPreferences prefs = getSharedPreferences("sunSharedData", Context.MODE_PRIVATE);
         binding.latInput.setText(prefs.getString("latitude",""));
         binding.lngInput.setText(prefs.getString("longitude",""));
-//        binding.editCity.setText(prefs.getString("cityName",""));
 
-        // Set up InputFilter for latitude input validation. Range within the range of -90 to +90, up to 6 decimal places
-        InputFilter latitudeFilter = new InputFilter() {
-            final Pattern pattern = Pattern.compile("^(-?\\d{0,2}(\\.\\d{0,6})?|\\d{0,1}(\\.\\d{0,6})?|90(\\.0{0,6})?)$");
-
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                String input = dest.subSequence(0, dstart) + source.toString() + dest.subSequence(dend, dest.length());
-
-                if (!pattern.matcher(input).matches()) {
-                    showInvalidInputWarning(getString(R.string.valid_input_lat));
-                    Log.d("Latitude input invalid", "Latitude input invalid");
-                    return "";
-                }
-
-                return null;
-            }
-        };
-
-        // Set up InputFilter for longitude input validation, Range within the range of -180 to +180, up to 6 decimal places
-        InputFilter longitudeFilter = new InputFilter() {
-            final Pattern pattern = Pattern.compile("^(-?\\d{0,3}(\\.\\d{0,6})?|\\d{0,2}(\\.\\d{0,6})?|180(\\.0{0,6})?)$");
-
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                String input = dest.subSequence(0, dstart) + source.toString() + dest.subSequence(dend, dest.length());
-
-                if (!pattern.matcher(input).matches()) {
-                    Log.d("Longitude input invalid", "Longitude input invalid");
-                    showInvalidInputWarning(getString(R.string.valid_input_lng));
-                    return "";
-                }
-
-                return null;
-            }
-        };
-
-
-        // Apply the InputFilter to the EditText
-        binding.latInput.setFilters(new InputFilter[]{latitudeFilter});
-        // Apply the InputFilter to the EditText
-        binding.lngInput.setFilters(new InputFilter[]{longitudeFilter});
-
-
-        // onCreateOptionMenu
         setSupportActionBar(binding.sunToolbar);// initialize the toolbar
         getSupportActionBar().setTitle(getString(R.string.sun_toolbar_title));
 
 
         sunModel = new ViewModelProvider(this).get(SunViewModel.class);
-        suns = sunModel.suns.getValue(); //get the array list from ViewModelProvider, might be NULL
+        suns = sunModel.suns.getValue();
 
-        //listener to the MutableLiveData object
+
         sunModel.selectedSun.observe(this,(selectedSun) ->{
             if(selectedSun != null) {
-                //create a Sun fragment
+
                 SunDetailsFragment sunFragment = new SunDetailsFragment(selectedSun);
 
                 FragmentManager fMgr = getSupportFragmentManager();
                 FragmentTransaction transaction = fMgr.beginTransaction();
-                transaction.addToBackStack("Add to back stack"); // adds to the history
-                transaction.replace(R.id.sunFragmentLocation, sunFragment);//The add() function needs the id of the FrameLayout where it will load the fragment
-                transaction.commit();// This line actually loads the fragment into the specified FrameLayout
+                transaction.addToBackStack("Add to back stack");
+                transaction.replace(R.id.sunFragmentLocation, sunFragment);
+                transaction.commit();
             }
         });
 
-        //load sun records from the database:
+
         SunDatabase db = Room.databaseBuilder(getApplicationContext(),SunDatabase.class, "sunDatabase").build();
-        //initialize the variable
+
         sDAO = db.sunDAO();
 
         if (suns == null) {
@@ -155,8 +116,8 @@ public class SunActivity extends AppCompatActivity {
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(() ->
             {
-                suns.addAll(sDAO.getAllSuns()); //Once you get the data from database
-                runOnUiThread(() -> binding.sunRecycleView.setAdapter(sunAdapter)); //You can then load the RecyclerView
+                suns.addAll(sDAO.getAllSuns());
+                runOnUiThread(() -> binding.sunRecycleView.setAdapter(sunAdapter));
             });
         }
 
@@ -165,11 +126,6 @@ public class SunActivity extends AppCompatActivity {
 
             String sunLatitude = binding.latInput.getText().toString();
             String sunLongitude = binding.lngInput.getText().toString();
-            String sunrise = "sunrise";
-            String sunset = "sunset";
-            String solar_noon = "noon";
-            String golden_hour = "golden hour";
-            String timezone = "Qingdao";
 
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("latitude", sunLatitude);
@@ -177,20 +133,17 @@ public class SunActivity extends AppCompatActivity {
             editor.apply();
 
 
-            // Prepare api url
-            // can add try and catch (UnsupportedEncodingException e) here if need encode - URLEncoder.encode(varTextInput, "UTF-8")
-//            String url = "https://api.sunrisesunset.io/json?lat=" + sunLatitude + "&lng=" + sunLongitude + "&timezone=UTC&date=today"; // if using UTC
             String url = "https://api.sunrisesunset.io/json?lat=" + sunLatitude + "&lng=" + sunLongitude;
             Log.d("Sunrise Sunset", "Request URL: " + url);
 
-            //this goes in the button click handler:
+
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                     (response) -> {
                         try {
                             if (response.has("results")) {
                                 Log.d("Sun API Results", "Sun API Request has results");
                                 JSONObject results = response.getJSONObject("results");
-                                String status = response.getString("status"); // get the JSONArray associated with "status"
+                                String status = response.getString("status");
                                 Log.d("Sun API status", "Status" + status);
                             }
                         } catch (JSONException e) {
@@ -203,7 +156,7 @@ public class SunActivity extends AppCompatActivity {
 
                         try {
                             JSONObject results = response.getJSONObject("results");
-                            String status = response.getString("status"); // get the JSONArray associated with "status"
+                            String status = response.getString("status");
 
                             if (results.length() == 0) {
                                 Log.e("Sun API Status not OK", "The Sun API results.length() == 0");
@@ -213,7 +166,7 @@ public class SunActivity extends AppCompatActivity {
                                 Log.e("Sun API Status not OK", "The Sun API status is not OK");
                                 Toast.makeText(this, getString(R.string.sun_sun_api_status_not_ok), Toast.LENGTH_SHORT).show();
                             } else {
-                                // When sunArray and sunStatus both ok:
+
                                 Log.d("Sun API ResultsStatusOK", "Sun API Results and Status OK");
 
                                 // Read the values in the "results" in JSON
@@ -234,16 +187,15 @@ public class SunActivity extends AppCompatActivity {
                                 Sun s = new Sun(sunLatitude, sunLongitude, sunriseResult, sunsetResult, solar_noonResult, golden_hourResult, timezoneResult, cityNameFromInput);
                                 sToPass = s; // pass the sun obj to the class level
 
-                                // tell the recycle view that there is new data SetChanged()
-                                sunAdapter.notifyDataSetChanged();//redraw the screen
+                                sunAdapter.notifyDataSetChanged();
 
                                 SunDetailsFragment sunFragment = new SunDetailsFragment(s);
 
                                 FragmentManager fMgr = getSupportFragmentManager();
                                 FragmentTransaction transaction = fMgr.beginTransaction();
-                                transaction.addToBackStack("Add to back stack"); // adds to the history
-                                transaction.replace(R.id.sunFragmentLocation, sunFragment);//The add() function needs the id of the FrameLayout where it will load the fragment
-                                transaction.commit();// This line actually loads the fragment into the specified FrameLayout
+                                transaction.addToBackStack("Add to back stack");
+                                transaction.replace(R.id.sunFragmentLocation, sunFragment);
+                                transaction.commit();
 
                                 //clear the previous text
                                 binding.latInput.setText("");
@@ -259,7 +211,7 @@ public class SunActivity extends AppCompatActivity {
                     });
             queue.add(request);
 
-            //clear the previous text
+
             binding.latInput.setText("");
             binding.lngInput.setText("");
 
@@ -270,7 +222,7 @@ public class SunActivity extends AppCompatActivity {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//                SunDetailsLayoutBinding binding = SunDetailsLayoutBinding.inflate(getLayoutInflater(), parent, false);
+
 
                 SunRecordBinding binding2 = SunRecordBinding.inflate(getLayoutInflater(),parent,false);
                 return new MyRowHolder(binding2.getRoot());
@@ -284,11 +236,6 @@ public class SunActivity extends AppCompatActivity {
                 holder.sunLatitudeView.setText(obj.getSunLatitude());
                 holder.sunLongitudeView.setText(obj.getSunLongitude());
 
-//                holder.sunriseView.setText(obj.getSunrise());
-//                holder.sunsetView.setText(obj.getSunset());
-//                holder.solar_noonView.setText(obj.getSolar_noon());
-//                holder.golden_hourView.setText(obj.getGolder_hour());
-//                holder.timezoneView.setText(obj.getTimezone());
             }
 
 
@@ -298,32 +245,26 @@ public class SunActivity extends AppCompatActivity {
             }
         });
 
-        // To specify a single column scrolling in a Vertical direction
+
         binding.sunRecycleView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    // This class represents one row
+
     public class MyRowHolder extends RecyclerView.ViewHolder {
 
         public TextView sunLatitudeView; // maybe not needed?
         public TextView sunLongitudeView; // maybe not needed?
         public TextView sunriseView;
         public TextView sunsetView;
-        public TextView solar_noonView;
-        public TextView golden_hourView;
-        public TextView timezoneView;
 
         public MyRowHolder(@NonNull View theRootConstraintLayout){
             super(theRootConstraintLayout);
 
-            // Feature: deleting a message from the RecyclerView
+
             theRootConstraintLayout.setOnClickListener(clk ->{
-                int position = getAbsoluteAdapterPosition();//find which row this is
+                int position = getAbsoluteAdapterPosition();
                 Sun selected = suns.get(position);
 
-                // Prepare api url
-                // can add try and catch (UnsupportedEncodingException e) here if need encode - URLEncoder.encode(varTextInput, "UTF-8")
-//            String url = "https://api.sunrisesunset.io/json?lat=" + sunLatitude + "&lng=" + sunLongitude + "&timezone=UTC&date=today"; // if using UTC
                 String url = "https://api.sunrisesunset.io/json?lat=" + selected.getSunLatitude() + "&lng=" + selected.getSunLongitude();
                 Log.d("Sunrise Sunset", "Request URL: " + url);
 
@@ -331,7 +272,7 @@ public class SunActivity extends AppCompatActivity {
                         (response) -> {
                     try {
                         JSONObject results = response.getJSONObject("results");
-                        String status = response.getString("status"); // get the JSONArray associated with "status"
+                        String status = response.getString("status");
                         if (results.length() == 0) {
                               Toast.makeText(SunActivity.this, getString(R.string.sun_found_nothing), Toast.LENGTH_SHORT).show();
 
@@ -341,27 +282,18 @@ public class SunActivity extends AppCompatActivity {
                         } else {
                             Log.d("Sun API ResultsStatusOK", "Sun API Results and Status OK");
 
-                            // Read the values in the "results" in JSON
+
                             String sunriseResult = results.getString("sunrise");
                             String sunsetResult = results.getString("sunset");
-                            String solar_noonResult = results.getString("solar_noon");
-                            String golden_hourResult = results.getString("golden_hour");
-                            String timezoneResult = results.getString("timezone");
 
                             selected.setSunrise(sunriseResult);
                             selected.setSunset(sunsetResult);
-                            selected.setSolar_noon(solar_noonResult);
-                            selected.setGolder_hour(golden_hourResult);
 
                             // TODO: this added thread cause an extra Fragment!
                             Executor threadUpdate = Executors.newSingleThreadExecutor();
                             threadUpdate.execute(()->{
-                                sDAO.updateSun(selected); //Update selected sun
+                                sDAO.updateSun(selected);
                             });
-
-                            // TODO: this added line cause an extra Fragment!
-//                            sunModel.selectedSun.postValue(selected);
-
 
                             sunAdapter.notifyDataSetChanged();
                         }
@@ -371,27 +303,24 @@ public class SunActivity extends AppCompatActivity {
                         }, error -> {                });
                 queue.add(request);
 
-                //starts the loading
                 sunModel.selectedSun.postValue(selected);
 
-                selectedRow = position; // pass position to the whole class scope variable to use in another class
+                selectedRow = position;
             });
 
-            // theRootConstraintLayout.findViewById
-            sunLatitudeView = theRootConstraintLayout.findViewById(R.id.lat_detail);// maybe not needed?
-            sunLongitudeView = theRootConstraintLayout.findViewById(R.id.lng_detail);// maybe not needed?
+            sunLatitudeView = theRootConstraintLayout.findViewById(R.id.lat_detail);
+            sunLongitudeView = theRootConstraintLayout.findViewById(R.id.lng_detail);
             sunriseView= theRootConstraintLayout.findViewById(R.id.sun_sunrise_detail);
             sunsetView= theRootConstraintLayout.findViewById(R.id.sun_sunset_detail);
-
 
         }
     }
 
-    //load a Menu layout file,
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        //inflate a menu into the toolbar
+
         getMenuInflater().inflate(R.menu.sun_detail_menu, menu);
         return true;
     }
@@ -413,8 +342,8 @@ public class SunActivity extends AppCompatActivity {
                                 sDAO.insertSun(sToPass);
                                 runOnUiThread(()->{
                                     Log.d("Sun Save", "Sun saved successfully");
-                                    // tell the recycle view that there is new data SetChanged()
-                                    sunAdapter.notifyDataSetChanged();//redraw the screen
+
+                                    sunAdapter.notifyDataSetChanged();
                                     Toast.makeText(this, getResources().getString(R.string.sun_save_success), Toast.LENGTH_SHORT).show();
                                 });
                             } catch (Exception e) {
@@ -427,18 +356,13 @@ public class SunActivity extends AppCompatActivity {
 
             case R.id.deleteSun:
 
-                //put your Sun deletion code here. If you select this item, you should show the alert dialog
-                //asking if the user wants to delete this message
-
                 int position = suns.indexOf(sunModel.selectedSun.getValue());
                 if(position != RecyclerView.NO_POSITION) {
-                    // temporarily stores the sun location before it is removed from the ArrayList
                     Sun toDelete = suns.get(position);
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(SunActivity.this);
 
-//                    builder.setMessage("Do you want to delete this record: " + toDelete.getSunLatitude() + ", " + toDelete.getSunLongitude());
-//                    builder.setTitle("Question: ");
+
 
                     builder.setMessage(getString(R.string.sun_del_warning_text) + toDelete.getSunLatitude() + ", " + toDelete.getSunLongitude());
                     builder.setTitle(getString(R.string.sun_del_warning_title));
@@ -447,13 +371,12 @@ public class SunActivity extends AppCompatActivity {
                     builder.setPositiveButton(getString(R.string.sun_yes), (btn, obj) -> { /* if yes is clicked */
                         Executor thread = Executors.newSingleThreadExecutor();
                         thread.execute(() -> {
-                            //delete from database
-                            sDAO.deleteSun(toDelete); //which sun location to delete?
+                            sDAO.deleteSun(toDelete);
                         });
-                        suns.remove(position); //remove from the array list
+                        suns.remove(position);
 
-                        sunAdapter.notifyDataSetChanged(); //redraw the list
-                        getSupportFragmentManager().popBackStack(); // go back to message list
+                        sunAdapter.notifyDataSetChanged();
+                        getSupportFragmentManager().popBackStack();
 
                         Snackbar.make(binding.sunRecycleView, getString(R.string.sun_del_after) + position, Snackbar.LENGTH_LONG)
                                 .setAction(getString(R.string.sun_undo), click -> {
@@ -462,20 +385,12 @@ public class SunActivity extends AppCompatActivity {
                                         sDAO.insertSun(toDelete);
                                     });
 
-                                    suns.add(position, toDelete); // add the toDelete back to ArrayList to undo delete action
-                                    sunAdapter.notifyDataSetChanged(); //redraw the list
+                                    suns.add(position, toDelete);
+                                    sunAdapter.notifyDataSetChanged();
 
-                                    // after undo, can go back to the fragment
-//                                    SunDetailsFragment sunFragment = new SunDetailsFragment(selectedSun);
-//
-//                                      FragmentManager fMgr = getSupportFragmentManager();
-//                                      FragmentTransaction transaction = fMgr.beginTransaction();
-//                                      transaction.addToBackStack("Add to back stack"); // adds to the history
-//                                      transaction.replace(R.id.sunFragmentLocation, sunFragment);//The add() function needs the id of the FrameLayout where it will load the fragment
-//                                      transaction.commit();// This line actually loads the fragment into the specified FrameLayout
                                 }).show();
                     });
-                    builder.create().show(); //this has to be last
+                    builder.create().show();
                 }
                 break;
 
