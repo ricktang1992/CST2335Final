@@ -32,6 +32,10 @@ import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SongListBinding;
 import algonquin.cst2335.cst2355final.databinding.SongSavedBinding;
+import algonquin.cst2335.cst2355final.tianjiaosun.SunActivity;
+import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
+import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
+
 /**
  * DeezerSongList is an activity that displays a list of saved Deezer songs and allows users to interact with them.
  */
@@ -224,8 +228,15 @@ public class DeezerSongList extends AppCompatActivity {
                         }).create().show();
                 break;
 
+            case R.id.showSaveList:
+                Intent SongSavedList = new Intent( DeezerSongList.this, DeezerSongList.class );
+                CharSequence showText = getString(R.string.goToSaveList);
+                Toast.makeText(this,showText, Toast.LENGTH_SHORT).show();
+                startActivity( SongSavedList);
+                break;
+
             case R.id.about:
-                Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
+                Toast.makeText(this,getString(R.string.version), Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.help:
@@ -233,11 +244,41 @@ public class DeezerSongList extends AppCompatActivity {
                 AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
                 instructionsDialog.setMessage(R.string.yxAboutUse)
                         .setTitle(R.string.yxAboutTitle)
-                        .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {
-                        })
+                        .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
                         .create().show();
+                break;
 
+            case R.id.ritaSunpage:
+                // Display instructions on how to use the interface
+                Intent sunPage = new Intent( DeezerSongList.this, SunActivity.class);
+                CharSequence text1 = getResources().getString(R.string.ziyaoyxSunpage);
+                Toast.makeText(this,text1, Toast.LENGTH_SHORT).show();
+                startActivity( sunPage);
+                break;
 
+            case R.id.ritaRecipePage:
+                // Display instructions on how to use the interface
+                Intent recipePage = new Intent( DeezerSongList.this, RecipeSearch.class);
+                CharSequence text2 = getResources().getString(R.string.yxRecipename);
+                Toast.makeText(this,text2, Toast.LENGTH_SHORT).show();
+                startActivity( recipePage);
+                break;
+
+            case R.id.ritaDictionary:
+                // Display instructions on how to use the interface
+                Intent dicPage = new Intent( DeezerSongList.this, SearchRoom.class);
+                CharSequence text3 = getResources().getString(R.string.ziyaodictionarying);
+                Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
+                startActivity( dicPage);
+                break;
+
+            case R.id.ritaSongpage:
+                // Display instructions on how to use the interface
+
+                Intent songPage = new Intent( DeezerSongList.this, DeezerAlbum.class);
+                CharSequence text4 = getResources().getString(R.string.ziyaosongPage);
+                Toast.makeText(this,text4, Toast.LENGTH_SHORT).show();
+                startActivity( songPage);
                 break;
         }
             return true;

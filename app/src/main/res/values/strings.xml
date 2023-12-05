@@ -116,7 +116,10 @@
     <string name="returnHomeQuestion">Do you want to return the home page:</string>
     <string name="title">Deezer Song</string>
     <string name="favButton">Favorite List</string>
-
+    <string name="saveToList">Save to List</string>
+    <string name="songname">Song Name</string>
+    <string name="durationnumber">Duration</string>
+    <string name="albumname">Album Name</string>
 
     <string name="tianjiaosaveButton">savied list</string>
 
