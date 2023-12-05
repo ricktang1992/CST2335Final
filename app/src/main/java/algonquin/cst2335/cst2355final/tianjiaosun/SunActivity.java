@@ -44,6 +44,7 @@ import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.ActivitySunBinding;
 import algonquin.cst2335.cst2355final.databinding.SunRecordBinding;
+import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
 import algonquin.cst2335.cst2355final.rita.DeezerSong;
 import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 import algonquin.cst2335.cst2355final.ziyao.RecipeMain;
@@ -489,7 +490,7 @@ public class SunActivity extends AppCompatActivity {
                 break;
 
             case R.id.sunGotoMusicItem:
-                Intent nextPage3 = new Intent(SunActivity.this, DeezerSong.class);
+                Intent nextPage3 = new Intent(SunActivity.this, DeezerAlbum.class);
                 startActivity(nextPage3);
                 break;
 
