@@ -90,7 +90,7 @@ public class DeezerSongList extends AppCompatActivity {
             }
         });
 
-        binding.saveSongRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         binding.saveSongRecyclerView.setAdapter(savedAdapter = new RecyclerView.Adapter<MySaveRowHolder>() {
             @NonNull
             @Override
@@ -118,7 +118,7 @@ public class DeezerSongList extends AppCompatActivity {
                 return saveSongs.size();
             }
         });
-
+        binding.saveSongRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     /**
