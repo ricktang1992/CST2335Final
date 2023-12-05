@@ -8,14 +8,27 @@
     android:background="@color/white">
 
     <TextView
+        android:id="@+id/fragementViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/title"
+        android:textColor="@color/pink"
+        android:textSize="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/songTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="96dp"
         android:text="Song Title Goes Here"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/fragementViewTitle" />
 
     <TextView
         android:id="@+id/duration"
@@ -23,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Duration goes here"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@+id/songTitle"
         app:layout_constraintTop_toBottomOf="@+id/songTitle" />
 
@@ -32,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Album name goes here"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@+id/duration"
         app:layout_constraintTop_toBottomOf="@+id/duration" />
 
@@ -40,17 +55,18 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="@+id/albumName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/albumName" />
 
     <Button
         android:id="@+id/saveSongButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:text="@string/saveToList"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="SAVE TO LIST"
         app:layout_constraintTop_toBottomOf="@+id/albumCover" />
 
     <androidx.appcompat.widget.Toolbar
@@ -60,5 +76,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/songnameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/songname"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragementViewTitle" />
+
+    <TextView
+        android:id="@+id/durationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/durationnumber"
+        android:textStyle="bold"
+        android:textColor="@color/green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/songnameTextView" />
+
+    <TextView
+        android:id="@+id/ablumnameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/albumname"
+        android:textStyle="bold"
+        android:textColor="@color/green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/durationTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
