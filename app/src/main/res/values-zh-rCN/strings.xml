@@ -102,6 +102,6 @@
     <string name="returnHomeQuestion">你是否想回到主界面:</string>
     <string name="title">歌</string>
     <string name="favButton">收藏夹</string>
+    <string name="tianjiaosaveButton">我的最爱</string>
     <string name="saveToList">加入收藏夹</string>
-
 </resources>

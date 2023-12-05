@@ -50,7 +50,7 @@ public class SunDetailsFragment extends Fragment {
         Date currentDate = Calendar.getInstance().getTime();
 
         // Format the date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd-MMM-yyyy", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd", Locale.getDefault());
         String formattedDate = dateFormat.format(currentDate);
 
         // Format the time
@@ -58,8 +58,8 @@ public class SunDetailsFragment extends Fragment {
         String formattedTime = timeFormat.format(currentDate);
 
         //set the text views:
-        binding.sunDateDetailTitle.setText(formattedDate);
-        binding.sunTimeDetailTitle.setText(formattedTime);
+        binding.sunDateDetailTitle.setText("Date:"+formattedDate);
+        binding.sunTimeDetailTitle.setText("Time:"+formattedTime);
 
         return binding.getRoot();
     }
