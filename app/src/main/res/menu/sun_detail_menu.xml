@@ -21,7 +21,7 @@
     <item
         android:id="@+id/favoriteSun"
         android:icon="@drawable/save"
-        android:title="saved" />
+        android:title="@string/tianjiaosaveButton" />
 
     <item
         android:id="@+id/saveSun"
