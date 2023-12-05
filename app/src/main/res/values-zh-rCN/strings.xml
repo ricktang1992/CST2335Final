@@ -104,4 +104,7 @@
     <string name="favButton">收藏夹</string>
     <string name="tianjiaosaveButton">我的最爱</string>
     <string name="saveToList">加入收藏夹</string>
+    <string name="songname">歌名</string>
+    <string name="durationnumber">时长</string>
+    <string name="albumname">专辑名</string>
 </resources>

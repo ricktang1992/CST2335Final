@@ -138,6 +138,11 @@ public class DeezerSongList extends AppCompatActivity {
         public MySaveRowHolder(@NonNull View itemView) {
             super(itemView);
             songTitleText = itemView.findViewById(R.id.songTitleText);
+            itemView.setOnClickListener(click ->{
+                int position = getAbsoluteAdapterPosition();
+                DeezerSong selected = saveSongs.get(position);
+                saveModel.selectedSong.postValue(selected);//launch a fragment
+            });
 
             binding.favoriteDeleteBtn.setOnClickListener(clk -> {
                 int position = getAbsoluteAdapterPosition();
