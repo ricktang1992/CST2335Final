@@ -23,17 +23,6 @@ public class Sun {
     @ColumnInfo(name="sunset")
     protected String sunset;
 
-    @ColumnInfo(name="solar_noon")
-    protected String solar_noon;
-
-    @ColumnInfo(name="golder_hour")
-    protected String golder_hour;
-
-    @ColumnInfo(name="timezone")
-    protected String timezone;
-
-    @ColumnInfo(name="cityName")
-    protected String cityName;
 
     public Sun(){}
 
@@ -43,10 +32,6 @@ public class Sun {
         this.sunLongitude = sunLongitude;
         this.sunrise = sunrise;
         this.sunset = sunset;
-        this.solar_noon = solar_noon;
-        this.golder_hour = golder_hour;
-        this.timezone = timezone;
-        this.cityName = cityName;
     }
 
     public String getSunLatitude() {
@@ -65,22 +50,6 @@ public class Sun {
         return sunset;
     }
 
-    public String getSolar_noon() {
-        return solar_noon;
-    }
-
-    public String getGolder_hour() {
-        return golder_hour;
-    }
-
-    public String getTimezone() {
-        return timezone;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
     public void setSunrise(String sunrise) {
         this.sunrise = sunrise;
     }
@@ -89,15 +58,4 @@ public class Sun {
         this.sunset = sunset;
     }
 
-    public void setSolar_noon(String solar_noon) {
-        this.solar_noon = solar_noon;
-    }
-
-    public void setGolder_hour(String golder_hour) {
-        this.golder_hour = golder_hour;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
 }

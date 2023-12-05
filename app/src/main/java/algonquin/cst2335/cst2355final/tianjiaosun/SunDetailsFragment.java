@@ -41,25 +41,7 @@ public class SunDetailsFragment extends Fragment {
 
         //set the text views:
         binding.sunSunriseDetail.setText(selected.sunrise);
-//        binding.sunNoonDetail.setText(selected.solar_noon);
-//        binding.sunGoldenDetail.setText(selected.golder_hour);
         binding.sunSunsetDetail.setText(selected.sunset);
-//        binding.sunTimezoneDetail.setText(selected.timezone);
-
-        // Get the current date and time
-        Date currentDate = Calendar.getInstance().getTime();
-
-        // Format the date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd", Locale.getDefault());
-        String formattedDate = dateFormat.format(currentDate);
-
-        // Format the time
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a z", Locale.getDefault());
-        String formattedTime = timeFormat.format(currentDate);
-
-        //set the text views:
-        binding.sunDateDetailTitle.setText("Date:"+formattedDate);
-        binding.sunTimeDetailTitle.setText("Time:"+formattedTime);
 
         return binding.getRoot();
     }

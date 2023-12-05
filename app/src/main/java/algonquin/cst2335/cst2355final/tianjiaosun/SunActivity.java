@@ -252,8 +252,8 @@ public class SunActivity extends AppCompatActivity {
 
     public class MyRowHolder extends RecyclerView.ViewHolder {
 
-        public TextView sunLatitudeView; // maybe not needed?
-        public TextView sunLongitudeView; // maybe not needed?
+        public TextView sunLatitudeView;
+        public TextView sunLongitudeView;
         public TextView sunriseView;
         public TextView sunsetView;
 
