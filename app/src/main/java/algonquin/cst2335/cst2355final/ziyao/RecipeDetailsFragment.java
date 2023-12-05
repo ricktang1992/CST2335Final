@@ -2,6 +2,8 @@ package algonquin.cst2335.cst2355final.ziyao;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,8 +95,10 @@ public class RecipeDetailsFragment extends Fragment {
                 (response) -> {
                     try {
                         String summary=response.getString("summary");
+
+                        Spanned spannedsummary= Html.fromHtml(summary,Html.FROM_HTML_MODE_LEGACY);
                         Log.d("WeatherResponse", "summary: " + summary);
-                        binding.recipeInfoSum.setText(summary);
+                        binding.recipeInfoSum.setText(spannedsummary);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
