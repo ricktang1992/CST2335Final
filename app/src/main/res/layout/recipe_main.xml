@@ -10,11 +10,12 @@
     android:layout_height="match_parent">
 <androidx.appcompat.widget.Toolbar
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    android:id="@+id/myZiyaoToolBar"/>
+    android:id="@+id/myZiyaoToolBar"
+    android:background="@color/my_primary"/>
     <FrameLayout
         android:id="@+id/ziyaofragmentLocation"
         android:layout_width="match_parent"
@@ -27,10 +28,11 @@
 
     <TextView
         android:id="@+id/ziyaosearchText"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
+        android:textAlignment="center"
         android:text="@string/ziyaoSavedRecipes"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"

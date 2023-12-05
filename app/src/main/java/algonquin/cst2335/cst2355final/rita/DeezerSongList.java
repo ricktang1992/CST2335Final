@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.cst2355final.Data.DeezerSongViewModel;
 import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
+import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 import algonquin.cst2335.cst2355final.databinding.SongListBinding;
 import algonquin.cst2335.cst2355final.databinding.SongSavedBinding;
 import algonquin.cst2335.cst2355final.tianjiaosun.SunActivity;
@@ -81,16 +83,17 @@ public class DeezerSongList extends AppCompatActivity {
 
         saveModel.selectedSong.observe(this, (newSongValue) -> {
             if (newSongValue != null) {
-                DeezerSongDetailsFragment dsf = new DeezerSongDetailsFragment(newSongValue);
+                DeezerSongSaveDetailsFragment dsf = new DeezerSongSaveDetailsFragment(newSongValue);
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.addToBackStack("");
                 ft.replace(R.id.saveSongFragmentLocation, dsf);
                 ft.commit();
+
             }
         });
 
-        binding.saveSongRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         binding.saveSongRecyclerView.setAdapter(savedAdapter = new RecyclerView.Adapter<MySaveRowHolder>() {
             @NonNull
             @Override
@@ -101,6 +104,8 @@ public class DeezerSongList extends AppCompatActivity {
                 binding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
                 // 2. call our constructor below
                 return new MySaveRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
 
@@ -118,6 +123,8 @@ public class DeezerSongList extends AppCompatActivity {
                 return saveSongs.size();
             }
         });
+        binding.saveSongRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
     }
 
@@ -138,6 +145,13 @@ public class DeezerSongList extends AppCompatActivity {
         public MySaveRowHolder(@NonNull View itemView) {
             super(itemView);
             songTitleText = itemView.findViewById(R.id.songTitleText);
+            itemView.setOnClickListener(click ->{
+                int position = getAbsoluteAdapterPosition();
+                DeezerSong selected = saveSongs.get(position);
+                saveModel.selectedSong.postValue(selected);//launch a fragment
+
+
+            });
 
             binding.favoriteDeleteBtn.setOnClickListener(clk -> {
                 int position = getAbsoluteAdapterPosition();
