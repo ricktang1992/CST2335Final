@@ -172,19 +172,9 @@ public class SunActivity extends AppCompatActivity {
                                 // Read the values in the "results" in JSON
                                 String sunriseResult = results.getString("sunrise");
                                 String sunsetResult = results.getString("sunset");
-                                String solar_noonResult = results.getString("solar_noon");
-                                String golden_hourResult = results.getString("golden_hour");
-                                String timezoneResult = results.getString("timezone");
-                                String cityNameFromInput;
-
-                                if(cityName != null) {
-                                    cityNameFromInput = cityName;
-                                } else {
-                                    cityNameFromInput = getResources().getString(R.string.sun_no_name_location);
-                                }
 
 
-                                Sun s = new Sun(sunLatitude, sunLongitude, sunriseResult, sunsetResult, solar_noonResult, golden_hourResult, timezoneResult, cityNameFromInput);
+                                Sun s = new Sun(sunLatitude, sunLongitude, sunriseResult, sunsetResult);
                                 sToPass = s; // pass the sun obj to the class level
 
                                 sunAdapter.notifyDataSetChanged();

@@ -27,7 +27,7 @@ public class Sun {
     public Sun(){}
 
     // constructor
-    public Sun(String sunLatitude, String sunLongitude, String sunrise, String sunset, String solar_noon, String golder_hour, String timezone, String cityName) {
+    public Sun(String sunLatitude, String sunLongitude, String sunrise, String sunset) {
         this.sunLatitude = sunLatitude;
         this.sunLongitude = sunLongitude;
         this.sunrise = sunrise;
