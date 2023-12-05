@@ -82,4 +82,24 @@
     <string name="sun_sun_api_status_not_ok">日出日落API状态不正常</string>
     <string name="sun_sun_api_ok">日API结果和状态正常</string>
     <string name="sun_sun_api_not_available">日API现在不可用</string>
+    <string name="songsearch">寻找歌手..</string>
+    <string name="question">请问：</string>
+    <string name="goToHomeToast">跳转至收藏清单...</string>
+    <string name="goToHomeSnack">你回到了主界面.</string>
+    <string name="undo">撤回 </string>
+    <string name="goToSaveList">当前为收藏清单</string>
+    <string name="version">Li Jiang的版本1.0</string>
+    <string name="addFavorites">添加至收藏夹</string>
+    <string name="confirm">是的</string>
+    <string name="reject">不是</string>
+    <string name="addQuestion">是否添加?</string>
+    <string name="addTitle">添加至收藏夹</string>
+    <string name="favoritesAdded"> 已添加至收藏夹</string>
+    <string name="songInFavorties">此歌曲已加入收藏夹</string>
+    <string name="deleteQuestion">你想将此歌曲从收藏夹中移除吗?</string>
+    <string name="deleteTitle">删除</string>
+    <string name="deletedSong">已经删除 </string>
+    <string name="returnHomeQuestion">你是否想回到主界面:</string>
+    <string name="title">歌</string>
+    <string name="favButton">收藏夹</string>
 </resources>

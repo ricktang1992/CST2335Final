@@ -28,6 +28,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import algonquin.cst2335.cst2355final.Data.DeezerSongViewModel;
+import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SongListBinding;
 import algonquin.cst2335.cst2355final.databinding.SongSavedBinding;
@@ -41,6 +42,7 @@ public class DeezerSongList extends AppCompatActivity {
     DeezerSongDAO dsDAO;
     RecyclerView.Adapter savedAdapter; // Initialize an adapter for RecyclerView
     Executor thread = Executors.newSingleThreadExecutor();
+
     /**
      * Initializes the activity when it is created.
      *
@@ -55,13 +57,13 @@ public class DeezerSongList extends AppCompatActivity {
         dsDAO = db.dsDAO();
         saveSongs = saveModel.favoriteSongsArray.getValue();
 
-        if(saveSongs == null){
+        if (saveSongs == null) {
             saveModel.favoriteSongsArray.postValue(saveSongs = new ArrayList<>());
             Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(() ->{
+            thread.execute(() -> {
                 saveSongs.addAll(dsDAO.getAllSongs());
 
-                runOnUiThread(()->{
+                runOnUiThread(() -> {
                     savedAdapter.notifyDataSetChanged();
                     binding.saveSongRecyclerView.setAdapter(savedAdapter);
                 });
@@ -73,8 +75,8 @@ public class DeezerSongList extends AppCompatActivity {
 
         setSupportActionBar(binding.mySaveSongToolbar);
 
-        saveModel.selectedSong.observe(this, (newSongValue)->{
-            if (newSongValue != null){
+        saveModel.selectedSong.observe(this, (newSongValue) -> {
+            if (newSongValue != null) {
                 DeezerSongDetailsFragment dsf = new DeezerSongDetailsFragment(newSongValue);
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -114,6 +116,7 @@ public class DeezerSongList extends AppCompatActivity {
         });
 
     }
+
     /**
      * Custom ViewHolder class for the RecyclerView in the saved song list.
      */
@@ -122,6 +125,7 @@ public class DeezerSongList extends AppCompatActivity {
          * TextView to display the title of a saved song.
          */
         public TextView songTitleText;
+
         /**
          * Constructor for the ViewHolder.
          *
@@ -173,6 +177,7 @@ public class DeezerSongList extends AppCompatActivity {
 
         }
     } //end of onCreat
+
     /**
      * Handles options menu creation.
      *
@@ -182,9 +187,10 @@ public class DeezerSongList extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.song_memu,menu);
+        getMenuInflater().inflate(R.menu.song_memu, menu);
         return true;
     }
+
     /**
      * Handles options menu item selection.
      *
@@ -193,49 +199,47 @@ public class DeezerSongList extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.returnHomeMenu:
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeezerSongList.this);
-
-                builder.setMessage("Do you want to return the home page: ")
-                        .setTitle("Question:")
-                        .setNegativeButton("No", (a, b) -> {
+                builder.setMessage(getString(R.string.goToHomeSnack))
+                        .setTitle(R.string.question)
+                        .setNegativeButton(getString(R.string.reject), (a, b) -> {
                         })
-                        .setPositiveButton("Yes", (a, b) -> {
-
-                            Executors.newSingleThreadExecutor().execute(() -> {
-
-                            });
-
-                            Snackbar.make(binding.mySaveSongToolbar, "You return to home page", Snackbar.LENGTH_LONG)
-                                    .setAction("Undo", clk -> {
-                                        Executors.newSingleThreadExecutor().execute(()->{
-
-                                        });
-
+                        .setPositiveButton(getString(R.string.confirm), (a, b) -> {
+                            Intent SongSavedList = new Intent(DeezerSongList.this, DeezerAlbum.class);
+                            CharSequence text3 = getString(R.string.goToHomeSnack);
+                            Toast.makeText(this, text3, Toast.LENGTH_SHORT).show();
+                            startActivity(SongSavedList);
+                            Snackbar.make(binding.mySaveSongToolbar, getString(R.string.goToHomeSnack), Snackbar.LENGTH_LONG)
+                                    .setAction(getString(R.string.undo), clk -> {
+                                        Intent mainPage = new Intent(DeezerSongList.this, MainActivity.class);
+                                        CharSequence text1 = getResources().getString(R.string.ziyaoyxSunpage);
+                                        Toast.makeText(this, text1, Toast.LENGTH_SHORT).show();
+                                        startActivity(mainPage);
                                     })
                                     .show();
                         }).create().show();
                 break;
 
-            case R.id.showSaveList:
-                Intent SongSavedList = new Intent( DeezerSongList.this, DeezerSongList.class );
-                CharSequence text3 = "Going to Saved term page...";
-                Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
-                startActivity( SongSavedList);
-                break;
             case R.id.about:
-                Toast.makeText(this,"Version 1.0, created by Li Jiang", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.help:
-                Toast.makeText(this,"help!",Toast.LENGTH_LONG).show();
+                // Display instructions on how to use the interface
+                AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
+                instructionsDialog.setMessage(R.string.yxAboutUse)
+                        .setTitle(R.string.yxAboutTitle)
+                        .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {
+                        })
+                        .create().show();
+
+
                 break;
         }
-        return true;
+            return true;
     }
-
 }

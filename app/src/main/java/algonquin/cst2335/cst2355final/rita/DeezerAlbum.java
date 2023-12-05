@@ -61,8 +61,12 @@ import algonquin.cst2335.cst2355final.R;
 import algonquin.cst2335.cst2355final.databinding.SongDetailBinding;
 import algonquin.cst2335.cst2355final.databinding.SongListBinding;
 import algonquin.cst2335.cst2355final.databinding.SongMainBinding;
+import algonquin.cst2335.cst2355final.tianjiaosun.SunActivity;
 import algonquin.cst2335.cst2355final.yuxing.SearchDetailsFragment;
 import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
+import algonquin.cst2335.cst2355final.ziyao.RecipeMain;
+import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
+
 /**
  * DeezerAlbum is an activity that allows users to search for songs on Deezer, view details, and navigate to a saved song list.
  */
@@ -76,7 +80,6 @@ public class DeezerAlbum extends AppCompatActivity {
     protected DeezerSongViewModel songModel; // Initialize a ViewModel
     protected RequestQueue queue = null; //create a Volley object that will connect to a server
 
-    Intent SongSavedList;
 
     /**
      * Called when the activity is created.
@@ -198,6 +201,13 @@ public class DeezerAlbum extends AppCompatActivity {
             } });
 
         binding.songrecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        binding.goToFavList.setOnClickListener(click ->{
+            Intent SongSavedList = new Intent( DeezerAlbum.this, DeezerSongList.class );
+            CharSequence showText = getString(R.string.goToSaveList);
+            Toast.makeText(this,showText, Toast.LENGTH_SHORT).show();
+            startActivity( SongSavedList);
+        });
     }
 
 
@@ -239,21 +249,21 @@ public class DeezerAlbum extends AppCompatActivity {
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeezerAlbum.this);
-                builder.setMessage(getString(R.string.reject))
+                builder.setMessage(getString(R.string.goToHomeSnack))
                         .setTitle(R.string.question)
                         .setNegativeButton(getString(R.string.reject), (a, b) -> {
                         })
                         .setPositiveButton(getString(R.string.confirm), (a, b) -> {
-                            SongSavedList = new Intent( DeezerAlbum.this, MainActivity.class );
+                            Intent  SongSavedList = new Intent( DeezerAlbum.this, MainActivity.class );
                             CharSequence text3 = getString(R.string.goToHomeSnack);
                             Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
                             startActivity( SongSavedList);
                             Snackbar.make(binding.mysongToolbar, getString(R.string.goToHomeSnack), Snackbar.LENGTH_LONG)
                                     .setAction(getString(R.string.undo), clk -> {
-                                        Executors.newSingleThreadExecutor().execute(()->{
-
-                                        });
-
+                                        Intent mainPage = new Intent( DeezerAlbum.this, MainActivity.class);
+                                        CharSequence text1 = getResources().getString(R.string.ziyaoyxSunpage);
+                                        Toast.makeText(this,text1, Toast.LENGTH_SHORT).show();
+                                        startActivity( mainPage);
                                     })
                                     .show();
                         }).create().show();
@@ -261,9 +271,9 @@ public class DeezerAlbum extends AppCompatActivity {
 
 
             case R.id.showSaveList:
-                SongSavedList = new Intent( DeezerAlbum.this, DeezerSongList.class );
-                CharSequence text3 = getString(R.string.goToSaveList);
-                Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
+                Intent SongSavedList = new Intent( DeezerAlbum.this, DeezerSongList.class );
+                CharSequence showText = getString(R.string.goToSaveList);
+                Toast.makeText(this,showText, Toast.LENGTH_SHORT).show();
                 startActivity( SongSavedList);
                 break;
 
@@ -272,7 +282,45 @@ public class DeezerAlbum extends AppCompatActivity {
                 break;
 
             case R.id.help:
-                Toast.makeText(this,"help!",Toast.LENGTH_LONG).show();
+                // Display instructions on how to use the interface
+                AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
+                instructionsDialog.setMessage(R.string.yxAboutUse)
+                        .setTitle(R.string.yxAboutTitle)
+                        .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
+                        .create().show();
+                break;
+
+            case R.id.ritaSunpage:
+                // Display instructions on how to use the interface
+                Intent sunPage = new Intent( DeezerAlbum.this, SunActivity.class);
+                CharSequence text1 = getResources().getString(R.string.ziyaoyxSunpage);
+                Toast.makeText(this,text1, Toast.LENGTH_SHORT).show();
+                startActivity( sunPage);
+                break;
+
+            case R.id.ritaRecipePage:
+                // Display instructions on how to use the interface
+                Intent recipePage = new Intent( DeezerAlbum.this, RecipeSearch.class);
+                CharSequence text2 = getResources().getString(R.string.yxRecipename);
+                Toast.makeText(this,text2, Toast.LENGTH_SHORT).show();
+                startActivity( recipePage);
+                break;
+
+            case R.id.ritaDictionary:
+                // Display instructions on how to use the interface
+                Intent dicPage = new Intent( DeezerAlbum.this, SearchRoom.class);
+                CharSequence text3 = getResources().getString(R.string.ziyaodictionarying);
+                Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
+                startActivity( dicPage);
+                break;
+
+            case R.id.ritaSongpage:
+                // Display instructions on how to use the interface
+
+                Intent songPage = new Intent( DeezerAlbum.this, DeezerAlbum.class);
+                CharSequence text4 = getResources().getString(R.string.ziyaosongPage);
+                Toast.makeText(this,text4, Toast.LENGTH_SHORT).show();
+                startActivity( songPage);
                 break;
         }
         return true;

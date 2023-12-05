@@ -17,8 +17,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".rita.DeezerAlbum"
-            >
+            tools:context=".rita.DeezerAlbum">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/mysongToolbar"
                 android:layout_width="wrap_content"
@@ -27,33 +27,47 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <Button
+                android:id="@+id/searchsongButton"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/ziyaoSearch"
+                android:textColor="@color/my_secondary"
+                app:layout_constraintEnd_toStartOf="@+id/searchSongText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mysongToolbar" />
+
+            <EditText
+                android:id="@+id/searchSongText"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
+                android:hint="@string/ziyaoSearchTextgoeshere"
+                android:inputType="text"
+                app:layout_constraintEnd_toStartOf="@+id/goToFavList"
+                app:layout_constraintTop_toBottomOf="@+id/mysongToolbar" />
+
+            <Button
+                android:id="@+id/goToFavList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:shadowColor="@color/grey"
+                android:text="@string/favButton"
+                android:textColor="@color/my_secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mysongToolbar" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/songrecyclerView"
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mysongToolbar"
-                />
-
-
-            <EditText
-                android:id="@+id/searchSongText"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:hint="Search here...."
-                android:inputType="text"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/searchsongButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchsongButton"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/searchSongText" />
+                />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

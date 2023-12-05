@@ -23,4 +23,30 @@
         android:title="Help"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/ritaSunpage"
+        android:icon="@drawable/sunrise"
+        android:title="@string/yxSunname"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/ritaRecipePage"
+        android:icon="@drawable/recipe"
+        android:title="@string/yxRecipename"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/ritaDictionary"
+        android:icon="@drawable/dictionary"
+        android:title="@string/ziyaodictionary"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/ritaSongpage"
+        android:icon="@drawable/song"
+        android:title="@string/yxSongname"
+        app:showAsAction="always" />
+
+
+
 </menu>
