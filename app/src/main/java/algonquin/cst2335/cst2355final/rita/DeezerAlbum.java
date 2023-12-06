@@ -112,6 +112,9 @@ public class DeezerAlbum extends AppCompatActivity {
             CharSequence text = getString(R.string.songsearch);
             Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
 
+            songs.clear();
+            myAdapter.notifyDataSetChanged();
+
             String stringURL = null;
             try {
                 String artistName = URLEncoder.encode(binding.searchSongText.getText().toString(), "UTF-8");
