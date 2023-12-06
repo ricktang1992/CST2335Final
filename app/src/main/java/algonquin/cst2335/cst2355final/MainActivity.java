@@ -52,8 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         recipeButton.setOnClickListener(clk->
         {
-            CharSequence text = "Going to Recipe Project...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            String goingToRecipe = getResources().getString(R.string.goingTorecipeApp);
+            CharSequence goingToRecipe1 = goingToRecipe;
+            Toast.makeText(this,goingToRecipe1, Toast.LENGTH_SHORT).show();
             startActivity( nextPage);
 
         } );
@@ -61,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         songButton.setOnClickListener(clk->
         {
-            CharSequence text = "Going to Song Project...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            String goingToSongApp = getResources().getString(R.string.goingTodeezerApp);
+            CharSequence goingToSongApp1 = goingToSongApp;
+            Toast.makeText(this,goingToSongApp1, Toast.LENGTH_SHORT).show();
             startActivity( songPage);
 
         } );
@@ -72,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
         Button dictionaryButton=variableBinding.dictionary;
         dictionaryButton.setOnClickListener(clk->
         {
-            CharSequence text = "Going to Dictionary Project...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            String goingToDictionaryApp = getResources().getString(R.string.goingTodictionaryApp);
+            CharSequence goingToDictionaryApp1 = goingToDictionaryApp;
+            Toast.makeText(this,goingToDictionaryApp1, Toast.LENGTH_SHORT).show();
             startActivity( dictionaryPage);
 
         } );
@@ -82,8 +85,9 @@ public class MainActivity extends AppCompatActivity {
         Button sunrise=variableBinding.sunrise;
         sunrise.setOnClickListener(clk->
         {
-            CharSequence text = "Going to Sun Project...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            String goingToSunApp = getResources().getString(R.string.goingTosunApp);
+            CharSequence goingToSunApp1 = goingToSunApp;
+            Toast.makeText(this,goingToSunApp1, Toast.LENGTH_SHORT).show();
             startActivity( sunPage);
 
         } );
@@ -95,46 +99,37 @@ public class MainActivity extends AppCompatActivity {
         {
             case R.id.recipeMenu:
 
-                CharSequence text = "Going to Recipe Project...";
-                Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+                String goingToRecipe = getResources().getString(R.string.goingTorecipeApp);
+                CharSequence goingToRecipe1 = goingToRecipe;
+                Toast.makeText(this,goingToRecipe1, Toast.LENGTH_SHORT).show();
                 startActivity( nextPage);
-                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-                //asking if the user wants to delete this message.
                 break;
             case R.id.sunMenu:
 
-                CharSequence text3 = "Going to Sun Project...";
-                Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
+                String goingToSunApp = getResources().getString(R.string.goingTosunApp);
+                CharSequence goingToSunApp1 = goingToSunApp;
+                Toast.makeText(this,goingToSunApp1, Toast.LENGTH_SHORT).show();
                 startActivity( sunPage);
-                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-                //asking if the user wants to delete this message.
                 break;
             case R.id.deezer:
 
-                CharSequence text4 = "Going to Music Project...";
-                Toast.makeText(this,text4, Toast.LENGTH_SHORT).show();
+                String goingToSongApp = getResources().getString(R.string.goingTodeezerApp);
+                CharSequence goingToSongApp1 = goingToSongApp;
+                Toast.makeText(this,goingToSongApp1, Toast.LENGTH_SHORT).show();
                 startActivity( songPage);
-                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-                //asking if the user wants to delete this message.
                 break;
             case R.id.dictionary:
 
-                CharSequence textdictionary = "Going to Dictionary Project...";
-                Toast.makeText(this,textdictionary, Toast.LENGTH_SHORT).show();
+                String goingToDictionaryApp = getResources().getString(R.string.goingTodictionaryApp);
+                CharSequence goingToDictionaryApp1 = goingToDictionaryApp;
+                Toast.makeText(this,goingToDictionaryApp1, Toast.LENGTH_SHORT).show();
                 startActivity( dictionaryPage);
-                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-                //asking if the user wants to delete this message.
                 break;
 
             case R.id.about:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-                builder2.setMessage("This application is the final project of our class CST2355.\n" +
-                                "Team Member: \n" +
-                                "Ziyao\n" +
-                                "Rita\n" +
-                                "Tianjiao\n" +
-                                "XingXing").setTitle("About: ")
-                        .setNegativeButton("OK", (dialog, cl) -> {
+                builder2.setMessage(getResources().getString(R.string.aboutDetail)).setTitle(getResources().getString(R.string.ziyaoAbout)+":")
+                        .setNegativeButton(getResources().getString(R.string.ziyaoOK), (dialog, cl) -> {
                         }).create().show();
                 break;
         }

@@ -108,6 +108,11 @@
     <string name="dictionaryApp">词典API</string>
     <string name="deezerApp">Deezer 歌曲</string>
     <string name="sumAppTitle">安卓大作业</string>
+    <string name="goingTosunApp">去往日出与日落</string>
+    <string name="goingTorecipeApp">去往菜谱程序</string>
+    <string name="goingTodictionaryApp">去往字典API程序</string>
+    <string name="goingTodeezerApp">去往Deezer歌曲</string>
+    <string name="aboutDetail">此应用是我们班CST2355的期末项目。\n团队成员：\nZiyao\nRita\nTianjiao\nXingXing</string>
     <string name="yxHomename">去主页</string>
     <string name="yxSave">保存</string>
     <string name="yxDelete">删除</string>
