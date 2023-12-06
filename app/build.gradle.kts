@@ -8,7 +8,7 @@ android {
     buildFeatures{
         viewBinding=true
     }
-    defaultConfig {//
+    defaultConfig {
         applicationId = "algonquin.cst2335.cst2355final"
         minSdk = 27
         targetSdk = 34
