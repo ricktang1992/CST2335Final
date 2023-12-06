@@ -46,7 +46,13 @@ import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 import algonquin.cst2335.cst2355final.ziyao.RecipeMain;
 import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
 
-
+/**
+ * Activity class for managing the Sun functionality in the application.
+ * This class handles user interactions, network requests to fetch sun data, database operations, and updating the user interface.
+ * It also manages transitions between different fragments and activities.
+ *
+ * Author: Tianjiao Feng
+ */
 public class SunActivity extends AppCompatActivity {
 
     // Binding class for accessing views in the layout.
@@ -70,9 +76,13 @@ public class SunActivity extends AppCompatActivity {
 
     protected RequestQueue queue = null; // Volley request queue for network requests.
 
-    // Called when the activity is created.
 
-    // SharedPreferences for persistent storage.
+    /**
+     * Called when the activity is first created.
+     * Initializes the activity, sets up the user interface, database connections, and event listeners.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down, this Bundle contains the most recent data, otherwise it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -237,14 +247,22 @@ public class SunActivity extends AppCompatActivity {
         binding.sunRecycleView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-
+    /**
+     * ViewHolder class for managing views in the RecyclerView.
+     * This class holds references to the individual views within a list item and handles click events for each row.
+     */
     public class MyRowHolder extends RecyclerView.ViewHolder {
 
         public TextView sunLatitudeView;
         public TextView sunLongitudeView;
         public TextView sunriseView;
         public TextView sunsetView;
-
+        /**
+         * Constructor for the ViewHolder.
+         * Initializes the views and sets up click listeners.
+         *
+         * @param theRootConstraintLayout The root view of the list item layout.
+         */
         public MyRowHolder(@NonNull View theRootConstraintLayout){
             super(theRootConstraintLayout);
 
@@ -420,7 +438,11 @@ public class SunActivity extends AppCompatActivity {
         return true;
     }
 
-    // Method to show an AlertDialog for invalid input
+    /**
+     * Displays a warning dialog if the user input is invalid.
+     *
+     * @param message The message to be displayed in the warning dialog.
+     */
     protected void showInvalidInputWarning(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.invalid_input_title));
