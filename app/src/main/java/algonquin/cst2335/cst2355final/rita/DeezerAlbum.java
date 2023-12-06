@@ -136,6 +136,7 @@ public class DeezerAlbum extends AppCompatActivity {
                                                         JSONObject song = tracks.getJSONObject(k);
                                                         String title = song.getString("title");
                                                         int duration = song.getInt("duration");
+
                                                         JSONObject album = song.getJSONObject("album");
                                                         String name = album.getString("title");
                                                         String cover = album.getString("cover");
@@ -143,7 +144,9 @@ public class DeezerAlbum extends AppCompatActivity {
                                                         // Create DeezerSong object and add to the list
                                                         DeezerSong deezer = new DeezerSong(title, name, duration, cover);
                                                         songs.add(deezer);
-                                                        myAdapter.notifyDataSetChanged();
+//                                                        myAdapter.notifyDataSetChanged();
+                                                        myAdapter.notifyItemInserted(songs.size()-1);
+                                                        binding.searchSongText.setText("");
                                                     }
                                                 } catch (JSONException e) {
                                                     throw new RuntimeException(e);
@@ -160,7 +163,7 @@ public class DeezerAlbum extends AppCompatActivity {
                             // Handle error
                         });
                 queue.add(apiRequest);
-                binding.searchSongText.setText("");
+
 
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
