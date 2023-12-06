@@ -223,6 +223,7 @@ public class DeezerAlbum extends AppCompatActivity {
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
             songText = itemView.findViewById(R.id.songTitleText);
+            //Set onClick listen to get the gragment
             itemView.setOnClickListener(click ->{
                 int position = getAbsoluteAdapterPosition();
                 DeezerSong selected = songs.get(position);
