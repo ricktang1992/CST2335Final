@@ -49,7 +49,7 @@
     <string name="helpziyao">Help</string>
     <!--The following strings belong to Sun Activity-->
     <string name="sun_toolbar_title">Sunrise &amp; Sunset</string>
-    <string name="sun_fav"> My Saved Sun </string>
+    <string name="sun_fav">Sunrise &amp; Sunset \n My Saved Sun </string>
     <string name="sun_lat_hint">Latitude: </string>
     <string name="sun_lng_hint">Longitude: </string>
     <string name="sun_lat_text">Latitude</string>
@@ -66,15 +66,15 @@
     <string name="sun_about_detail">Sunrise &amp; Sunset, Version 1.2, created by Tianjiao</string>
     <string name="sun_to_main">Back to main page</string>
     <string name="sun_undo">Undo</string>
+    <string name="helptianjiao">help</string>
     <string name="sun_help1">How to use:</string>
     <string name="sun_help2"><![CDATA[
-        Enter both Latitude and Longitude, LOOKUP\n\n
-         My Saved Records\n\n
-         Save this Record\n\n
-         ️Delete this Record\n\n
-         Goto Recipe\n\n
-         Goto Deezer\n\n
-         Goto Word\n
+1. This is a program that provides a query for sunrise and sunset by longitude and latitude information.\n
+2. Input the longitude and dimension information you need to query in the search box (the valid range of latitude and longitude is from -180 degrees to +180 degrees longitude, and the latitude is about -85 degrees to +85 degrees.)\n
+3. Click the "Lookup" button to view the sunrise and sunset times at the query address.\n
+4. Click the "save" icon in the menu to save the query address to the saved list.\n
+5. Click "Delete" icon to delete the saved list.
+
     ]]></string>
     <string name="sun_save_no_record_warning">No sun record selected</string>
     <string name="sun_save_dupe_record_warning">Sun record already in your Favourite</string>
@@ -83,10 +83,9 @@
     <string name="sunset_title"> Sunset</string>
     <string name="invalid_input_title">Invalid Input</string>
     <string name="sun_refresh">Details</string>
-    <string name="sun_found_nothing">Found nothing, Array length = 0</string>
-    <string name="sun_sun_api_status_not_ok">Sunrise sunset API status not OK</string>
-    <string name="sun_sun_api_ok">Sun API Results and Status OK</string>
-    <string name="sun_sun_api_not_available">The Sun API is not available now</string>
+    <string name="sun_sun_api_not_available">Sun api not available</string>
+    <string name="sun_sun_api_status_not_ok">api status is not ok</string>
+    <string name="sun_found_nothing">sun_found_nothing</string>
 
     <string name="songsearch">Searching for the artist...</string>
     <string name="question">Question:</string>
@@ -125,30 +124,6 @@
 
 
     <!-- feng.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

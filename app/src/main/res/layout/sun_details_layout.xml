@@ -55,11 +55,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Latitude: "
+        android:text="@string/sun_lat_hint"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="@+id/sun_lng_title"
-        app:layout_constraintTop_toBottomOf="@+id/sun_lng_title" />
+        app:layout_constraintStart_toStartOf="@+id/sun_sunset_title"
+        app:layout_constraintTop_toBottomOf="@+id/sun_sunset_title" />
 
     <TextView
         android:id="@+id/sun_lat_detail"
@@ -77,20 +77,18 @@
         android:id="@+id/sun_lng_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
-        android:text="Longitude:"
+        android:text="@string/sun_lng_hint"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sun_sunset_title" />
+        app:layout_constraintStart_toStartOf="@+id/sun_lat_title"
+        app:layout_constraintTop_toBottomOf="@+id/sun_lat_title" />
 
     <TextView
         android:id="@+id/sun_lng_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="-179.999999"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/sun_lng_title"

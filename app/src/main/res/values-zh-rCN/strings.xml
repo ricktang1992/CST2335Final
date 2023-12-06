@@ -43,7 +43,7 @@
     <string name="ziyaodictionarying">去往字典项目...</string>
     <string name="helpRecipeMenu">1.搜索菜谱：\n在搜索栏中输入您要查找的菜谱的名称或成分。\n点击搜索按钮即可获取匹配菜谱的列表。\n2.查看菜谱详细信息：\n单击菜谱 从列表中查看详细信息。\n探索食材、烹饪说明等。\n3.保存您的最爱：找到您喜欢的食谱？ \\n在详细视图中单击“保存食谱”。\n可以从“保存的食谱”菜单访问您保存的食谱。</string>
     <string name="helpziyao">帮助</string>
-    <string name="sun_fav">我喜欢的</string>
+    <string name="sun_fav">日出&amp;日落\n我喜欢的</string>
     <string name="sun_toolbar_title">日出与日落</string>
     <string name="sun_lat_hint">纬度：</string>
     <string name="sun_lng_hint">经度：</string>
@@ -61,27 +61,23 @@
     <string name="sun_about_detail">日出与日落，版本1.2，天蛟创作</string>
     <string name="sun_to_main">返回主页</string>
     <string name="sun_undo">撤销</string>
-    <string name="sun_help1">如何使用SunSeeker：</string>
-    <string name="sun_help2"><![CDATA[ 输入城市名，检查纬度和经度\n\n 输入纬度和经度，查找\n\n 我的已保存记录\n\n 保存此记录\n\n 🗑删除此记录\n\n 前往RecipeRover\n\n 前往DeezerDiscover\n\n 前往WordWiz\n ]]></string>
+    <string name="sun_help1">如何使用：</string>
+    <string name="sun_sun_api_not_available">日出API不可用</string>
+    <string name="sun_sun_api_status_not_ok">API状态不正常</string>
+    <string name="sun_found_nothing">未发现日出信息</string>
+    <string name="helptianjiao">帮助</string>
+    <string name="sun_help2">这是一个通过经纬度信息提供日出和日落查询的程序。\n
+在搜索框中输入您需要查询的经度和纬度信息（经度的有效范围是-180度到+180度，纬度大约是-85度到+85度）。\n
+点击“查询”按钮查看查询地址的日出和日落时间。\n
+点击菜单中的“保存”图标，将查询地址保存到已保存列表中。\n
+点击“删除”图标删除已保存的列表。\n</string>
     <string name="sun_save_no_record_warning">未选择日记录</string>
     <string name="sun_save_dupe_record_warning">日记录已在您的收藏中</string>
     <string name="sun_save_success">日记录已成功保存</string>
     <string name="sunrise_title">日出</string>
     <string name="sunset_title">日落</string>
-    <string name="solar_noon_title">☀正午</string>
-    <string name="golden_hour_title">黄金时刻</string>
-    <string name="timezone_title">时区</string>
     <string name="invalid_input_title">无效输入</string>
-    <string name="valid_input_lat">有效纬度范围：-90到+90</string>
-    <string name="valid_input_lng">有效经度范围：-180到+180</string>
     <string name="sun_refresh">刷新/详情</string>
-    <string name="sun_find_city"><![CDATA[查找城市的纬度和经度]]></string>
-    <string name="sun_check">检查</string>
-    <string name="sun_no_name_location">XYZ位置</string>
-    <string name="sun_found_nothing">未找到任何内容，数组长度= 0</string>
-    <string name="sun_sun_api_status_not_ok">日出日落API状态不正常</string>
-    <string name="sun_sun_api_ok">日API结果和状态正常</string>
-    <string name="sun_sun_api_not_available">日API现在不可用</string>
     <string name="songsearch">寻找歌手..</string>
     <string name="question">请问：</string>
     <string name="goToHomeToast">跳转至收藏清单...</string>

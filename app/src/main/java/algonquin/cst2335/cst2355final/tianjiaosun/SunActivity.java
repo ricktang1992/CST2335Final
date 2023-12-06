@@ -44,6 +44,7 @@ import algonquin.cst2335.cst2355final.databinding.SunRecordBinding;
 import algonquin.cst2335.cst2355final.rita.DeezerAlbum;
 import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 import algonquin.cst2335.cst2355final.ziyao.RecipeMain;
+import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
 
 
 public class SunActivity extends AppCompatActivity {
@@ -159,15 +160,13 @@ public class SunActivity extends AppCompatActivity {
                             String status = response.getString("status");
 
                             if (results.length() == 0) {
-                                Log.e("Sun API Status not OK", "The Sun API results.length() == 0");
+
                                 Toast.makeText(this, getString(R.string.sun_found_nothing), Toast.LENGTH_SHORT).show();
                             } else if (!"OK".equals(status)) {
                                 // Status is not OK
-                                Log.e("Sun API Status not OK", "The Sun API status is not OK");
                                 Toast.makeText(this, getString(R.string.sun_sun_api_status_not_ok), Toast.LENGTH_SHORT).show();
                             } else {
 
-                                Log.d("Sun API ResultsStatusOK", "Sun API Results and Status OK");
 
                                 // Read the values in the "results" in JSON
                                 String sunriseResult = results.getString("sunrise");
@@ -197,7 +196,6 @@ public class SunActivity extends AppCompatActivity {
                         }
                     },
                     (error) -> {
-                        Log.e("JsonObjectRequest Error", "JsonObjectRequest Error");
                     });
             queue.add(request);
 
@@ -390,7 +388,7 @@ public class SunActivity extends AppCompatActivity {
                 break;
 
             case R.id.sunGotoRecipeItem:
-                Intent nextPage2 = new Intent(SunActivity.this, RecipeMain.class);
+                Intent nextPage2 = new Intent(SunActivity.this, RecipeSearch.class);
                 startActivity(nextPage2);
                 break;
 

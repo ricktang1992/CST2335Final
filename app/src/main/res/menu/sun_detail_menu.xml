@@ -44,7 +44,7 @@
 
     <item
         android:id="@+id/sunHelp"
-        android:title="help"
+        android:title="@string/helptianjiao"
         app:showAsAction="never" />
 
     <item
