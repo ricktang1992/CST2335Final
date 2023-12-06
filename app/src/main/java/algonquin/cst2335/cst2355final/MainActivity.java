@@ -19,29 +19,57 @@ import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
 
 //test
+/**
+ * This is the main activity of the CST2355 Final Project.
+ * It serves as the entry point to various features of the application.
+ */
 public class MainActivity extends AppCompatActivity {
+    /**
+     * Binding object for the main activity layout.
+     */
     private ActivityMainBinding variableBinding;
-    private static String TAG = "MainActivity";
+
+    /**
+     * Intent for navigating to the recipe page.
+     */
     Intent nextPage;
-
+    /**
+     * Intent for navigating to the song page.
+     */
     Intent songPage;
-
+    /**
+     * Intent for navigating to the dictionary page.
+     */
     Intent dictionaryPage;
+    /**
+     * Intent for navigating to the sun page.
+     */
     Intent sunPage;
 
-
+    /**
+     * Initializes the options menu.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return true for the menu to be displayed; false for it to be hidden.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.my_menu, menu);
         return true;
     }
+    /**
+     * Initializes the activity and sets up the layout.
+     *
+     * @param savedInstanceState A Bundle containing the saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         variableBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(variableBinding.getRoot());
         setSupportActionBar( variableBinding.myToolbar);
+        // Initialize Intent objects for different activities
         nextPage = new Intent( MainActivity.this, RecipeSearch.class);
         songPage = new Intent( MainActivity.this, DeezerAlbum.class);
         sunPage = new Intent( MainActivity.this, SunActivity.class);
@@ -49,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button recipeButton=variableBinding.recipe;
         Button songButton = variableBinding.deezer;
-
+// Set up click listeners for buttons
         recipeButton.setOnClickListener(clk->
         {
             String goingToRecipe = getResources().getString(R.string.goingTorecipeApp);
@@ -59,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         } );
 
-
+// Set up click listeners for buttons
         songButton.setOnClickListener(clk->
         {
             String goingToSongApp = getResources().getString(R.string.goingTodeezerApp);
@@ -72,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         dictionaryPage = new Intent( MainActivity.this, SearchRoom.class);
         Button dictionaryButton=variableBinding.dictionary;
+        // Set up click listeners for buttons
         dictionaryButton.setOnClickListener(clk->
         {
             String goingToDictionaryApp = getResources().getString(R.string.goingTodictionaryApp);
@@ -83,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
         sunPage = new Intent( MainActivity.this, SunActivity.class);
         Button sunrise=variableBinding.sunrise;
+        // Set up click listeners for buttons
         sunrise.setOnClickListener(clk->
         {
             String goingToSunApp = getResources().getString(R.string.goingTosunApp);
@@ -93,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
         } );
 
     }
+    /**
+     * Handles options menu item selection.
+     *
+     * @param item The menu item that was selected.
+     * @return true to indicate that the event has been consumed.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch( item.getItemId() )
