@@ -129,4 +129,6 @@
         \n8. 点击返回可返回上一级页面。
         \n8. 如需更多帮助，您可以联系支持人员。</string>
     <string name="returnStep">返回</string>
+    <string name="returnLast">你想返回搜索界面吗？</string>
+
 </resources>

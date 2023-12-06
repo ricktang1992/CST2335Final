@@ -214,7 +214,7 @@ public class DeezerSongList extends AppCompatActivity {
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeezerSongList.this);
-                builder.setMessage(getString(R.string.goToHomeSnack))
+                builder.setMessage(getString(R.string.returnStep))
                         .setTitle(R.string.question)
                         .setNegativeButton(getString(R.string.reject), (a, b) -> {
                         })
@@ -223,10 +223,10 @@ public class DeezerSongList extends AppCompatActivity {
                             CharSequence text3 = getString(R.string.goToHomeSnack);
                             Toast.makeText(this, text3, Toast.LENGTH_SHORT).show();
                             startActivity(SongSavedList);
-                            Snackbar.make(binding.mySaveSongToolbar, getString(R.string.goToHomeSnack), Snackbar.LENGTH_LONG)
+                            Snackbar.make(binding.mySaveSongToolbar, getString(R.string.returnLast), Snackbar.LENGTH_LONG)
                                     .setAction(getString(R.string.undo), clk -> {
                                         Intent mainPage = new Intent(DeezerSongList.this, MainActivity.class);
-                                        CharSequence text1 = getResources().getString(R.string.ziyaoyxSunpage);
+                                        CharSequence text1 = getResources().getString(R.string.returnStep);
                                         Toast.makeText(this, text1, Toast.LENGTH_SHORT).show();
                                         startActivity(mainPage);
                                     })

@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/favButton"
-                android:textColor="@color/pink"
+                android:textColor="@color/my_primary"
                 android:textSize="45dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
