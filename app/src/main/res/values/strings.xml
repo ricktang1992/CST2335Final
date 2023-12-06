@@ -10,6 +10,11 @@
     <string name="yxSongname">Go to Song Page</string>
     <string name="yxRecipename">Go to Recipe Page</string>
     <string name="yxSunname">Go to Sun Page</string>
+    <string name="yxHomename">Go to Home Page</string>
+    <string name="yxSave">Save this item</string>
+    <string name="yxDelete">Delete this item</string>
+    <string name="yxTooltitle">Dictionary</string>
+
     <!-- Rick.-->
     <string name="ziyaorecipename">Recipe info goes here</string>
     <string name="ziyaorecipeInfoSum">Recipe Info Sum</string>
@@ -113,6 +118,19 @@
     <string name="albumname">Album Name</string>
 
     <string name="tianjiaosaveButton">Saved list</string>
+
+
+
+    <string name="sunApp">Sunrise ad Sunset</string>
+    <string name="recipeApp">Recipe Search</string>
+    <string name="dictionaryApp">Dictionary API</string>
+    <string name="deezerApp">Deezer Song</string>
+    <string name="sumAppTitle">CST2355 Final Project</string>
+    <string name="goingTosunApp">Going to Sunrise ad Sunset</string>
+    <string name="goingTorecipeApp">Going to Recipe Search</string>
+    <string name="goingTodictionaryApp">Going to Dictionary API</string>
+    <string name="goingTodeezerApp">Going to Deezer Song</string>
+    <string name="aboutDetail">This application is the final project of our class CST2355.\nTeam Member:\nZiyao\nRita\nTianjiao\nXingXing</string>
 
 
 

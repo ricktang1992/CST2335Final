@@ -12,7 +12,8 @@
         android:background="@color/my_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/yxTooltitle"/>
 
     <EditText
         android:id="@+id/yuxingeditTextSearch"
