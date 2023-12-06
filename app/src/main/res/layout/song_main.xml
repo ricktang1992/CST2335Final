@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".rita.DeezerAlbum"
-    android:background="@drawable/songback"
     >
 
     <FrameLayout
@@ -18,7 +17,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".rita.DeezerAlbum">
+            tools:context=".rita.DeezerAlbum"
+            android:background="@drawable/songbg2"
+            >
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/mysongToolbar"
@@ -46,22 +47,22 @@
                 android:id="@+id/searchsongButton"
                 android:layout_width="107dp"
                 android:layout_height="55dp"
-                android:layout_marginEnd="16dp"
                 android:text="@string/ziyaoSearch"
                 android:textColor="@color/my_secondary"
-                app:layout_constraintEnd_toStartOf="@+id/searchSongText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/songmainViewTitle" />
 
             <EditText
                 android:id="@+id/searchSongText"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="1dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="12dp"
                 android:hint="@string/ziyaoSearchTextgoeshere"
                 android:inputType="text"
                 app:layout_constraintEnd_toStartOf="@+id/goToFavList"
+                app:layout_constraintStart_toEndOf="@+id/searchsongButton"
                 app:layout_constraintTop_toBottomOf="@+id/songmainViewTitle" />
 
             <Button
