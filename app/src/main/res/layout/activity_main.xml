@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="CST2355 Final Project"
+        android:text="@string/sumAppTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Sunrise ad Sunset"
+        android:text="@string/sunApp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Recipe Search"
+        android:text="@string/recipeApp"
         app:layout_constraintEnd_toEndOf="@+id/sunrise"
         app:layout_constraintStart_toStartOf="@+id/sunrise"
         app:layout_constraintTop_toBottomOf="@+id/sunrise" />
