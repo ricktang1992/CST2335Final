@@ -147,9 +147,7 @@ public class DeezerAlbum extends AppCompatActivity {
                                                         // Create DeezerSong object and add to the list
                                                         DeezerSong deezer = new DeezerSong(title, name, duration, cover);
                                                         songs.add(deezer);
-//                                                        myAdapter.notifyDataSetChanged();
-                                                        myAdapter.notifyItemInserted(songs.size()-1);
-                                                        binding.searchSongText.setText("");
+                                                        myAdapter.notifyDataSetChanged();
                                                     }
                                                 } catch (JSONException e) {
                                                     throw new RuntimeException(e);
@@ -166,7 +164,7 @@ public class DeezerAlbum extends AppCompatActivity {
                             // Handle error
                         });
                 queue.add(apiRequest);
-
+                binding.searchSongText.setText("");
 
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
