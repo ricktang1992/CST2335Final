@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Dictionary API"
+        android:text="@string/yxTooltitle"
         app:layout_constraintEnd_toEndOf="@+id/recipe"
         app:layout_constraintStart_toStartOf="@+id/recipe"
         app:layout_constraintTop_toBottomOf="@+id/recipe" />

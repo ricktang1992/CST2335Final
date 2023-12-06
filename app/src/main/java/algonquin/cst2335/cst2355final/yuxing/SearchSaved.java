@@ -30,6 +30,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import algonquin.cst2335.cst2355final.Data.SearchViewModel;
+import algonquin.cst2335.cst2355final.MainActivity;
 import algonquin.cst2335.cst2355final.R;
 
 import algonquin.cst2335.cst2355final.databinding.SearchMessageBinding;
@@ -108,6 +109,11 @@ public class SearchSaved extends AppCompatActivity {
      * Intent to navigate to the sun page.
      */
     Intent sunPage;
+
+    /**
+     * Intent to navigate to the sun page.
+     */
+    Intent homePage;
 
     /**
      * The RecyclerView Adapter for managing the display of saved search terms.
@@ -363,6 +369,14 @@ public class SearchSaved extends AppCompatActivity {
 
 
                 startActivity( dictionarySavedPage);
+
+                break;
+            case R.id.yxHomepage:
+                // Display instructions on how to use the interface
+                homePage = new Intent( SearchSaved.this, MainActivity.class);
+                CharSequence text4 = "Going to Saved home page...";
+                Toast.makeText(this,text4, Toast.LENGTH_SHORT).show();
+                startActivity( homePage);
 
                 break;
         }

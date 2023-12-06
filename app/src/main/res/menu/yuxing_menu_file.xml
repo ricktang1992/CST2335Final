@@ -9,12 +9,12 @@
     <item
         android:id="@+id/delete"
         android:icon="@drawable/delete"
-        android:title="Delete this item"
+        android:title="@string/yxDelete"
         app:showAsAction="always" />
     <item
         android:id="@+id/saveTheTERM"
         android:icon="@drawable/save"
-        android:title="Save this item"
+        android:title="@string/yxSave"
         app:showAsAction="always" />
     <item
         android:id="@+id/yxrecipepage"
@@ -29,6 +29,10 @@
     <item
         android:id="@+id/yxsavedTerm"
         android:title="@string/yxSaveBtnName" />
+    <item
+        android:id="@+id/yxHomepage"
+        android:title="@string/yxHomename"
+        app:showAsAction="never" />
     <item
         android:id="@+id/yxSunpage"
         android:icon="@drawable/sunrise"

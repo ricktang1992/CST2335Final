@@ -10,6 +10,11 @@
     <string name="yxSongname">Go to Song Page</string>
     <string name="yxRecipename">Go to Recipe Page</string>
     <string name="yxSunname">Go to Sun Page</string>
+    <string name="yxHomename">Go to Home Page</string>
+    <string name="yxSave">Save this item</string>
+    <string name="yxDelete">Delete this item</string>
+    <string name="yxTooltitle">Dictionary</string>
+
     <!-- Rick.-->
     <string name="ziyaorecipename">Recipe info goes here</string>
     <string name="ziyaorecipeInfoSum">Recipe Info Sum</string>
