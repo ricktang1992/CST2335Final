@@ -284,7 +284,7 @@ public class DeezerAlbum extends AppCompatActivity {
             case R.id.help:
                 // Display instructions on how to use the interface
                 AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
-                instructionsDialog.setMessage(R.string.yxAboutUse)
+                instructionsDialog.setMessage(R.string.SongAboutuse)
                         .setTitle(R.string.yxAboutTitle)
                         .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
                         .create().show();

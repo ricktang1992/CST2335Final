@@ -8,15 +8,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2335.cst2355final.Data.DeezerSongViewModel;
 import algonquin.cst2335.cst2355final.R;
 
 import algonquin.cst2335.cst2355final.databinding.SongSaveDetailBinding;
@@ -48,10 +52,6 @@ public class DeezerSongSaveDetailsFragment extends Fragment {
      */
     String songName;
     /**
-     * The name of the Album
-     */
-    String songAlbum;
-    /**
      * Default constructor for DeezerSongDetailsFragment.
      */
     public DeezerSongSaveDetailsFragment() {
@@ -79,6 +79,8 @@ public class DeezerSongSaveDetailsFragment extends Fragment {
         DeezerSongDatabase db = Room.databaseBuilder(requireActivity(), DeezerSongDatabase.class, "Song-favorite").build();
         dsDAO = db.dsDAO();
 
+
+
         if (selected != null) {
 
             SongSaveDetailBinding binding = SongSaveDetailBinding.inflate(inflater);
@@ -91,11 +93,9 @@ public class DeezerSongSaveDetailsFragment extends Fragment {
             queue = Volley.newRequestQueue(requireContext());
             String coverURL = selected.cover;
             queue = Volley.newRequestQueue(requireContext());
-
-            // Use Picasso to load and display the image
             Picasso.get().load(coverURL).into(binding.albumCover);
 
-            return binding.getRoot();
+        return binding.getRoot();
         } else {
             // Handle the case where selected is null, return an appropriate view or null
             return super.onCreateView(inflater, container, savedInstanceState);

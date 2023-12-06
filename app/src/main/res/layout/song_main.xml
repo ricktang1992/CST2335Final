@@ -36,7 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title"
-                android:textColor="@color/pink"
+                android:textStyle="bold"
+                android:textColor="@color/white"
                 android:textSize="45dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +49,7 @@
                 android:layout_width="107dp"
                 android:layout_height="55dp"
                 android:text="@string/ziyaoSearch"
-                android:textColor="@color/my_secondary"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/songmainViewTitle" />
 
@@ -59,6 +60,7 @@
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="12dp"
+                android:textColor="@color/white"
                 android:hint="@string/ziyaoSearchTextgoeshere"
                 android:inputType="text"
                 app:layout_constraintEnd_toStartOf="@+id/goToFavList"
@@ -70,9 +72,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:shadowColor="@color/grey"
                 android:text="@string/favButton"
-                android:textColor="@color/my_secondary"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/songmainViewTitle" />
 
@@ -80,6 +81,7 @@
                 android:id="@+id/songrecyclerView"
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/my_primary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchsongButton"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -4,23 +4,23 @@
 
     <item
         android:id="@+id/returnHomeMenu"
-        android:title="Home Page"
+        android:title="@string/returnStep"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/showSaveList"
         android:icon="@drawable/songlist"
-        android:title="Show saved list"
+        android:title="@string/favButton"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/about"
-        android:title="about"
+        android:title="@string/sun_about_title"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/help"
-        android:title="Help"
+        android:title="@string/helptianjiao"
         app:showAsAction="never" />
 
     <item

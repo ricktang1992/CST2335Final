@@ -145,31 +145,24 @@ public class DeezerSongList extends AppCompatActivity {
         public MySaveRowHolder(@NonNull View itemView) {
             super(itemView);
             songTitleText = itemView.findViewById(R.id.songTitleText);
-            itemView.setOnClickListener(click ->{
+
+            itemView.setOnClickListener(click -> {
                 int position = getAbsoluteAdapterPosition();
-                DeezerSong selected = saveSongs.get(position);
-                saveModel.selectedSong.postValue(selected);//launch a fragment
+                DeezerSong selectedSong = saveSongs.get(position);
 
-
-            });
-
-            binding.favoriteDeleteBtn.setOnClickListener(clk -> {
-                int position = getAbsoluteAdapterPosition();
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeezerSongList.this);
-                String deleteQuestion = getString(R.string.deleteQuestion);
-                String deleteTitle = getString(R.string.deleteTitle);
-                String confirm = getString(R.string.confirm);
-                builder.setMessage(deleteQuestion)
-                        .setTitle(deleteTitle).
-                        setNegativeButton(getString(R.string.reject), (dialog, cl) -> {
-
+                String songChoice= getString(R.string.inqureSongAction);
+                String songalertTitle = getString(R.string.sun_del_title);
+                String deleteQ = getString(R.string.deleteTitle);
+                String showDetail = getString(R.string.sun_refresh);
+                builder.setMessage(songChoice)
+                        .setTitle(songalertTitle).
+                        setNegativeButton(showDetail, (dialog, cl) -> {
+                            saveModel.selectedSong.postValue(selectedSong);//launch a fragment
                         })
-                        .setPositiveButton(confirm, (dialog, cl) -> {
-                            DeezerSong song = saveSongs.get(position);
-
+                        .setPositiveButton(deleteQ, (dialog, cl) -> {
                             thread.execute(() -> {
-                                dsDAO.deleteSong(song);
-                                runOnUiThread(() -> binding.saveSongRecyclerView.setAdapter(savedAdapter));
+                                dsDAO.deleteSong(selectedSong);
                             });
                             saveSongs.remove(position);
                             savedAdapter.notifyItemRemoved(position);
@@ -179,14 +172,13 @@ public class DeezerSongList extends AppCompatActivity {
 
                             Snackbar.make(songTitleText, deletedSong + " " + songTitleText.getText().toString(),
                                             Snackbar.LENGTH_LONG)
-                                    .setAction(undo, click -> {
-                                        saveSongs.add(position, song);
-                                        savedAdapter.notifyItemInserted(position);
-                                        thread.execute(() ->
+                                    .setAction(getString(R.string.undo), c -> {
+                                        Executors.newSingleThreadExecutor().execute(() ->
                                         {
-                                            dsDAO.insertSong(song);
-                                            runOnUiThread(() -> binding.saveSongRecyclerView.setAdapter(savedAdapter));
+                                            dsDAO.insertSong(selectedSong);
                                         });
+                                        saveSongs.add(position, selectedSong);
+                                        savedAdapter.notifyItemInserted(position);
                                     })
                                     .show();
                         })
