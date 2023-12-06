@@ -164,6 +164,11 @@ public class SearchRoom extends AppCompatActivity {
     Intent sunPage;
 
     /**
+     * Intent for navigating to the home project.
+     */
+    Intent homePage;
+
+    /**
      * Initializes the options menu.
      *
      * @param menu The menu to be initialized.
@@ -481,6 +486,14 @@ public class SearchRoom extends AppCompatActivity {
                 CharSequence text3 = "Going to Saved term page...";
                 Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
                 startActivity( dictionarySavedPage);
+
+                break;
+            case R.id.yxHomepage:
+                // Display instructions on how to use the interface
+                homePage = new Intent( SearchRoom.this, MainActivity.class);
+                CharSequence text4 = "Going to Saved home page...";
+                Toast.makeText(this,text4, Toast.LENGTH_SHORT).show();
+                startActivity( homePage);
 
                 break;
         }

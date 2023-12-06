@@ -103,4 +103,8 @@
     <string name="songname">歌名</string>
     <string name="durationnumber">时长</string>
     <string name="albumname">专辑名</string>
+    <string name="yxHomename">去主页</string>
+    <string name="yxSave">保存</string>
+    <string name="yxDelete">删除</string>
+    <string name="yxTooltitle">字典</string>
 </resources>
