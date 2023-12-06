@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".rita.DeezerSongDetailsFragment"
-    android:background="@color/white">
+    android:background="@color/my_primary">
 
     <TextView
         android:id="@+id/fragementViewTitle"
@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
+        android:textColor="@color/white"
         android:text="Song Title Goes Here"
         android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/songnameTextView"
@@ -35,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:textColor="@color/white"
         android:text="Duration goes here"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@+id/songTitle"
@@ -45,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:textColor="@color/white"
         android:text="Album name goes here"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@+id/duration"
@@ -59,15 +62,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/albumName" />
 
-
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mysongToolbar2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/my_primary"
+        />
 
     <TextView
         android:id="@+id/songnameTextView"
@@ -76,7 +79,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:text="@string/songname"
-        android:textColor="@color/green"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragementViewTitle" />
@@ -88,7 +91,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="@string/durationnumber"
-        android:textColor="@color/green"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/songnameTextView" />
@@ -100,7 +103,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="@string/albumname"
-        android:textColor="@color/green"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/durationTextView" />

@@ -19,29 +19,57 @@ import algonquin.cst2335.cst2355final.yuxing.SearchRoom;
 import algonquin.cst2335.cst2355final.ziyao.RecipeSearch;
 
 //test
+/**
+ * This is the main activity of the CST2355 Final Project.
+ * It serves as the entry point to various features of the application.
+ */
 public class MainActivity extends AppCompatActivity {
+    /**
+     * Binding object for the main activity layout.
+     */
     private ActivityMainBinding variableBinding;
-    private static String TAG = "MainActivity";
+
+    /**
+     * Intent for navigating to the recipe page.
+     */
     Intent nextPage;
-
+    /**
+     * Intent for navigating to the song page.
+     */
     Intent songPage;
-
+    /**
+     * Intent for navigating to the dictionary page.
+     */
     Intent dictionaryPage;
+    /**
+     * Intent for navigating to the sun page.
+     */
     Intent sunPage;
 
-
+    /**
+     * Initializes the options menu.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return true for the menu to be displayed; false for it to be hidden.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.my_menu, menu);
         return true;
     }
+    /**
+     * Initializes the activity and sets up the layout.
+     *
+     * @param savedInstanceState A Bundle containing the saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         variableBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(variableBinding.getRoot());
         setSupportActionBar( variableBinding.myToolbar);
+        // Initialize Intent objects for different activities
         nextPage = new Intent( MainActivity.this, RecipeSearch.class);
         songPage = new Intent( MainActivity.this, DeezerAlbum.class);
         sunPage = new Intent( MainActivity.this, SunActivity.class);
@@ -49,20 +77,22 @@ public class MainActivity extends AppCompatActivity {
 
         Button recipeButton=variableBinding.recipe;
         Button songButton = variableBinding.deezer;
-
+// Set up click listeners for buttons
         recipeButton.setOnClickListener(clk->
         {
-            CharSequence text = "Going to Recipe Project...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            String goingToRecipe = getResources().getString(R.string.goingTorecipeApp);
+            CharSequence goingToRecipe1 = goingToRecipe;
+            Toast.makeText(this,goingToRecipe1, Toast.LENGTH_SHORT).show();
             startActivity( nextPage);
 
         } );
 
-
+// Set up click listeners for buttons
         songButton.setOnClickListener(clk->
         {
-            CharSequence text = "Going to Song Project...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            String goingToSongApp = getResources().getString(R.string.goingTodeezerApp);
+            CharSequence goingToSongApp1 = goingToSongApp;
+            Toast.makeText(this,goingToSongApp1, Toast.LENGTH_SHORT).show();
             startActivity( songPage);
 
         } );
@@ -70,55 +100,72 @@ public class MainActivity extends AppCompatActivity {
 
         dictionaryPage = new Intent( MainActivity.this, SearchRoom.class);
         Button dictionaryButton=variableBinding.dictionary;
+        // Set up click listeners for buttons
         dictionaryButton.setOnClickListener(clk->
         {
-            CharSequence text = "Going to Dictionary Project...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            String goingToDictionaryApp = getResources().getString(R.string.goingTodictionaryApp);
+            CharSequence goingToDictionaryApp1 = goingToDictionaryApp;
+            Toast.makeText(this,goingToDictionaryApp1, Toast.LENGTH_SHORT).show();
             startActivity( dictionaryPage);
 
         } );
 
         sunPage = new Intent( MainActivity.this, SunActivity.class);
         Button sunrise=variableBinding.sunrise;
+        // Set up click listeners for buttons
         sunrise.setOnClickListener(clk->
         {
-            CharSequence text = "Going to Sun Project...";
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+            String goingToSunApp = getResources().getString(R.string.goingTosunApp);
+            CharSequence goingToSunApp1 = goingToSunApp;
+            Toast.makeText(this,goingToSunApp1, Toast.LENGTH_SHORT).show();
             startActivity( sunPage);
 
         } );
 
     }
+    /**
+     * Handles options menu item selection.
+     *
+     * @param item The menu item that was selected.
+     * @return true to indicate that the event has been consumed.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch( item.getItemId() )
         {
             case R.id.recipeMenu:
 
-                CharSequence text = "Going to Recipe Project...";
-                Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
+                String goingToRecipe = getResources().getString(R.string.goingTorecipeApp);
+                CharSequence goingToRecipe1 = goingToRecipe;
+                Toast.makeText(this,goingToRecipe1, Toast.LENGTH_SHORT).show();
                 startActivity( nextPage);
-                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-                //asking if the user wants to delete this message.
+                break;
+            case R.id.sunMenu:
+
+                String goingToSunApp = getResources().getString(R.string.goingTosunApp);
+                CharSequence goingToSunApp1 = goingToSunApp;
+                Toast.makeText(this,goingToSunApp1, Toast.LENGTH_SHORT).show();
+                startActivity( sunPage);
+                break;
+            case R.id.deezer:
+
+                String goingToSongApp = getResources().getString(R.string.goingTodeezerApp);
+                CharSequence goingToSongApp1 = goingToSongApp;
+                Toast.makeText(this,goingToSongApp1, Toast.LENGTH_SHORT).show();
+                startActivity( songPage);
                 break;
             case R.id.dictionary:
 
-                CharSequence textdictionary = "Going to Dictionary Project...";
-                Toast.makeText(this,textdictionary, Toast.LENGTH_SHORT).show();
+                String goingToDictionaryApp = getResources().getString(R.string.goingTodictionaryApp);
+                CharSequence goingToDictionaryApp1 = goingToDictionaryApp;
+                Toast.makeText(this,goingToDictionaryApp1, Toast.LENGTH_SHORT).show();
                 startActivity( dictionaryPage);
-                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
-                //asking if the user wants to delete this message.
                 break;
 
             case R.id.about:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-                builder2.setMessage("This application is the final project of our class CST2355.\n" +
-                                "Team Member: \n" +
-                                "Ziyao\n" +
-                                "Rita\n" +
-                                "Tianjiao\n" +
-                                "XingXing").setTitle("About: ")
-                        .setNegativeButton("OK", (dialog, cl) -> {
+                builder2.setMessage(getResources().getString(R.string.aboutDetail)).setTitle(getResources().getString(R.string.ziyaoAbout)+":")
+                        .setNegativeButton(getResources().getString(R.string.ziyaoOK), (dialog, cl) -> {
                         }).create().show();
                 break;
         }

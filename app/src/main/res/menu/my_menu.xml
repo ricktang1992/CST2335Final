@@ -5,22 +5,22 @@
     <!-- Text color. -->
     <item
         android:id="@+id/sunMenu"
-        android:title="sunMenu Application"
+        android:title="@string/sunApp"
         app:showAsAction="never" />
     <item
         android:id="@+id/recipeMenu"
-        android:title="Recipe Application"
+        android:title="@string/recipeApp"
         app:showAsAction="never" />
     <item
         android:id="@+id/dictionaryMenu"
-        android:title="dictionaryMenu Application"
+        android:title="@string/dictionaryApp"
         app:showAsAction="never" />
     <item
         android:id="@+id/deezer"
-        android:title="Deezer Application"
+        android:title="@string/deezerApp"
         app:showAsAction="never" />
     <item
         android:id="@+id/about"
-        android:title="About"
+        android:title="@string/ziyaoAbout"
         app:showAsAction="never" />
 </menu>

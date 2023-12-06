@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/mainbg"
+    >
 
     <!-- Text color. -->
     <androidx.appcompat.widget.Toolbar
@@ -13,13 +15,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/myToolbar"/>
+        android:id="@+id/myToolbar"
+        android:background="@color/my_primary"
+        />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="CST2355 Final Project"
+        android:textSize="30dp"
+        android:textColor="@color/my_primary"
+        android:text="@string/sumAppTitle"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Sunrise ad Sunset"
+        android:text="@string/sunApp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -39,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Recipe Search"
+        android:text="@string/recipeApp"
         app:layout_constraintEnd_toEndOf="@+id/sunrise"
         app:layout_constraintStart_toStartOf="@+id/sunrise"
         app:layout_constraintTop_toBottomOf="@+id/sunrise" />
@@ -49,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Dictionary API"
+        android:text="@string/yxTooltitle"
         app:layout_constraintEnd_toEndOf="@+id/recipe"
         app:layout_constraintStart_toStartOf="@+id/recipe"
         app:layout_constraintTop_toBottomOf="@+id/recipe" />

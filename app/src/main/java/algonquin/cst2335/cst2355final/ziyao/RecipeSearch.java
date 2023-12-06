@@ -160,6 +160,7 @@ public class RecipeSearch extends AppCompatActivity {
         binding = RecipeSearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar( binding.myZiyaoToolBar);
+        getSupportActionBar().setTitle(getResources().getString(R.string.recipeApp));
         recipeModel = new ViewModelProvider(this).get(RecipeViewModel.class);
         RecipeDatabase db = Room.databaseBuilder(getApplicationContext(), RecipeDatabase.class, "database-name").build();
         mDAO = db.cmDAO();

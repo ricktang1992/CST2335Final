@@ -112,11 +112,15 @@ public class DeezerAlbum extends AppCompatActivity {
             CharSequence text = getString(R.string.songsearch);
             Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
 
+            songs.clear();
+            myAdapter.notifyDataSetChanged();
+
             String stringURL = null;
             try {
+                // URL encoding to handle special characters
                 String artistName = URLEncoder.encode(binding.searchSongText.getText().toString(), "UTF-8");
                 stringURL = "https://api.deezer.com/search/artist/?q=" + artistName;
-
+                // Volley request for artist search
                 JsonObjectRequest apiRequest = new  JsonObjectRequest(Request.Method.GET, stringURL,null,
                         (response) -> {
                             try {
@@ -136,6 +140,7 @@ public class DeezerAlbum extends AppCompatActivity {
                                                         JSONObject song = tracks.getJSONObject(k);
                                                         String title = song.getString("title");
                                                         int duration = song.getInt("duration");
+
                                                         JSONObject album = song.getJSONObject("album");
                                                         String name = album.getString("title");
                                                         String cover = album.getString("cover");
@@ -178,8 +183,17 @@ public class DeezerAlbum extends AppCompatActivity {
             ft.replace(R.id.songfragmentLocation, songFragment);
             ft.commit();
         });
-
+        /**
+         * Sets up the RecyclerView and its adapter, as well as handles a click event for navigating to the saved song list.
+         */
         binding.songrecyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+            /**
+             * Called when a new ViewHolder is needed.
+             *
+             * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position.
+             * @param viewType The view type of the new View.
+             * @return A new ViewHolder that holds a View with the given view type.
+             */
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -187,21 +201,30 @@ public class DeezerAlbum extends AppCompatActivity {
                         SongListBinding.inflate(getLayoutInflater(), parent, false);
                 return new MyRowHolder(binding.getRoot());
             }
-
+            /**
+             * Called by RecyclerView to display the data at the specified position.
+             *
+             * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position in the data set.
+             * @param position The position of the item within the adapter's data set.
+             */
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 DeezerSong obj = songs.get(position);
                 holder.songText.setText(obj.getTitle());
             }
-
+            /**
+             * Returns the total number of rows to be drawn in the RecyclerView.
+             *
+             * @return The total number of rows in the data set held by the adapter.
+             */
             //return the number of rows to draw
             @Override
             public int getItemCount() {
                 return songs.size();
             } });
-
+        // Set the layout manager for the RecyclerView
         binding.songrecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        // Handle a click event on the "Go to Favorite List" button
         binding.goToFavList.setOnClickListener(click ->{
             Intent SongSavedList = new Intent( DeezerAlbum.this, DeezerSongList.class );
             CharSequence showText = getString(R.string.goToSaveList);
@@ -210,13 +233,23 @@ public class DeezerAlbum extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * ViewHolder class for a row in the RecyclerView.
+     */
     class MyRowHolder extends RecyclerView.ViewHolder {
+        /**
+         * TextView to display the title of the song.
+         */
         public TextView songText;
-
+        /**
+         * Constructor for MyRowHolder.
+         *
+         * @param itemView The view for a single row in the RecyclerView.
+         */
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
             songText = itemView.findViewById(R.id.songTitleText);
+            //Set onClick listen to get the gragment
             itemView.setOnClickListener(click ->{
                 int position = getAbsoluteAdapterPosition();
                 DeezerSong selected = songs.get(position);
@@ -268,28 +301,27 @@ public class DeezerAlbum extends AppCompatActivity {
                                     .show();
                         }).create().show();
                 break;
-
-
+            //go to the favorite list
             case R.id.showSaveList:
                 Intent SongSavedList = new Intent( DeezerAlbum.this, DeezerSongList.class );
                 CharSequence showText = getString(R.string.goToSaveList);
                 Toast.makeText(this,showText, Toast.LENGTH_SHORT).show();
                 startActivity( SongSavedList);
                 break;
-
+            //show the version info
             case R.id.about:
                 Toast.makeText(this,getString(R.string.version), Toast.LENGTH_LONG).show();
                 break;
-
+            //show the information of the application
             case R.id.help:
                 // Display instructions on how to use the interface
                 AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
-                instructionsDialog.setMessage(R.string.yxAboutUse)
+                instructionsDialog.setMessage(R.string.SongAboutuse)
                         .setTitle(R.string.yxAboutTitle)
                         .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
                         .create().show();
                 break;
-
+            //go to sun page
             case R.id.ritaSunpage:
                 // Display instructions on how to use the interface
                 Intent sunPage = new Intent( DeezerAlbum.this, SunActivity.class);
@@ -297,7 +329,7 @@ public class DeezerAlbum extends AppCompatActivity {
                 Toast.makeText(this,text1, Toast.LENGTH_SHORT).show();
                 startActivity( sunPage);
                 break;
-
+            //go to recipe page
             case R.id.ritaRecipePage:
                 // Display instructions on how to use the interface
                 Intent recipePage = new Intent( DeezerAlbum.this, RecipeSearch.class);
@@ -305,7 +337,7 @@ public class DeezerAlbum extends AppCompatActivity {
                 Toast.makeText(this,text2, Toast.LENGTH_SHORT).show();
                 startActivity( recipePage);
                 break;
-
+            //go to dictionary page
             case R.id.ritaDictionary:
                 // Display instructions on how to use the interface
                 Intent dicPage = new Intent( DeezerAlbum.this, SearchRoom.class);
@@ -313,7 +345,7 @@ public class DeezerAlbum extends AppCompatActivity {
                 Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
                 startActivity( dicPage);
                 break;
-
+            //go to song page
             case R.id.ritaSongpage:
                 // Display instructions on how to use the interface
 

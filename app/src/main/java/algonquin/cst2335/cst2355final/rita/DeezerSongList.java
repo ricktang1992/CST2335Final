@@ -145,31 +145,24 @@ public class DeezerSongList extends AppCompatActivity {
         public MySaveRowHolder(@NonNull View itemView) {
             super(itemView);
             songTitleText = itemView.findViewById(R.id.songTitleText);
-            itemView.setOnClickListener(click ->{
+
+            itemView.setOnClickListener(click -> {
                 int position = getAbsoluteAdapterPosition();
-                DeezerSong selected = saveSongs.get(position);
-                saveModel.selectedSong.postValue(selected);//launch a fragment
+                DeezerSong selectedSong = saveSongs.get(position);
 
-
-            });
-
-            binding.favoriteDeleteBtn.setOnClickListener(clk -> {
-                int position = getAbsoluteAdapterPosition();
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeezerSongList.this);
-                String deleteQuestion = getString(R.string.deleteQuestion);
-                String deleteTitle = getString(R.string.deleteTitle);
-                String confirm = getString(R.string.confirm);
-                builder.setMessage(deleteQuestion)
-                        .setTitle(deleteTitle).
-                        setNegativeButton(getString(R.string.reject), (dialog, cl) -> {
-
+                String songChoice= getString(R.string.inqureSongAction);
+                String songalertTitle = getString(R.string.sun_del_title);
+                String deleteQ = getString(R.string.deleteTitle);
+                String showDetail = getString(R.string.sun_refresh);
+                builder.setMessage(songChoice)
+                        .setTitle(songalertTitle).
+                        setNegativeButton(showDetail, (dialog, cl) -> {
+                            saveModel.selectedSong.postValue(selectedSong);//launch a fragment
                         })
-                        .setPositiveButton(confirm, (dialog, cl) -> {
-                            DeezerSong song = saveSongs.get(position);
-
+                        .setPositiveButton(deleteQ, (dialog, cl) -> {
                             thread.execute(() -> {
-                                dsDAO.deleteSong(song);
-                                runOnUiThread(() -> binding.saveSongRecyclerView.setAdapter(savedAdapter));
+                                dsDAO.deleteSong(selectedSong);
                             });
                             saveSongs.remove(position);
                             savedAdapter.notifyItemRemoved(position);
@@ -179,14 +172,13 @@ public class DeezerSongList extends AppCompatActivity {
 
                             Snackbar.make(songTitleText, deletedSong + " " + songTitleText.getText().toString(),
                                             Snackbar.LENGTH_LONG)
-                                    .setAction(undo, click -> {
-                                        saveSongs.add(position, song);
-                                        savedAdapter.notifyItemInserted(position);
-                                        thread.execute(() ->
+                                    .setAction(getString(R.string.undo), c -> {
+                                        Executors.newSingleThreadExecutor().execute(() ->
                                         {
-                                            dsDAO.insertSong(song);
-                                            runOnUiThread(() -> binding.saveSongRecyclerView.setAdapter(savedAdapter));
+                                            dsDAO.insertSong(selectedSong);
                                         });
+                                        saveSongs.add(position, selectedSong);
+                                        savedAdapter.notifyItemInserted(position);
                                     })
                                     .show();
                         })
@@ -222,7 +214,7 @@ public class DeezerSongList extends AppCompatActivity {
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeezerSongList.this);
-                builder.setMessage(getString(R.string.goToHomeSnack))
+                builder.setMessage(getString(R.string.returnStep))
                         .setTitle(R.string.question)
                         .setNegativeButton(getString(R.string.reject), (a, b) -> {
                         })
@@ -231,10 +223,10 @@ public class DeezerSongList extends AppCompatActivity {
                             CharSequence text3 = getString(R.string.goToHomeSnack);
                             Toast.makeText(this, text3, Toast.LENGTH_SHORT).show();
                             startActivity(SongSavedList);
-                            Snackbar.make(binding.mySaveSongToolbar, getString(R.string.goToHomeSnack), Snackbar.LENGTH_LONG)
+                            Snackbar.make(binding.mySaveSongToolbar, getString(R.string.returnLast), Snackbar.LENGTH_LONG)
                                     .setAction(getString(R.string.undo), clk -> {
                                         Intent mainPage = new Intent(DeezerSongList.this, MainActivity.class);
-                                        CharSequence text1 = getResources().getString(R.string.ziyaoyxSunpage);
+                                        CharSequence text1 = getResources().getString(R.string.returnStep);
                                         Toast.makeText(this, text1, Toast.LENGTH_SHORT).show();
                                         startActivity(mainPage);
                                     })

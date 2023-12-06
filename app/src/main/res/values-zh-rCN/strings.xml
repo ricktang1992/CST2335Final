@@ -103,4 +103,32 @@
     <string name="songname">歌名</string>
     <string name="durationnumber">时长</string>
     <string name="albumname">专辑名</string>
+    <string name="sunApp">日出与日落</string>
+    <string name="recipeApp">搜索菜谱</string>
+    <string name="dictionaryApp">词典API</string>
+    <string name="deezerApp">Deezer 歌曲</string>
+    <string name="sumAppTitle">安卓大作业</string>
+    <string name="goingTosunApp">去往日出与日落</string>
+    <string name="goingTorecipeApp">去往菜谱程序</string>
+    <string name="goingTodictionaryApp">去往字典API程序</string>
+    <string name="goingTodeezerApp">去往Deezer歌曲</string>
+    <string name="aboutDetail">此应用是我们班CST2355的期末项目。\n团队成员：\nZiyao\nRita\nTianjiao\nXingXing</string>
+    <string name="yxHomename">去主页</string>
+    <string name="yxSave">保存</string>
+    <string name="yxDelete">删除</string>
+    <string name="yxTooltitle">字典</string>
+    <string name="inqureSongAction">你想打开还是删除这首歌？</string>
+    <string name="SongAboutuse">界面使用说明：
+        \n1. 在提供的编辑栏中输入搜索词。
+        \n2. 单击“搜索”按钮从歌曲应用检索定义。
+        \n3. 单击”收藏夹“按钮访问收藏夹列表。
+        \n4. 单击搜索结果可在单独的片段中查看详细信息。
+        \n5. 单击“保存”图标将术语添加到已保存的列表中。
+        \n6. 点击收藏夹列表歌曲，选择删除选项将歌曲从收藏夹种移除
+        \n7. 最上方的工具栏可用于链接日出，食谱，词典及歌曲等应用
+        \n8. 点击返回可返回上一级页面。
+        \n8. 如需更多帮助，您可以联系支持人员。</string>
+    <string name="returnStep">返回</string>
+    <string name="returnLast">你想返回搜索界面吗？</string>
+
 </resources>

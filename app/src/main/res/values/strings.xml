@@ -10,6 +10,11 @@
     <string name="yxSongname">Go to Song Page</string>
     <string name="yxRecipename">Go to Recipe Page</string>
     <string name="yxSunname">Go to Sun Page</string>
+    <string name="yxHomename">Go to Home Page</string>
+    <string name="yxSave">Save this item</string>
+    <string name="yxDelete">Delete this item</string>
+    <string name="yxTooltitle">Dictionary</string>
+
     <!-- Rick.-->
     <string name="ziyaorecipename">Recipe info goes here</string>
     <string name="ziyaorecipeInfoSum">Recipe Info Sum</string>
@@ -111,12 +116,34 @@
     <string name="songname">Song Name</string>
     <string name="durationnumber">Duration</string>
     <string name="albumname">Album Name</string>
-
+    <string name="returnStep">Return</string>
     <string name="tianjiaosaveButton">Saved list</string>
+    <string name="inqureSongAction">Do you want see the song details or delete this song?</string>
 
 
+    <string name="sunApp">Sunrise ad Sunset</string>
+    <string name="recipeApp">Recipe Search</string>
+    <string name="dictionaryApp">Dictionary API</string>
+    <string name="deezerApp">Deezer Song</string>
+    <string name="sumAppTitle">CST2355 Final Project</string>
+    <string name="goingTosunApp">Going to Sunrise ad Sunset</string>
+    <string name="goingTorecipeApp">Going to Recipe Search</string>
+    <string name="goingTodictionaryApp">Going to Dictionary API</string>
+    <string name="goingTodeezerApp">Going to Deezer Song</string>
+    <string name="aboutDetail">This application is the final project of our class CST2355.\nTeam Member:\nZiyao\nRita\nTianjiao\nXingXing</string>
+    <string name="SongAboutuse">Instructions on how to use the interface:
+        \n1. Enter a search term in the middle of the provided EditText.
+        \n2. Click the Search button to retrieve data from the Deezer Song API.
+        \n3. Click the Favorite List button to access the favorite list which song you saved before.
+        \n4. Click on a song to see detailed information in a separate fragment.
+        \n5. Click the Save to list button to add a song to the favorite list in the fragment.
+        \n6. To delete a term, select it and choose the Delete choice from the favorite list.
+        \n7. The toolbar provide access to Sun page, Receipe page, Dictionary page and Song page.
+        \n8. Each page click the return will back to the previous page.
+        \n9. For more help, you can contact support.</string>
 
 
+<string name="returnLast">Do you want to return to the searching site</string>
 
 
 
