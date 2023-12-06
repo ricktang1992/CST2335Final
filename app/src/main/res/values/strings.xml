@@ -121,6 +121,14 @@
 
 
 
+    <string name="sunApp">Sunrise ad Sunset</string>
+    <string name="recipeApp">Recipe Search</string>
+    <string name="dictionaryApp">Dictionary API</string>
+    <string name="deezerApp">Deezer Song</string>
+    <string name="sumAppTitle">CST2355 Final Project</string>
+
+
+
 
 
 

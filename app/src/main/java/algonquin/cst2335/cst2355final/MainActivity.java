@@ -101,6 +101,22 @@ public class MainActivity extends AppCompatActivity {
                 //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
                 //asking if the user wants to delete this message.
                 break;
+            case R.id.sunMenu:
+
+                CharSequence text3 = "Going to Sun Project...";
+                Toast.makeText(this,text3, Toast.LENGTH_SHORT).show();
+                startActivity( sunPage);
+                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
+                //asking if the user wants to delete this message.
+                break;
+            case R.id.deezer:
+
+                CharSequence text4 = "Going to Music Project...";
+                Toast.makeText(this,text4, Toast.LENGTH_SHORT).show();
+                startActivity( songPage);
+                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
+                //asking if the user wants to delete this message.
+                break;
             case R.id.dictionary:
 
                 CharSequence textdictionary = "Going to Dictionary Project...";
